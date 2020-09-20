@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using PIM.Models.PersonModel;
 
 namespace PIM.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class IdentitiesController : ControllerBase
@@ -48,7 +50,7 @@ namespace PIM.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutIdentity(long id, Identity identity)
         {
-            if (id != identity.IdentitryId)
+            if (id != identity.IdentityId)
             {
                 return BadRequest();
             }
@@ -83,7 +85,7 @@ namespace PIM.Controllers
             _context.Identities.Add(identity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentity", new { id = identity.IdentitryId }, identity);
+            return CreatedAtAction("GetIdentity", new { id = identity.IdentityId }, identity);
         }
 
         // DELETE: api/Identities/5
@@ -104,7 +106,7 @@ namespace PIM.Controllers
 
         private bool IdentityExists(long id)
         {
-            return _context.Identities.Any(e => e.IdentitryId == id);
+            return _context.Identities.Any(e => e.IdentityId == id);
         }
     }
 }

@@ -11,9 +11,13 @@
     <Compile Remove="Migrations\20200916222707_initial.Designer.cs" />
     <Compile Remove="Migrations\20200916234703_initial.cs" />
     <Compile Remove="Migrations\20200916234703_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200916235008_initial.cs" />
+    <Compile Remove="Migrations\20200916235008_initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />

@@ -12,7 +12,7 @@ namespace PIM.Models.PersonModel
         [Key]
         public long PersonId { get; set; }
         [Column(TypeName = "VARCHAR(70)")]
-        public String PesronName { get; set; }
+        public String PersonName { get; set; }
         [Column(TypeName = "VARCHAR(25)")]
         public String SocialName { get; set; }
         [Column(TypeName = "VARCHAR(30)")]
@@ -25,12 +25,34 @@ namespace PIM.Models.PersonModel
         [Column(TypeName = "VARCHAR(15)")]
         public String Role { get; set; }
 
+        public override string ToString()
+        {
+            return "Person: "+PersonId+" "+PersonName+" "+Email+" "+Password+" "+CPF+" "+Role;
+        }
+
         public Person() { }
 
-        public Person(long personId, string pesronName, string socialName, string email, string password, string cPF, DateTime birthDay, string role)
+        public Person(long personId)
         {
             PersonId = personId;
-            PesronName = pesronName;
+        }
+
+        public Person(Person person)
+        {
+            PersonId = person.PersonId;
+            PersonName = person.PersonName;
+            SocialName = person.SocialName;
+            Email = person.Email;
+            Password = person.Password;
+            CPF = person.CPF;
+            BirthDay = person.BirthDay;
+            Role = person.Role;
+        }
+
+        public Person(long personId, string personName, string socialName, string email, string password, string cPF, DateTime birthDay, string role)
+        {
+            PersonId = personId;
+            PersonName = personName;
             SocialName = socialName;
             Email = email;
             Password = password;

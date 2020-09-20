@@ -34,5 +34,184 @@ namespace PIM.Data
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>().HasData(
+                new Person
+                {
+                    PersonId = 1,
+                    PersonName = "Mike Wazowski",
+                    SocialName = "null",
+                    Email = "ezratmp+lath6@gmail.com",
+                    Password = "pass",
+                    CPF = "65519709076",
+                    BirthDay = DateTime.Parse("Nov 1, 1999"),
+                    Role = "USER"
+                },
+                new Person
+                {
+                    PersonId = 2,
+                    PersonName = "Mackenzie Mathis",
+                    SocialName = "null",
+                    Email = "lengtmp+lue5n@gmail.com",
+                    Password = "passWORLD",
+                    CPF = "82124778005",
+                    BirthDay = DateTime.Parse("Jan 6, 1985"),
+                    Role = "USER"
+                },
+                new Person
+                {
+                    PersonId = 3,
+                    PersonName = "Alexia Calvert",
+                    SocialName = "null",
+                    Email = "banetmp+nqzlb@gmail.com",
+                    Password = "p4ssw0rld",
+                    CPF = "58113438092",
+                    BirthDay = DateTime.Parse("Dez 30, 2000"),
+                    Role = "USER"
+                });
+
+            modelBuilder.Entity<Identity>().HasData(
+                new Identity
+                {
+                    IdentityId = 1,
+                    RegistroGeral = "190471001",
+                    OrgaoExpedidor = "SSP",
+                    DataExpedicao = DateTime.Parse("Dez 15, 2000"),
+                    PersonId = 1
+                },
+                new Identity
+                {
+                    IdentityId = 2,
+                    RegistroGeral = "362932888",
+                    OrgaoExpedidor = "SSP",
+                    DataExpedicao = DateTime.Parse("Jan 10, 1995"),
+                    PersonId = 2
+                },
+                new Identity
+                {
+                    IdentityId = 3,
+                    RegistroGeral = "362932888",
+                    OrgaoExpedidor = "SSP",
+                    DataExpedicao = DateTime.Parse("Oct 2, 2006"),
+                    PersonId = 3
+                });
+
+            modelBuilder.Entity<Telephone>().HasData(
+                new Telephone
+                {
+                    TelephoneId = 1,
+                    DDD = "011",
+                    TelephoneNumber = "99507-9350",
+                    PersonId = 1
+                },
+                new Telephone
+                {
+                    TelephoneId = 2,
+                    DDD = "011",
+                    TelephoneNumber = "98732-0893",
+                    PersonId = 2
+                },
+                new Telephone
+                {
+                    TelephoneId = 3,
+                    DDD = "011",
+                    TelephoneNumber = "99970-7434",
+                    PersonId = 3
+                });
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    UserId = 1,
+                    AccountStatus = false,
+                    PersonId = 1L
+                },
+                new User
+                {
+                    UserId = 2,
+                    AccountStatus = true,
+                    PersonId = 2L
+                },
+                new User
+                {
+                    UserId = 3,
+                    AccountStatus = true,
+                    PersonId = 3L
+                });
+
+            modelBuilder.Entity<Address>().HasData(
+                new Address
+                {
+                    AddressId = 1,
+                    AddrType = "Rua",
+                    AddrNumber = "105B",
+                    AddrCity = "São Paulo",
+                    AddrNeighbohood = "Republica",
+                    ZipCode = "01045001",
+                    PersonId = 1
+                },
+                new Address
+                {
+                    AddressId = 2,
+                    AddrType = "Avenida",
+                    AddrNumber = "125",
+                    AddrCity = "São Paulo",
+                    AddrNeighbohood = "Pinheiros",
+                    ZipCode = "39100000",
+                    PersonId = 2
+                },
+                new Address
+                {
+                    AddressId = 3,
+                    AddrType = "Rua",
+                    AddrNumber = "463",
+                    AddrCity = "Osasco",
+                    AddrNeighbohood = "Vila Yara",
+                    ZipCode = "06026050",
+                    PersonId = 3
+                });
+
+            modelBuilder.Entity<State>().HasData(
+                new State
+                {
+                    StateId = 1,
+                    StateName = "São Paulo",
+                    AddressId = 1
+                },
+                new State
+                {
+                    StateId = 2,
+                    StateName = "São Paulo",
+                    AddressId = 2
+                },
+                new State
+                {
+                    StateId = 3,
+                    StateName = "São Paulo",
+                    AddressId = 3
+                });
+
+            modelBuilder.Entity<Country>().HasData(
+                new Country
+                {
+                    CountryId = 1,
+                    CountryName = "Brasil",
+                    AddressId = 1
+                },
+                new Country
+                {
+                    CountryId = 2,
+                    CountryName = "Brasil",
+                    AddressId = 2
+                },
+                new Country
+                {
+                    CountryId = 3,
+                    CountryName = "Brasil",
+                    AddressId = 3
+                });
+        }
     }
 }

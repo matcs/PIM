@@ -14,15 +14,17 @@ namespace PIM.Models
         public long CountryId { get; set; }
         [Column(TypeName = "VARCHAR(35)")]
         public String CountryName { get; set; }
-        public Address Address { get; set; }
+        
+        [ForeignKey("Address")]
+        public long AddressId { get; set; }
 
         public Country() { }
 
-        public Country(long countryId, string countryName, Address address)
+        public Country(long countryId, string countryName, long addressId)
         {
             CountryId = countryId;
             CountryName = countryName;
-            Address = address;
+            AddressId = addressId;
         }
     }
 }

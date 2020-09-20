@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,16 +12,17 @@ namespace PIM.Models.User
         [Key]
         public long WalletId { get; set; }
         public double WalletBalance { get; set; }
-        
-        public User User { get; set; }
+
+        [ForeignKey("User")]
+        public long UserId { get; set; }
 
         public Wallet() { }
 
-        public Wallet(long walletId, double walletBalance, User user)
+        public Wallet(long walletId, double walletBalance, long userId)
         {
             WalletId = walletId;
             WalletBalance = walletBalance;
-            User = user;
+            UserId = userId;
         }
     }
 }

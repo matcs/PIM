@@ -10,7 +10,7 @@ using PIM.Data;
 namespace PIM.Migrations
 {
     [DbContext(typeof(PIMContext))]
-    [Migration("20200916235008_initial")]
+    [Migration("20200920225037_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ namespace PIM.Migrations
                     b.Property<string>("AddrType")
                         .HasColumnType("VARCHAR(25)");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<long>("PersonId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("ZipCode")
@@ -48,9 +48,39 @@ namespace PIM.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.HasIndex("PersonId");
-
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1L,
+                            AddrCity = "São Paulo",
+                            AddrNeighbohood = "Republica",
+                            AddrNumber = "105B",
+                            AddrType = "Rua",
+                            PersonId = 1L,
+                            ZipCode = "01045001"
+                        },
+                        new
+                        {
+                            AddressId = 2L,
+                            AddrCity = "São Paulo",
+                            AddrNeighbohood = "Pinheiros",
+                            AddrNumber = "125",
+                            AddrType = "Avenida",
+                            PersonId = 2L,
+                            ZipCode = "39100000"
+                        },
+                        new
+                        {
+                            AddressId = 3L,
+                            AddrCity = "Osasco",
+                            AddrNeighbohood = "Vila Yara",
+                            AddrNumber = "463",
+                            AddrType = "Rua",
+                            PersonId = 3L,
+                            ZipCode = "06026050"
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.Administrator.Administrator", b =>
@@ -60,12 +90,10 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("PersonId")
+                    b.Property<long>("PersonId")
                         .HasColumnType("bigint");
 
                     b.HasKey("AdministratorId");
-
-                    b.HasIndex("PersonId");
 
                     b.ToTable("Administrators");
                 });
@@ -77,12 +105,10 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("AdministratorId")
+                    b.Property<long>("AdministratorId")
                         .HasColumnType("bigint");
 
                     b.HasKey("CarteiraDeTrabalhoId");
-
-                    b.HasIndex("AdministratorId");
 
                     b.ToTable("CarteiraDeTrabalhos");
                 });
@@ -94,7 +120,7 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("AddressId")
+                    b.Property<long>("AddressId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("CountryName")
@@ -102,14 +128,32 @@ namespace PIM.Migrations
 
                     b.HasKey("CountryId");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            CountryId = 1L,
+                            AddressId = 1L,
+                            CountryName = "Brasil"
+                        },
+                        new
+                        {
+                            CountryId = 2L,
+                            AddressId = 2L,
+                            CountryName = "Brasil"
+                        },
+                        new
+                        {
+                            CountryId = 3L,
+                            AddressId = 3L,
+                            CountryName = "Brasil"
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.PersonModel.Identity", b =>
                 {
-                    b.Property<long>("IdentitryId")
+                    b.Property<long>("IdentityId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -120,17 +164,41 @@ namespace PIM.Migrations
                     b.Property<string>("OrgaoExpedidor")
                         .HasColumnType("VARCHAR(7)");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<long>("PersonId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("RegistroGeral")
                         .HasColumnType("CHAR(10)");
 
-                    b.HasKey("IdentitryId");
-
-                    b.HasIndex("PersonId");
+                    b.HasKey("IdentityId");
 
                     b.ToTable("Identities");
+
+                    b.HasData(
+                        new
+                        {
+                            IdentityId = 1L,
+                            DataExpedicao = new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrgaoExpedidor = "SSP",
+                            PersonId = 1L,
+                            RegistroGeral = "190471001"
+                        },
+                        new
+                        {
+                            IdentityId = 2L,
+                            DataExpedicao = new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrgaoExpedidor = "SSP",
+                            PersonId = 2L,
+                            RegistroGeral = "362932888"
+                        },
+                        new
+                        {
+                            IdentityId = 3L,
+                            DataExpedicao = new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrgaoExpedidor = "SSP",
+                            PersonId = 3L,
+                            RegistroGeral = "362932888"
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.PersonModel.Person", b =>
@@ -152,7 +220,7 @@ namespace PIM.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("VARCHAR(50)");
 
-                    b.Property<string>("PesronName")
+                    b.Property<string>("PersonName")
                         .HasColumnType("VARCHAR(70)");
 
                     b.Property<string>("Role")
@@ -164,6 +232,41 @@ namespace PIM.Migrations
                     b.HasKey("PersonId");
 
                     b.ToTable("People");
+
+                    b.HasData(
+                        new
+                        {
+                            PersonId = 1L,
+                            BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CPF = "65519709076",
+                            Email = "ezratmp+lath6@gmail.com",
+                            Password = "pass",
+                            PersonName = "Mike Wazowski",
+                            Role = "USER",
+                            SocialName = "null"
+                        },
+                        new
+                        {
+                            PersonId = 2L,
+                            BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CPF = "82124778005",
+                            Email = "lengtmp+lue5n@gmail.com",
+                            Password = "passWORLD",
+                            PersonName = "Mackenzie Mathis",
+                            Role = "USER",
+                            SocialName = "null"
+                        },
+                        new
+                        {
+                            PersonId = 3L,
+                            BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CPF = "58113438092",
+                            Email = "banetmp+nqzlb@gmail.com",
+                            Password = "p4ssw0rld",
+                            PersonName = "Alexia Calvert",
+                            Role = "USER",
+                            SocialName = "null"
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.PersonModel.Telephone", b =>
@@ -174,19 +277,40 @@ namespace PIM.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DDD")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(5)");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<long>("PersonId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("TelephoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(11)");
 
                     b.HasKey("TelephoneId");
 
-                    b.HasIndex("PersonId");
-
                     b.ToTable("Telephones");
+
+                    b.HasData(
+                        new
+                        {
+                            TelephoneId = 1L,
+                            DDD = "011",
+                            PersonId = 1L,
+                            TelephoneNumber = "99507-9350"
+                        },
+                        new
+                        {
+                            TelephoneId = 2L,
+                            DDD = "011",
+                            PersonId = 2L,
+                            TelephoneNumber = "98732-0893"
+                        },
+                        new
+                        {
+                            TelephoneId = 3L,
+                            DDD = "011",
+                            PersonId = 3L,
+                            TelephoneNumber = "99970-7434"
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.State", b =>
@@ -196,7 +320,7 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("AddressId")
+                    b.Property<long>("AddressId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("StateName")
@@ -204,9 +328,27 @@ namespace PIM.Migrations
 
                     b.HasKey("StateId");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("States");
+
+                    b.HasData(
+                        new
+                        {
+                            StateId = 1L,
+                            AddressId = 1L,
+                            StateName = "São Paulo"
+                        },
+                        new
+                        {
+                            StateId = 2L,
+                            AddressId = 2L,
+                            StateName = "São Paulo"
+                        },
+                        new
+                        {
+                            StateId = 3L,
+                            AddressId = 3L,
+                            StateName = "São Paulo"
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.User.Contract", b =>
@@ -218,6 +360,9 @@ namespace PIM.Migrations
 
                     b.Property<byte[]>("ContractTerms")
                         .HasColumnType("VARBINARY(MAX)");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ContractId");
 
@@ -234,14 +379,32 @@ namespace PIM.Migrations
                     b.Property<bool>("AccountStatus")
                         .HasColumnType("bit");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<long>("PersonId")
                         .HasColumnType("bigint");
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("PersonId");
-
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1L,
+                            AccountStatus = false,
+                            PersonId = 1L
+                        },
+                        new
+                        {
+                            UserId = 2L,
+                            AccountStatus = true,
+                            PersonId = 2L
+                        },
+                        new
+                        {
+                            UserId = 3L,
+                            AccountStatus = true,
+                            PersonId = 3L
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.User.Wallet", b =>
@@ -251,7 +414,7 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.Property<double>("WalletBalance")
@@ -259,72 +422,7 @@ namespace PIM.Migrations
 
                     b.HasKey("WalletId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Wallets");
-                });
-
-            modelBuilder.Entity("PIM.Models.Address", b =>
-                {
-                    b.HasOne("PIM.Models.PersonModel.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
-                });
-
-            modelBuilder.Entity("PIM.Models.Administrator.Administrator", b =>
-                {
-                    b.HasOne("PIM.Models.PersonModel.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
-                });
-
-            modelBuilder.Entity("PIM.Models.Administrator.CarteiraDeTrabalho", b =>
-                {
-                    b.HasOne("PIM.Models.Administrator.Administrator", "Administrator")
-                        .WithMany()
-                        .HasForeignKey("AdministratorId");
-                });
-
-            modelBuilder.Entity("PIM.Models.Country", b =>
-                {
-                    b.HasOne("PIM.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-                });
-
-            modelBuilder.Entity("PIM.Models.PersonModel.Identity", b =>
-                {
-                    b.HasOne("PIM.Models.PersonModel.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
-                });
-
-            modelBuilder.Entity("PIM.Models.PersonModel.Telephone", b =>
-                {
-                    b.HasOne("PIM.Models.PersonModel.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
-                });
-
-            modelBuilder.Entity("PIM.Models.State", b =>
-                {
-                    b.HasOne("PIM.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-                });
-
-            modelBuilder.Entity("PIM.Models.User.User", b =>
-                {
-                    b.HasOne("PIM.Models.PersonModel.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
-                });
-
-            modelBuilder.Entity("PIM.Models.User.Wallet", b =>
-                {
-                    b.HasOne("PIM.Models.User.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

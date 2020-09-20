@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,14 +12,16 @@ namespace PIM.Models.Administrator
     {
         [Key]
         public long CarteiraDeTrabalhoId { get; set; }
-        public Administrator Administrator { get; set; }
+        
+        [ForeignKey("Administrator")]
+        public long AdministratorId { get; set; }
 
         public CarteiraDeTrabalho() { }
 
-        public CarteiraDeTrabalho(long carteiraDeTrabalhoId, Administrator administrator)
+        public CarteiraDeTrabalho(long carteiraDeTrabalhoId, long administratorId)
         {
             CarteiraDeTrabalhoId = carteiraDeTrabalhoId;
-            Administrator = administrator;
+            AdministratorId = administratorId;
         }
     }
 }

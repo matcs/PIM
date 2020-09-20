@@ -10,24 +10,25 @@ namespace PIM.Models.PersonModel
     public class Identity
     {
         [Key]
-        public long IdentitryId { get; set; }
+        public long IdentityId { get; set; }
         [Column(TypeName = "CHAR(10)")]
         public String RegistroGeral { get; set; }
         [Column(TypeName = "VARCHAR(7)")]
         public String OrgaoExpedidor { get; set; }
         public DateTime DataExpedicao { get; set; }
 
-        public Person Person { get; set; }
+        [ForeignKey("Person")]
+        public long PersonId { get; set; }
 
         public Identity() { }
 
-        public Identity(long identitryId, string registroGeral, string orgaoExpedidor, DateTime dataExpedicao, Person person)
+        public Identity(long identityId, string registroGeral, string orgaoExpedidor, DateTime dataExpedicao, long personId)
         {
-            IdentitryId = identitryId;
+            IdentityId = identityId;
             RegistroGeral = registroGeral;
             OrgaoExpedidor = orgaoExpedidor;
             DataExpedicao = dataExpedicao;
-            Person = person;
+            PersonId = personId;
         }
     }
 }

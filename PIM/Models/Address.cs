@@ -22,22 +22,25 @@ namespace PIM.Models
         public String AddrNeighbohood { get; set; }
         [Column(TypeName = "VARCHAR(25)")]
         public String ZipCode { get; set; }
-    
-        public Person Person { get; set; }
 
-        public Address()
-        {
-        }
+        [ForeignKey("Person")]
+        public long PersonId { get; set; }
 
-        public Address(long addressId, string addrType, string addrNumber, string addrCity, string addrNeighbohood, string zipCode, Person person)
+        public Address() { }
+
+        public Address(long addressId)
         {
             AddressId = addressId;
+        }
+
+        public Address(long addressId, string addrType, string addrNumber, string addrCity, string addrNeighbohood, string zipCode, long personId) : this(addressId)
+        {
             AddrType = addrType;
             AddrNumber = addrNumber;
             AddrCity = addrCity;
             AddrNeighbohood = addrNeighbohood;
             ZipCode = zipCode;
-            Person = person;
+            PersonId = personId;
         }
     }
 }

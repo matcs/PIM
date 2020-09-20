@@ -14,14 +14,16 @@ namespace PIM.Models.User
         [Column(TypeName = "VARBINARY(MAX)")]
         public String ContractTerms { get; set; }
 
-        public Contract()
-        {
-        }
+        [ForeignKey("User")]
+        public long UserId { get; set; }
 
-        public Contract(long contractId, string contractTerms)
+        public Contract(){ }
+
+        public Contract(long contractId, string contractTerms, long userId)
         {
             ContractId = contractId;
             ContractTerms = contractTerms;
+            UserId = userId;
         }
     }
 }
