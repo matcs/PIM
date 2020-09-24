@@ -11,7 +11,7 @@ using PIM.Models.Administrator;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CarteiraDeTrabalhoesController : ControllerBase

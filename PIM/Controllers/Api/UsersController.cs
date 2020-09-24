@@ -11,51 +11,51 @@ using PIM.Models.User;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class WalletsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly PIMContext _context;
 
-        public WalletsController(PIMContext context)
+        public UsersController(PIMContext context)
         {
             _context = context;
         }
 
-        // GET: api/Wallets
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Wallet>>> GetWallets()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Wallets.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Wallets/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Wallet>> GetWallet(long id)
+        public async Task<ActionResult<User>> GetUser(long id)
         {
-            var wallet = await _context.Wallets.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
-            if (wallet == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return wallet;
+            return user;
         }
 
-        // PUT: api/Wallets/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWallet(long id, Wallet wallet)
+        public async Task<IActionResult> PutUser(long id, User user)
         {
-            if (id != wallet.WalletId)
+            if (id != user.UserId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(wallet).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PIM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WalletExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace PIM.Controllers
             return NoContent();
         }
 
-        // POST: api/Wallets
+        // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Wallet>> PostWallet(Wallet wallet)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Wallets.Add(wallet);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWallet", new { id = wallet.WalletId }, wallet);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Wallets/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Wallet>> DeleteWallet(long id)
+        public async Task<ActionResult<User>> DeleteUser(long id)
         {
-            var wallet = await _context.Wallets.FindAsync(id);
-            if (wallet == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Wallets.Remove(wallet);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return wallet;
+            return user;
         }
 
-        private bool WalletExists(long id)
+        private bool UserExists(long id)
         {
-            return _context.Wallets.Any(e => e.WalletId == id);
+            return _context.Users.Any(e => e.UserId == id);
         }
     }
 }

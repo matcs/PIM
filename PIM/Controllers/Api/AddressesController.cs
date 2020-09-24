@@ -7,55 +7,55 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
-using PIM.Models.PersonModel;
+using PIM.Models;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TelephonesController : ControllerBase
+    public class AddressesController : ControllerBase
     {
         private readonly PIMContext _context;
 
-        public TelephonesController(PIMContext context)
+        public AddressesController(PIMContext context)
         {
             _context = context;
         }
 
-        // GET: api/Telephones
+        // GET: api/Addresses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Telephone>>> GetTelephones()
+        public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
         {
-            return await _context.Telephones.ToListAsync();
+            return await _context.Addresses.ToListAsync();
         }
 
-        // GET: api/Telephones/5
+        // GET: api/Addresses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Telephone>> GetTelephone(long id)
+        public async Task<ActionResult<Address>> GetAddress(long id)
         {
-            var telephone = await _context.Telephones.FindAsync(id);
+            var address = await _context.Addresses.FindAsync(id);
 
-            if (telephone == null)
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return telephone;
+            return address;
         }
 
-        // PUT: api/Telephones/5
+        // PUT: api/Addresses/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTelephone(long id, Telephone telephone)
+        public async Task<IActionResult> PutAddress(long id, Address address)
         {
-            if (id != telephone.TelephoneId)
+            if (id != address.AddressId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(telephone).State = EntityState.Modified;
+            _context.Entry(address).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PIM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TelephoneExists(id))
+                if (!AddressExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace PIM.Controllers
             return NoContent();
         }
 
-        // POST: api/Telephones
+        // POST: api/Addresses
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Telephone>> PostTelephone(Telephone telephone)
+        public async Task<ActionResult<Address>> PostAddress(Address address)
         {
-            _context.Telephones.Add(telephone);
+            _context.Addresses.Add(address);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTelephone", new { id = telephone.TelephoneId }, telephone);
+            return CreatedAtAction("GetAddress", new { id = address.AddressId }, address);
         }
 
-        // DELETE: api/Telephones/5
+        // DELETE: api/Addresses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Telephone>> DeleteTelephone(long id)
+        public async Task<ActionResult<Address>> DeleteAddress(long id)
         {
-            var telephone = await _context.Telephones.FindAsync(id);
-            if (telephone == null)
+            var address = await _context.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            _context.Telephones.Remove(telephone);
+            _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
 
-            return telephone;
+            return address;
         }
 
-        private bool TelephoneExists(long id)
+        private bool AddressExists(long id)
         {
-            return _context.Telephones.Any(e => e.TelephoneId == id);
+            return _context.Addresses.Any(e => e.AddressId == id);
         }
     }
 }

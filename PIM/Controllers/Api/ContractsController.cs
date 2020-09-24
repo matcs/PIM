@@ -11,7 +11,7 @@ using PIM.Models.User;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ContractsController : ControllerBase

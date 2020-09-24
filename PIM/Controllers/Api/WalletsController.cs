@@ -7,55 +7,55 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
-using PIM.Models;
+using PIM.Models.User;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CountriesController : ControllerBase
+    public class WalletsController : ControllerBase
     {
         private readonly PIMContext _context;
 
-        public CountriesController(PIMContext context)
+        public WalletsController(PIMContext context)
         {
             _context = context;
         }
 
-        // GET: api/Countries
+        // GET: api/Wallets
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
+        public async Task<ActionResult<IEnumerable<Wallet>>> GetWallets()
         {
-            return await _context.Countries.ToListAsync();
+            return await _context.Wallets.ToListAsync();
         }
 
-        // GET: api/Countries/5
+        // GET: api/Wallets/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Country>> GetCountry(long id)
+        public async Task<ActionResult<Wallet>> GetWallet(long id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var wallet = await _context.Wallets.FindAsync(id);
 
-            if (country == null)
+            if (wallet == null)
             {
                 return NotFound();
             }
 
-            return country;
+            return wallet;
         }
 
-        // PUT: api/Countries/5
+        // PUT: api/Wallets/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(long id, Country country)
+        public async Task<IActionResult> PutWallet(long id, Wallet wallet)
         {
-            if (id != country.CountryId)
+            if (id != wallet.WalletId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(country).State = EntityState.Modified;
+            _context.Entry(wallet).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PIM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CountryExists(id))
+                if (!WalletExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace PIM.Controllers
             return NoContent();
         }
 
-        // POST: api/Countries
+        // POST: api/Wallets
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Country>> PostCountry(Country country)
+        public async Task<ActionResult<Wallet>> PostWallet(Wallet wallet)
         {
-            _context.Countries.Add(country);
+            _context.Wallets.Add(wallet);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCountry", new { id = country.CountryId }, country);
+            return CreatedAtAction("GetWallet", new { id = wallet.WalletId }, wallet);
         }
 
-        // DELETE: api/Countries/5
+        // DELETE: api/Wallets/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Country>> DeleteCountry(long id)
+        public async Task<ActionResult<Wallet>> DeleteWallet(long id)
         {
-            var country = await _context.Countries.FindAsync(id);
-            if (country == null)
+            var wallet = await _context.Wallets.FindAsync(id);
+            if (wallet == null)
             {
                 return NotFound();
             }
 
-            _context.Countries.Remove(country);
+            _context.Wallets.Remove(wallet);
             await _context.SaveChangesAsync();
 
-            return country;
+            return wallet;
         }
 
-        private bool CountryExists(long id)
+        private bool WalletExists(long id)
         {
-            return _context.Countries.Any(e => e.CountryId == id);
+            return _context.Wallets.Any(e => e.WalletId == id);
         }
     }
 }

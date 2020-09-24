@@ -7,55 +7,55 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
-using PIM.Models;
+using PIM.Models.PersonModel;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressesController : ControllerBase
+    public class IdentitiesController : ControllerBase
     {
         private readonly PIMContext _context;
 
-        public AddressesController(PIMContext context)
+        public IdentitiesController(PIMContext context)
         {
             _context = context;
         }
 
-        // GET: api/Addresses
+        // GET: api/Identities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
+        public async Task<ActionResult<IEnumerable<Identity>>> GetIdentities()
         {
-            return await _context.Addresses.ToListAsync();
+            return await _context.Identities.ToListAsync();
         }
 
-        // GET: api/Addresses/5
+        // GET: api/Identities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Address>> GetAddress(long id)
+        public async Task<ActionResult<Identity>> GetIdentity(long id)
         {
-            var address = await _context.Addresses.FindAsync(id);
+            var identity = await _context.Identities.FindAsync(id);
 
-            if (address == null)
+            if (identity == null)
             {
                 return NotFound();
             }
 
-            return address;
+            return identity;
         }
 
-        // PUT: api/Addresses/5
+        // PUT: api/Identities/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAddress(long id, Address address)
+        public async Task<IActionResult> PutIdentity(long id, Identity identity)
         {
-            if (id != address.AddressId)
+            if (id != identity.IdentityId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(address).State = EntityState.Modified;
+            _context.Entry(identity).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PIM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AddressExists(id))
+                if (!IdentityExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace PIM.Controllers
             return NoContent();
         }
 
-        // POST: api/Addresses
+        // POST: api/Identities
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Address>> PostAddress(Address address)
+        public async Task<ActionResult<Identity>> PostIdentity(Identity identity)
         {
-            _context.Addresses.Add(address);
+            _context.Identities.Add(identity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAddress", new { id = address.AddressId }, address);
+            return CreatedAtAction("GetIdentity", new { id = identity.IdentityId }, identity);
         }
 
-        // DELETE: api/Addresses/5
+        // DELETE: api/Identities/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Address>> DeleteAddress(long id)
+        public async Task<ActionResult<Identity>> DeleteIdentity(long id)
         {
-            var address = await _context.Addresses.FindAsync(id);
-            if (address == null)
+            var identity = await _context.Identities.FindAsync(id);
+            if (identity == null)
             {
                 return NotFound();
             }
 
-            _context.Addresses.Remove(address);
+            _context.Identities.Remove(identity);
             await _context.SaveChangesAsync();
 
-            return address;
+            return identity;
         }
 
-        private bool AddressExists(long id)
+        private bool IdentityExists(long id)
         {
-            return _context.Addresses.Any(e => e.AddressId == id);
+            return _context.Identities.Any(e => e.IdentityId == id);
         }
     }
 }

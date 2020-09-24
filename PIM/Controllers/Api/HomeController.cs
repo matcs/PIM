@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PIM.Data;
+using PIM.Models;
 using PIM.Models.PersonModel;
 using PIM.Services;
 
@@ -17,7 +20,7 @@ namespace PIM.Controllers
     {
         private readonly PIMContext _context;
 
-        public HomeController(PIMContext context)
+        public HomeController(PIMContext context, ILogger<HomeController> logger)
         {
             _context = context;
         }
@@ -51,27 +54,6 @@ namespace PIM.Controllers
                 Beaver = token
             };
         }
-
-        [HttpGet]
-        [Route("anonymous")]
-        [AllowAnonymous]
-        public string Anonymous() => "Anônimo";
-
-        [HttpGet]
-        [Route("authenticated")]
-        [Authorize]
-        public string Authenticated() => String.Format("Autenticado - {0}", User.Identity.Name);
-
-        [HttpGet]
-        [Route("employee")]
-        [Authorize(Roles = "employee,manager")]
-        public string Employee() => "Funcionário";
-
-        [HttpGet]
-        [Route("manager")]
-        [Authorize(Roles = "manager")]
-        public string Manager() => "Gerente";
-
 
     }
 }

@@ -17,7 +17,15 @@ namespace PIM.Models.User
         [ForeignKey("Person")]
         public long PersonId { get; set; }
 
+        public User()
+        {
+        }
 
-
+        public User(long userId, bool accountStatus, long personId)
+        {
+            UserId = userId;
+            AccountStatus = accountStatus;
+            PersonId = personId;
+        }
     }
 }

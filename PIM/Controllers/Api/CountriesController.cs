@@ -7,55 +7,55 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
-using PIM.Models.PersonModel;
+using PIM.Models;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentitiesController : ControllerBase
+    public class CountriesController : ControllerBase
     {
         private readonly PIMContext _context;
 
-        public IdentitiesController(PIMContext context)
+        public CountriesController(PIMContext context)
         {
             _context = context;
         }
 
-        // GET: api/Identities
+        // GET: api/Countries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Identity>>> GetIdentities()
+        public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
         {
-            return await _context.Identities.ToListAsync();
+            return await _context.Countries.ToListAsync();
         }
 
-        // GET: api/Identities/5
+        // GET: api/Countries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Identity>> GetIdentity(long id)
+        public async Task<ActionResult<Country>> GetCountry(long id)
         {
-            var identity = await _context.Identities.FindAsync(id);
+            var country = await _context.Countries.FindAsync(id);
 
-            if (identity == null)
+            if (country == null)
             {
                 return NotFound();
             }
 
-            return identity;
+            return country;
         }
 
-        // PUT: api/Identities/5
+        // PUT: api/Countries/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentity(long id, Identity identity)
+        public async Task<IActionResult> PutCountry(long id, Country country)
         {
-            if (id != identity.IdentityId)
+            if (id != country.CountryId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identity).State = EntityState.Modified;
+            _context.Entry(country).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PIM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityExists(id))
+                if (!CountryExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace PIM.Controllers
             return NoContent();
         }
 
-        // POST: api/Identities
+        // POST: api/Countries
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Identity>> PostIdentity(Identity identity)
+        public async Task<ActionResult<Country>> PostCountry(Country country)
         {
-            _context.Identities.Add(identity);
+            _context.Countries.Add(country);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentity", new { id = identity.IdentityId }, identity);
+            return CreatedAtAction("GetCountry", new { id = country.CountryId }, country);
         }
 
-        // DELETE: api/Identities/5
+        // DELETE: api/Countries/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Identity>> DeleteIdentity(long id)
+        public async Task<ActionResult<Country>> DeleteCountry(long id)
         {
-            var identity = await _context.Identities.FindAsync(id);
-            if (identity == null)
+            var country = await _context.Countries.FindAsync(id);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            _context.Identities.Remove(identity);
+            _context.Countries.Remove(country);
             await _context.SaveChangesAsync();
 
-            return identity;
+            return country;
         }
 
-        private bool IdentityExists(long id)
+        private bool CountryExists(long id)
         {
-            return _context.Identities.Any(e => e.IdentityId == id);
+            return _context.Countries.Any(e => e.CountryId == id);
         }
     }
 }

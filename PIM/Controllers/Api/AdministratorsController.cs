@@ -7,55 +7,55 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
-using PIM.Models.User;
+using PIM.Models.Administrator;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class AdministratorsController : ControllerBase
     {
         private readonly PIMContext _context;
 
-        public UsersController(PIMContext context)
+        public AdministratorsController(PIMContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Administrators
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Administrator>>> GetAdministrators()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Administrators.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Administrators/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<ActionResult<Administrator>> GetAdministrator(long id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var administrator = await _context.Administrators.FindAsync(id);
 
-            if (user == null)
+            if (administrator == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return administrator;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Administrators/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        public async Task<IActionResult> PutAdministrator(long id, Administrator administrator)
         {
-            if (id != user.UserId)
+            if (id != administrator.AdministratorId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(administrator).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace PIM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!AdministratorExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace PIM.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Administrators
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Administrator>> PostAdministrator(Administrator administrator)
         {
-            _context.Users.Add(user);
+            _context.Administrators.Add(administrator);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetAdministrator", new { id = administrator.AdministratorId }, administrator);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Administrators/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(long id)
+        public async Task<ActionResult<Administrator>> DeleteAdministrator(long id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var administrator = await _context.Administrators.FindAsync(id);
+            if (administrator == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Administrators.Remove(administrator);
             await _context.SaveChangesAsync();
 
-            return user;
+            return administrator;
         }
 
-        private bool UserExists(long id)
+        private bool AdministratorExists(long id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return _context.Administrators.Any(e => e.AdministratorId == id);
         }
     }
 }

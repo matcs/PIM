@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
+using PIM.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using PIM.Data;
+using PIM.Models.PersonModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace PIM
 {
@@ -30,9 +27,11 @@ namespace PIM
         {
             services.AddCors();
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddDbContext<PIMContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+           
+
             //JWT Configuration
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             services.AddAuthentication(x =>
@@ -48,8 +47,8 @@ namespace PIM
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = true,
-                    ValidateAudience = true
+                    ValidateIssuer = false,
+                    ValidateAudience = false
                 };
             }).AddCookie();
         }
@@ -86,6 +85,7 @@ namespace PIM
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+               
             });
         }
     }
