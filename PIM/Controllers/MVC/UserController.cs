@@ -12,5 +12,20 @@ namespace PIM.Controllers.MVC
         {
             return View();
         }
+
+        public IActionResult News()
+        {
+            return View();
+        }
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        public IActionResult Wallet()
+        {
+            return View();
+        }
     }
 }
