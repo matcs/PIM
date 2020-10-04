@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
-using PIM.Models.PersonModel;
+using PIM.Models.Person;
 using PIM.Services;
 
 namespace PIM.Controllers

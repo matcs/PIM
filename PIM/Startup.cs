@@ -8,8 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using PIM.Models.PersonModel;
-using Microsoft.AspNetCore.Identity;
+using PIM.Models.Person;
 
 namespace PIM
 {
@@ -30,7 +29,8 @@ namespace PIM
             services.AddRazorPages();
             services.AddDbContext<PIMContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-           
+            services.AddDefaultIdentity<Person>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddEntityFrameworkStores<PIMContext>();
 
             //JWT Configuration
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -85,7 +85,7 @@ namespace PIM
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-               
+                endpoints.MapRazorPages();
             });
         }
     }

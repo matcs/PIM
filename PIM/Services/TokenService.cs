@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
-using PIM.Models.PersonModel;
+using PIM.Models.Person;
 
 namespace PIM.Services
 {

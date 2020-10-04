@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PIM.Data;
 using PIM.Models;
-using PIM.Models.PersonModel;
+using PIM.Models.Person;
 using PIM.Services;
 
 namespace PIM.Controllers

@@ -6,18 +6,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIM.Models.PersonModel
+namespace PIM.Models.Person
 {
-    public class Person
+    public class Person : IdentityUser
     {
         [Key]
         public long PersonId { get; set; }
         [Column(TypeName = "VARCHAR(70)")]
-        public String PersonFirstName { get; set; }
+        public string First_Name { get; set; }
+        [Column(TypeName = "VARCHAR(70)")]
+        public string Last_Name { get; set; }
         [Column(TypeName = "VARCHAR(25)")]
         public String SocialName { get; set; }
         [Column(TypeName = "VARCHAR(30)")]
-        public String Email { get; set; }
+        public override String Email { get; set; }
         [Column(TypeName = "VARCHAR(50)")]
         public String Password { get; set; }
         [Column(TypeName = "VARCHAR(15)")]
@@ -28,32 +30,16 @@ namespace PIM.Models.PersonModel
 
         public override string ToString()
         {
-            return "Person: "+PersonId+" "+PersonFirstName+" "+Email+" "+Password+" "+CPF+" "+Role;
+            return "Person: "+PersonId+" "+First_Name+" "+Email+" "+Password+" "+CPF+" "+Role;
         }
 
         public Person() { }
 
-        public Person(long personId)
+        public Person(long personId, string firstName, string lastName, string socialName, string email, string password, string cPF, DateTime birthDay, string role)
         {
             PersonId = personId;
-        }
-
-        public Person(Person person)
-        {
-            PersonId = person.PersonId;
-            PersonFirstName = person.PersonFirstName;
-            SocialName = person.SocialName;
-            Email = person.Email;
-            Password = person.Password;
-            CPF = person.CPF;
-            BirthDay = person.BirthDay;
-            Role = person.Role;
-        }
-
-        public Person(long personId, string personName, string socialName, string email, string password, string cPF, DateTime birthDay, string role)
-        {
-            PersonId = personId;
-            PersonFirstName = personName;
+            First_Name = firstName;
+            Last_Name = lastName;
             SocialName = socialName;
             Email = email;
             Password = password;

@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PIM.Models;
 using PIM.Models.Administrator;
-using PIM.Models.PersonModel;
+using PIM.Models.Person;
+using PIM.Models.RG;
+using PIM.Models.Telephone;
 using PIM.Models.User;
 using System;
 using System.Collections.Generic;
@@ -10,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PIM.Data
 {
-    public class PIMContext : DbContext
+    public class PIMContext : IdentityDbContext<Person>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,7 +35,7 @@ namespace PIM.Data
         public DbSet<Person> People { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
         public DbSet<Contract> Contracts { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,7 +44,7 @@ namespace PIM.Data
                 new Person
                 {
                     PersonId = 1,
-                    PersonName = "Mike Wazowski",
+                    First_Name = "Mike",
                     SocialName = "null",
                     Email = "ezratmp+lath6@gmail.com",
                     Password = "pass",
@@ -52,7 +55,7 @@ namespace PIM.Data
                 new Person
                 {
                     PersonId = 2,
-                    PersonName = "Mackenzie Mathis",
+                    First_Name = "Mackenzie",
                     SocialName = "null",
                     Email = "lengtmp+lue5n@gmail.com",
                     Password = "passWORLD",
@@ -63,7 +66,7 @@ namespace PIM.Data
                 new Person
                 {
                     PersonId = 3,
-                    PersonName = "Alexia Calvert",
+                    First_Name = "Alexia",
                     SocialName = "null",
                     Email = "banetmp+nqzlb@gmail.com",
                     Password = "p4ssw0rld",
@@ -121,7 +124,7 @@ namespace PIM.Data
                     PersonId = 3
                 });
 
-            modelBuilder.Entity<User>().HasData(
+            /*modelBuilder.Entity<User>().HasData(
                 new User
                 {
                     UserId = 1,
@@ -140,7 +143,7 @@ namespace PIM.Data
                     AccountStatus = true,
                     PersonId = 3L
                 });
-
+            */
             modelBuilder.Entity<Address>().HasData(
                 new Address
                 {
@@ -212,6 +215,7 @@ namespace PIM.Data
                     CountryName = "Brasil",
                     AddressId = 3
                 });
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
