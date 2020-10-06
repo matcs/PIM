@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PIM.Migrations
 {
-    public partial class initialcreated : Migration
+    public partial class InitialCreated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,15 +62,9 @@ namespace PIM.Migrations
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    PersonId = table.Column<long>(nullable: false),
                     First_Name = table.Column<string>(type: "VARCHAR(70)", nullable: true),
                     Last_Name = table.Column<string>(type: "VARCHAR(70)", nullable: true),
                     SocialName = table.Column<string>(type: "VARCHAR(25)", nullable: true),
@@ -127,6 +121,20 @@ namespace PIM.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    CustumersId = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AccountStatus = table.Column<bool>(nullable: false),
+                    PersonId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.CustumersId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Identities",
                 columns: table => new
                 {
@@ -178,7 +186,7 @@ namespace PIM.Migrations
                     WalletId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WalletBalance = table.Column<double>(nullable: false),
-                    UserId = table.Column<long>(nullable: false)
+                    CustomersId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -303,12 +311,12 @@ namespace PIM.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "BirthDay", "CPF", "ConcurrencyStamp", "Email", "EmailConfirmed", "First_Name", "Last_Name", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PersonId", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "SocialName", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "BirthDay", "CPF", "ConcurrencyStamp", "Email", "EmailConfirmed", "First_Name", "Last_Name", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumberConfirmed", "Role", "SocialName", "UserName" },
                 values: new object[,]
                 {
-                    { "12ae27c4-2849-483e-9f36-914230bf850f", 0, new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "58113438092", "ab10e3ef-e9cb-498d-9db2-690d5c76306c", "banetmp+nqzlb@gmail.com", false, "Alexia", null, false, null, null, null, "p4ssw0rld", null, 3L, null, false, "USER", "8161f49c-6f66-447e-8ada-ec6d899312c3", "null", false, null },
-                    { "97c4a192-9425-49a0-8fc7-9cac141ccfc4", 0, new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "82124778005", "1ce573b4-440b-4e01-a168-82386e2a55f2", "lengtmp+lue5n@gmail.com", false, "Mackenzie", null, false, null, null, null, "passWORLD", null, 2L, null, false, "USER", "f9b23451-3b38-4ec3-a906-36d3b565d468", "null", false, null },
-                    { "20151c97-45fc-4750-a869-3e5129818551", 0, new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "65519709076", "f98598c5-4fc8-4000-be43-4f05754a8eb1", "ezratmp+lath6@gmail.com", false, "Mike", null, false, null, null, null, "pass", null, 1L, null, false, "USER", "ce8c0871-0d21-48f5-a381-6757ab905241", "null", false, null }
+                    { "11456698-5c20-4517-a21d-21551351a173", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "65519709076", "7e3868d1-bc2e-468a-81e8-044b075fd25b", "ezratmp+lath6@gmail.com", false, "Mike", null, null, null, null, "pass", null, false, "USER", "null", null },
+                    { "6b74f56c-0701-4483-82e0-4b952cf2387e", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "82124778005", "0971a78e-0831-45d7-a68d-3f9baeafe5a5", "lengtmp+lue5n@gmail.com", false, "Mackenzie", null, null, null, null, "passWORLD", null, false, "USER", "null", null },
+                    { "f19ec1f9-cfe2-4729-b01b-5e22e296b076", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "58113438092", "6be7ec75-1dab-40b4-95ec-b53fcfa609ef", "banetmp+nqzlb@gmail.com", false, "Alexia", null, null, null, null, "p4ssw0rld", null, false, "USER", "null", null }
                 });
 
             migrationBuilder.InsertData(
@@ -316,9 +324,19 @@ namespace PIM.Migrations
                 columns: new[] { "CountryId", "AddressId", "CountryName" },
                 values: new object[,]
                 {
-                    { 1L, 1L, "Brasil" },
                     { 2L, 2L, "Brasil" },
+                    { 1L, 1L, "Brasil" },
                     { 3L, 3L, "Brasil" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "CustumersId", "AccountStatus", "PersonId" },
+                values: new object[,]
+                {
+                    { 1L, false, 1L },
+                    { 2L, true, 2L },
+                    { 3L, true, 3L }
                 });
 
             migrationBuilder.InsertData(
@@ -326,9 +344,9 @@ namespace PIM.Migrations
                 columns: new[] { "IdentityId", "DataExpedicao", "OrgaoExpedidor", "PersonId", "RegistroGeral" },
                 values: new object[,]
                 {
+                    { 1L, new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", 1L, "190471001" },
                     { 3L, new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", 3L, "362932888" },
-                    { 2L, new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", 2L, "362932888" },
-                    { 1L, new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", 1L, "190471001" }
+                    { 2L, new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", 2L, "362932888" }
                 });
 
             migrationBuilder.InsertData(
@@ -422,6 +440,9 @@ namespace PIM.Migrations
 
             migrationBuilder.DropTable(
                 name: "Countries");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Identities");

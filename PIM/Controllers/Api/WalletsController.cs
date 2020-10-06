@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
-using PIM.Models.User;
+using PIM.Models;
 
 namespace PIM.Controllers
 {
@@ -16,9 +16,9 @@ namespace PIM.Controllers
     [ApiController]
     public class WalletsController : ControllerBase
     {
-        private readonly PIMContext _context;
+        private readonly ApplicationContext _context;
 
-        public WalletsController(PIMContext context)
+        public WalletsController(ApplicationContext context)
         {
             _context = context;
         }

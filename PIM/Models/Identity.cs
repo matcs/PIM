@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIM.Models.RG
+namespace PIM.Models
 {
     public class Identity
     {

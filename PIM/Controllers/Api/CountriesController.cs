@@ -16,9 +16,9 @@ namespace PIM.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly PIMContext _context;
+        private readonly ApplicationContext _context;
 
-        public CountriesController(PIMContext context)
+        public CountriesController(ApplicationContext context)
         {
             _context = context;
         }

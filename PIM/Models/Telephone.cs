@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIM.Models.Telephone
+namespace PIM.Models
 { 
     public class Telephone
     {

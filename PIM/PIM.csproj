@@ -22,6 +22,16 @@
     <Compile Remove="Migrations\20200916235008_initial.Designer.cs" />
     <Compile Remove="Migrations\20201003215507_initial created.cs" />
     <Compile Remove="Migrations\20201003215507_initial created.Designer.cs" />
+    <Compile Remove="Migrations\20201003220415_initial created.cs" />
+    <Compile Remove="Migrations\20201003220415_initial created.Designer.cs" />
+    <Compile Remove="Migrations\20201006005158_initial created.cs" />
+    <Compile Remove="Migrations\20201006005158_initial created.Designer.cs" />
+    <Compile Remove="Migrations\20201006010244_initial created.cs" />
+    <Compile Remove="Migrations\20201006010244_initial created.Designer.cs" />
+    <Compile Remove="Migrations\20201006022827_initial created.cs" />
+    <Compile Remove="Migrations\20201006022827_initial created.Designer.cs" />
+    <Compile Remove="Migrations\20201006023751_initial created.cs" />
+    <Compile Remove="Migrations\20201006023751_initial created.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +40,7 @@
     <Compile Include="Areas\Identity\Pages\Account\Login.cshtml.cs" />
     <Compile Include="Areas\Identity\Pages\Account\Logout.cshtml.cs" />
     <Compile Include="Areas\Identity\Pages\Account\Register.cshtml.cs" />
+    <Compile Include="Areas\Identity\Pages\Account\ResetPassword.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,9 +63,15 @@
     <None Include="Areas\Identity\Pages\Account\Login.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Logout.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Register.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
 
 </Project>

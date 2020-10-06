@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PIM.Models;
-using PIM.Models.Administrator;
-using PIM.Models.Person;
-using PIM.Models.RG;
-using PIM.Models.Telephone;
-using PIM.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PIM.Data
 {
-    public class PIMContext : IdentityDbContext<Person>
+    public class ApplicationContext : IdentityDbContext<User>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +17,7 @@ namespace PIM.Data
                providerOptions => providerOptions.CommandTimeout(60));
         }
 
-        public PIMContext(DbContextOptions<PIMContext> options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         { }
 
@@ -32,48 +27,54 @@ namespace PIM.Data
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<CarteiraDeTrabalho> CarteiraDeTrabalhos { get; set; }
         public DbSet<Identity> Identities { get; set; }
-        public DbSet<Person> People { get; set; }
+        public DbSet<User> People { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
         public DbSet<Contract> Contracts { get; set; }
-        //public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>().HasData(
-                new Person
-                {
-                    PersonId = 1,
-                    First_Name = "Mike",
-                    SocialName = "null",
-                    Email = "ezratmp+lath6@gmail.com",
-                    Password = "pass",
-                    CPF = "65519709076",
-                    BirthDay = DateTime.Parse("Nov 1, 1999"),
-                    Role = "USER"
-                },
-                new Person
-                {
-                    PersonId = 2,
-                    First_Name = "Mackenzie",
-                    SocialName = "null",
-                    Email = "lengtmp+lue5n@gmail.com",
-                    Password = "passWORLD",
-                    CPF = "82124778005",
-                    BirthDay = DateTime.Parse("Jan 6, 1985"),
-                    Role = "USER"
-                },
-                new Person
-                {
-                    PersonId = 3,
-                    First_Name = "Alexia",
-                    SocialName = "null",
-                    Email = "banetmp+nqzlb@gmail.com",
-                    Password = "p4ssw0rld",
-                    CPF = "58113438092",
-                    BirthDay = DateTime.Parse("Dez 30, 2000"),
-                    Role = "USER"
-                });
+            modelBuilder.Entity<User>
+                (entity => {
+                    entity.Ignore(c => c.AccessFailedCount)
+                                           .Ignore(c => c.LockoutEnabled)
+                                           .Ignore(c => c.PhoneNumber)
+                                           .Ignore(c => c.SecurityStamp)
+                                           .Ignore(c => c.TwoFactorEnabled)
+                    .ToTable(name: "Users").HasData(
+                    new User
+                    {
+                        First_Name = "Mike",
+                        SocialName = "null",
+                        Email = "ezratmp+lath6@gmail.com",
+                        Password = "pass",
+                        CPF = "65519709076",
+                        BirthDay = DateTime.Parse("Nov 1, 1999"),
+                        Role = "USER"
+                    },
+                    new User
+                    {
+                        First_Name = "Mackenzie",
+                        SocialName = "null",
+                        Email = "lengtmp+lue5n@gmail.com",
+                        Password = "passWORLD",
+                        CPF = "82124778005",
+                        BirthDay = DateTime.Parse("Jan 6, 1985"),
+                        Role = "USER"
+                    },
+                    new User
+                    {
+                        First_Name = "Alexia",
+                        SocialName = "null",
+                        Email = "banetmp+nqzlb@gmail.com",
+                        Password = "p4ssw0rld",
+                        CPF = "58113438092",
+                        BirthDay = DateTime.Parse("Dez 30, 2000"),
+                        Role = "USER"
+                    });
+            });
+                
 
             modelBuilder.Entity<Identity>().HasData(
                 new Identity
@@ -124,26 +125,25 @@ namespace PIM.Data
                     PersonId = 3
                 });
 
-            /*modelBuilder.Entity<User>().HasData(
-                new User
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer
                 {
-                    UserId = 1,
+                    CustumersId = 1,
                     AccountStatus = false,
                     PersonId = 1L
                 },
-                new User
+                new Customer
                 {
-                    UserId = 2,
+                    CustumersId = 2,
                     AccountStatus = true,
                     PersonId = 2L
                 },
-                new User
+                new Customer
                 {
-                    UserId = 3,
+                    CustumersId = 3,
                     AccountStatus = true,
                     PersonId = 3L
                 });
-            */
             modelBuilder.Entity<Address>().HasData(
                 new Address
                 {

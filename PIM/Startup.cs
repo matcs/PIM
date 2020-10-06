@@ -8,7 +8,8 @@ using Microsoft.Extensions.Hosting;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using PIM.Models.Person;
+using PIM.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace PIM
 {
@@ -27,13 +28,13 @@ namespace PIM
             services.AddCors();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddDbContext<PIMContext>
+            services.AddDbContext<ApplicationContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<Person>(options => options.SignIn.RequireConfirmedAccount = true)
-                 .AddEntityFrameworkStores<PIMContext>();
-
+            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddEntityFrameworkStores<ApplicationContext>();
+            
             //JWT Configuration
-            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            /*var key = Encoding.ASCII.GetBytes(Settings.Secret);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -47,10 +48,10 @@ namespace PIM
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateIssuer = true,
+                    ValidateAudience = true
                 };
-            }).AddCookie();
+            }).AddCookie();*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

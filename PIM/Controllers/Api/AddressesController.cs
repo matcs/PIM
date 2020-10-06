@@ -16,9 +16,9 @@ namespace PIM.Controllers
     [ApiController]
     public class AddressesController : ControllerBase
     {
-        private readonly PIMContext _context;
+        private readonly ApplicationContext _context;
 
-        public AddressesController(PIMContext context)
+        public AddressesController(ApplicationContext context)
         {
             _context = context;
         }

@@ -12,15 +12,15 @@ namespace PIM.Models
         [Key]
         public long AddressId { get; set; }
         [Column(TypeName = "VARCHAR(25)")]
-        public String AddrType { get; set; }
+        public string AddrType { get; set; }
         [Column(TypeName = "VARCHAR(10)")]
-        public String AddrNumber { get; set; }
+        public string AddrNumber { get; set; }
         [Column(TypeName = "VARCHAR(40)")]
-        public String AddrCity { get; set; }
+        public string AddrCity { get; set; }
         [Column(TypeName = "VARCHAR(40)")]
-        public String AddrNeighbohood { get; set; }
+        public string AddrNeighbohood { get; set; }
         [Column(TypeName = "VARCHAR(25)")]
-        public String ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         [ForeignKey("Person")]
         public long PersonId { get; set; }

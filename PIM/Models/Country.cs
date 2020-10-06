@@ -12,7 +12,7 @@ namespace PIM.Models
         [Key]
         public long CountryId { get; set; }
         [Column(TypeName = "VARCHAR(35)")]
-        public String CountryName { get; set; }
+        public string CountryName { get; set; }
         
         [ForeignKey("Address")]
         public long AddressId { get; set; }

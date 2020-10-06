@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PIM.Data;
 using PIM.Models;
-using PIM.Models.Person;
 using PIM.Services;
 
 namespace PIM.Controllers
@@ -18,9 +17,9 @@ namespace PIM.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        private readonly PIMContext _context;
+        private readonly ApplicationContext _context;
 
-        public HomeController(PIMContext context, ILogger<HomeController> logger)
+        public HomeController(ApplicationContext context, ILogger<HomeController> logger)
         {
             _context = context;
         }
@@ -28,11 +27,11 @@ namespace PIM.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult<dynamic> Authenticate([FromBody] Person model)
+        public ActionResult<dynamic> Authenticate([FromBody] User model)
         {
-            List<Person> people = _context.People.ToList();
+            List<User> people = _context.People.ToList();
 
-            Person person = null;
+            User person = null;
 
             foreach (var peoples in people)
             {

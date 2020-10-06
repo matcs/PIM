@@ -6,13 +6,12 @@ using System.Security.Claims;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
-using PIM.Models.Person;
-
+using PIM.Models;
 namespace PIM.Services
 {
     public static class TokenService
     {
-        public static string GenerateToken(Person person)
+        public static string GenerateToken(User person)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);

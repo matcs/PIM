@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIM.Models.User
+namespace PIM.Models
 {
     public class Contract
     {
         [Key]
         public long ContractId { get; set; }
         [Column(TypeName = "VARBINARY(MAX)")]
-        public String ContractTerms { get; set; }
+        public string ContractTerms { get; set; }
 
         [ForeignKey("User")]
         public long UserId { get; set; }
