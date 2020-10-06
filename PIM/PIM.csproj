@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-PIM-D8C67B39-CCA6-450E-8D64-7CE930D7B004</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201006223235_InitialCreated.cs" />
+    <Compile Remove="Migrations\20201006223235_InitialCreated.Designer.cs" />
+    <Compile Remove="Migrations\20201006223942_InitialCreated.cs" />
+    <Compile Remove="Migrations\20201006223942_InitialCreated.Designer.cs" />
+    <Compile Remove="Migrations\20201006224152_InitialCreated.cs" />
+    <Compile Remove="Migrations\20201006224152_InitialCreated.Designer.cs" />
+    <Compile Remove="Migrations\20201006224825_InitialCreated.cs" />
+    <Compile Remove="Migrations\20201006224825_InitialCreated.Designer.cs" />
+    <Compile Remove="Migrations\20201006225543_initial.cs" />
+    <Compile Remove="Migrations\20201006225543_initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+</Project>
