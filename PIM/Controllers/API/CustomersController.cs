@@ -1,0 +1,146 @@
+﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PIM.Data;
+using PIM.Models;
+using PIM.Services;
+
+namespace PIM.Controllers.API
+{
+    [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CustomersController : ControllerBase
+    {
+        private readonly ApplicationDbContext _context;
+
+        public CustomersController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost]
+        [Route("login")]
+        [AllowAnonymous]
+        public ActionResult<dynamic> Authenticate([FromBody] User model)
+        {
+            List<User> users = _context.Users.ToList();
+
+            User user = null;
+
+            foreach (var peoples in users)
+            {
+                if (peoples.Email.Equals(model.Email))
+                    user = peoples;
+            }
+
+            if (user == null)
+                return NotFound(new { message = "Usuário inválido" });
+            if (!model.Password.Equals(user.Password))
+                return NotFound(new { message = "Senha inválida" });
+            
+            var token = TokenService.GenerateToken(user);
+            user.Password = "";
+
+            var handler = new JwtSecurityTokenHandler();
+            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+            return new
+            {
+
+                User = user,
+                Beaver = token,
+                JsonPayload = tokenS.Payload
+            };
+        }
+
+        // GET: api/Customers
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        {
+            return await _context.Customers.ToListAsync();
+        }
+
+        // GET: api/Customers/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Customer>> GetCustomer(long id)
+        {
+            var customer = await _context.Customers.FindAsync(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
+
+        // PUT: api/Customers/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCustomer(long id, Customer customer)
+        {
+            if (id != customer.CustumersId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(customer).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CustomerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/Customers
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCustomer", new { id = customer.CustumersId }, customer);
+        }
+
+        // DELETE: api/Customers/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Customer>> DeleteCustomer(long id)
+        {
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            _context.Customers.Remove(customer);
+            await _context.SaveChangesAsync();
+
+            return customer;
+        }
+
+        private bool CustomerExists(long id)
+        {
+            return _context.Customers.Any(e => e.CustumersId == id);
+        }
+    }
+}
