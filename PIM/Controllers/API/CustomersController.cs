@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
 using PIM.Models;
-using PIM.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PIM.Controllers.API
 {
@@ -23,39 +21,6 @@ namespace PIM.Controllers.API
             _context = context;
         }
 
-        [HttpPost]
-        [Route("login")]
-        [AllowAnonymous]
-        public ActionResult<dynamic> Authenticate([FromBody] User model)
-        {
-            List<User> users = _context.Users.ToList();
-
-            User user = null;
-
-            foreach (var peoples in users)
-            {
-                if (peoples.Email.Equals(model.Email))
-                    user = peoples;
-            }
-
-            if (user == null)
-                return NotFound(new { message = "Usuário inválido" });
-            if (!model.Password.Equals(user.Password))
-                return NotFound(new { message = "Senha inválida" });
-            
-            var token = TokenService.GenerateToken(user);
-            user.Password = "";
-
-            var handler = new JwtSecurityTokenHandler();
-            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
-            return new
-            {
-
-                User = user,
-                Beaver = token,
-                JsonPayload = tokenS.Payload
-            };
-        }
 
         // GET: api/Customers
         [HttpGet]

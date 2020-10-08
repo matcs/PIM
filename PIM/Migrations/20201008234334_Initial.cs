@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PIM.Migrations
 {
-    public partial class InitialCreated : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,19 +53,6 @@ namespace PIM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarteiraDeTrabalhos",
-                columns: table => new
-                {
-                    CarteiraDeTrabalhoId = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AdministratorId = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CarteiraDeTrabalhos", x => x.CarteiraDeTrabalhoId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Contracts",
                 columns: table => new
                 {
@@ -94,6 +81,20 @@ namespace PIM.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CryptoCurrencies",
+                columns: table => new
+                {
+                    CryptoCurrencyId = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<double>(nullable: false),
+                    ValueDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CryptoCurrencies", x => x.CryptoCurrencyId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -108,19 +109,19 @@ namespace PIM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RegistroGeral",
+                name: "IdentityCards",
                 columns: table => new
                 {
-                    RegistroGeralId = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RegistroGeralCod = table.Column<string>(type: "CHAR(10)", nullable: true),
-                    OrgaoExpedidor = table.Column<string>(type: "VARCHAR(7)", nullable: true),
-                    DataExpedicao = table.Column<DateTime>(nullable: false),
+                    IdentityCardId = table.Column<string>(type: "NVARCHAR(40)", nullable: false),
+                    Identification = table.Column<string>(type: "NVARCHAR(10)", nullable: true),
+                    IndividualTaxpayerRegistration = table.Column<string>(type: "NVARCHAR(12)", nullable: true),
+                    IssuingBody = table.Column<string>(nullable: true),
+                    ShippingDate = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegistroGeral", x => x.RegistroGeralId);
+                    table.PrimaryKey("PK_IdentityCards", x => x.IdentityCardId);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,6 +195,26 @@ namespace PIM.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WorkRecordBooklets",
+                columns: table => new
+                {
+                    WorkRecordBookletId = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<string>(type: "NVARCHAR(10)", nullable: true),
+                    Serial = table.Column<string>(type: "NVARCHAR(12)", nullable: true),
+                    BirthPlace = table.Column<string>(type: "NVARCHAR(10)", nullable: true),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    FatherName = table.Column<string>(nullable: true),
+                    MotherName = table.Column<string>(nullable: true),
+                    ShippingDate = table.Column<DateTime>(nullable: false),
+                    AdministratorId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkRecordBooklets", x => x.WorkRecordBookletId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -212,6 +233,27 @@ namespace PIM.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaymentReceipts",
+                columns: table => new
+                {
+                    PaymentReceiptsId = table.Column<string>(nullable: false),
+                    TransactionDate = table.Column<DateTime>(nullable: false),
+                    Amount = table.Column<double>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    CustomerCustumersId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentReceipts", x => x.PaymentReceiptsId);
+                    table.ForeignKey(
+                        name: "FK_PaymentReceipts_Customers_CustomerCustumersId",
+                        column: x => x.CustomerCustumersId,
+                        principalTable: "Customers",
+                        principalColumn: "CustumersId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -330,13 +372,13 @@ namespace PIM.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "RegistroGeral",
-                columns: new[] { "RegistroGeralId", "DataExpedicao", "OrgaoExpedidor", "RegistroGeralCod", "UserId" },
+                table: "IdentityCards",
+                columns: new[] { "IdentityCardId", "Identification", "IndividualTaxpayerRegistration", "IssuingBody", "ShippingDate", "UserId" },
                 values: new object[,]
                 {
-                    { 3L, new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", "362932888", 3L },
-                    { 2L, new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", "362932888", 2L },
-                    { 1L, new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SSP", "190471001", 1L }
+                    { "abc2", "362932888", "06810592067", "SSP", new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 3L },
+                    { "abc1", "362932888", "62472128010", "SSP", new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2L },
+                    { "abc", "190471001", "53925227008", "SSP", new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1L }
                 });
 
             migrationBuilder.InsertData(
@@ -364,9 +406,9 @@ namespace PIM.Migrations
                 columns: new[] { "Id", "BirthDay", "CPF", "ConcurrencyStamp", "Email", "EmailConfirmed", "First_Name", "Last_Name", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumberConfirmed", "Role", "SocialName", "UserName" },
                 values: new object[,]
                 {
-                    { "548def52-eaf1-4b5b-8bb9-d29920008efc", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "65519709076", "61e3bb4b-6b2d-48a7-9cc6-ad8b0f42d122", "ezratmp+lath6@gmail.com", false, "Mike", null, null, null, null, "pass", null, false, "USER", "null", null },
-                    { "7ff2b465-f32a-4e4a-8d35-168c9afaeffe", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "82124778005", "cb499312-75db-4fa4-8eed-99c520e904b2", "lengtmp+lue5n@gmail.com", false, "Mackenzie", null, null, null, null, "passWORLD", null, false, "USER", "null", null },
-                    { "393a0cce-5296-4056-bd77-067b559cfe68", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "58113438092", "36585a2a-9beb-4bef-a966-876ff385f0bc", "banetmp+nqzlb@gmail.com", false, "Alexia", null, null, null, null, "p4ssw0rld", null, false, "USER", "null", null }
+                    { "ae6154b5-183b-4177-9cc7-e09cb1a09300", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "65519709076", "25873d55-201a-43f7-98e5-b5868a4fdd7c", "ezratmp+lath6@gmail.com", false, "Mike", null, null, null, null, "pass", null, false, "USER", "null", null },
+                    { "fc9f69b8-f2b2-471d-9754-25d29efb57f1", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "82124778005", "f88d6fce-d993-4291-90fd-638c23fc0673", "lengtmp+lue5n@gmail.com", false, "Mackenzie", null, null, null, null, "passWORLD", null, false, "USER", "null", null },
+                    { "7b322217-7585-46b5-ab8a-f865ba7039a7", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "58113438092", "d79c5d77-8c0a-4129-838e-7f3a62a95912", "banetmp+nqzlb@gmail.com", false, "Alexia", null, null, null, null, "p4ssw0rld", null, false, "USER", "null", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -395,6 +437,18 @@ namespace PIM.Migrations
                 name: "IX_AspNetUserRoles_RoleId",
                 table: "AspNetUserRoles",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IdentityCards_IndividualTaxpayerRegistration",
+                table: "IdentityCards",
+                column: "IndividualTaxpayerRegistration",
+                unique: true,
+                filter: "[IndividualTaxpayerRegistration] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PaymentReceipts_CustomerCustumersId",
+                table: "PaymentReceipts",
+                column: "CustomerCustumersId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -433,19 +487,19 @@ namespace PIM.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CarteiraDeTrabalhos");
-
-            migrationBuilder.DropTable(
                 name: "Contracts");
 
             migrationBuilder.DropTable(
                 name: "Countries");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "CryptoCurrencies");
 
             migrationBuilder.DropTable(
-                name: "RegistroGeral");
+                name: "IdentityCards");
+
+            migrationBuilder.DropTable(
+                name: "PaymentReceipts");
 
             migrationBuilder.DropTable(
                 name: "States");
@@ -457,10 +511,16 @@ namespace PIM.Migrations
                 name: "Wallets");
 
             migrationBuilder.DropTable(
+                name: "WorkRecordBooklets");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }

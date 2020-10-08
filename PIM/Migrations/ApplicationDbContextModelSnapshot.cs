@@ -231,21 +231,6 @@ namespace PIM.Migrations
                     b.ToTable("Administrators");
                 });
 
-            modelBuilder.Entity("PIM.Models.CarteiraDeTrabalho", b =>
-                {
-                    b.Property<long>("CarteiraDeTrabalhoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("AdministratorId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("CarteiraDeTrabalhoId");
-
-                    b.ToTable("CarteiraDeTrabalhos");
-                });
-
             modelBuilder.Entity("PIM.Models.Contract", b =>
                 {
                     b.Property<long>("ContractId")
@@ -302,6 +287,24 @@ namespace PIM.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PIM.Models.CryptoCurrency", b =>
+                {
+                    b.Property<long>("CryptoCurrencyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("ValueDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CryptoCurrencyId");
+
+                    b.ToTable("CryptoCurrencies");
+                });
+
             modelBuilder.Entity("PIM.Models.Customer", b =>
                 {
                     b.Property<long>("CustumersId")
@@ -340,54 +343,87 @@ namespace PIM.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PIM.Models.RegistroGeral", b =>
+            modelBuilder.Entity("PIM.Models.IdentityCard", b =>
                 {
-                    b.Property<long>("RegistroGeralId")
+                    b.Property<string>("IdentityCardId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("NVARCHAR(40)");
 
-                    b.Property<DateTime>("DataExpedicao")
+                    b.Property<string>("Identification")
+                        .HasColumnType("NVARCHAR(10)");
+
+                    b.Property<string>("IndividualTaxpayerRegistration")
+                        .HasColumnType("NVARCHAR(12)");
+
+                    b.Property<string>("IssuingBody")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("OrgaoExpedidor")
-                        .HasColumnType("VARCHAR(7)");
-
-                    b.Property<string>("RegistroGeralCod")
-                        .HasColumnType("CHAR(10)");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("RegistroGeralId");
+                    b.HasKey("IdentityCardId");
 
-                    b.ToTable("RegistroGeral");
+                    b.HasIndex("IndividualTaxpayerRegistration")
+                        .IsUnique()
+                        .HasFilter("[IndividualTaxpayerRegistration] IS NOT NULL");
+
+                    b.ToTable("IdentityCards");
 
                     b.HasData(
                         new
                         {
-                            RegistroGeralId = 1L,
-                            DataExpedicao = new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OrgaoExpedidor = "SSP",
-                            RegistroGeralCod = "190471001",
+                            IdentityCardId = "abc",
+                            Identification = "190471001",
+                            IndividualTaxpayerRegistration = "53925227008",
+                            IssuingBody = "SSP",
+                            ShippingDate = new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1L
                         },
                         new
                         {
-                            RegistroGeralId = 2L,
-                            DataExpedicao = new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OrgaoExpedidor = "SSP",
-                            RegistroGeralCod = "362932888",
+                            IdentityCardId = "abc1",
+                            Identification = "362932888",
+                            IndividualTaxpayerRegistration = "62472128010",
+                            IssuingBody = "SSP",
+                            ShippingDate = new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 2L
                         },
                         new
                         {
-                            RegistroGeralId = 3L,
-                            DataExpedicao = new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OrgaoExpedidor = "SSP",
-                            RegistroGeralCod = "362932888",
+                            IdentityCardId = "abc2",
+                            Identification = "362932888",
+                            IndividualTaxpayerRegistration = "06810592067",
+                            IssuingBody = "SSP",
+                            ShippingDate = new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 3L
                         });
+                });
+
+            modelBuilder.Entity("PIM.Models.PaymentReceipt", b =>
+                {
+                    b.Property<string>("PaymentReceiptsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<long?>("CustomerCustumersId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PaymentReceiptsId");
+
+                    b.HasIndex("CustomerCustumersId");
+
+                    b.ToTable("PaymentReceipts");
                 });
 
             modelBuilder.Entity("PIM.Models.State", b =>
@@ -545,10 +581,10 @@ namespace PIM.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "548def52-eaf1-4b5b-8bb9-d29920008efc",
+                            Id = "ae6154b5-183b-4177-9cc7-e09cb1a09300",
                             BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CPF = "65519709076",
-                            ConcurrencyStamp = "61e3bb4b-6b2d-48a7-9cc6-ad8b0f42d122",
+                            ConcurrencyStamp = "25873d55-201a-43f7-98e5-b5868a4fdd7c",
                             Email = "ezratmp+lath6@gmail.com",
                             EmailConfirmed = false,
                             First_Name = "Mike",
@@ -559,10 +595,10 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "7ff2b465-f32a-4e4a-8d35-168c9afaeffe",
+                            Id = "fc9f69b8-f2b2-471d-9754-25d29efb57f1",
                             BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CPF = "82124778005",
-                            ConcurrencyStamp = "cb499312-75db-4fa4-8eed-99c520e904b2",
+                            ConcurrencyStamp = "f88d6fce-d993-4291-90fd-638c23fc0673",
                             Email = "lengtmp+lue5n@gmail.com",
                             EmailConfirmed = false,
                             First_Name = "Mackenzie",
@@ -573,10 +609,10 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "393a0cce-5296-4056-bd77-067b559cfe68",
+                            Id = "7b322217-7585-46b5-ab8a-f865ba7039a7",
                             BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CPF = "58113438092",
-                            ConcurrencyStamp = "36585a2a-9beb-4bef-a966-876ff385f0bc",
+                            ConcurrencyStamp = "d79c5d77-8c0a-4129-838e-7f3a62a95912",
                             Email = "banetmp+nqzlb@gmail.com",
                             EmailConfirmed = false,
                             First_Name = "Alexia",
@@ -603,6 +639,42 @@ namespace PIM.Migrations
                     b.HasKey("WalletId");
 
                     b.ToTable("Wallets");
+                });
+
+            modelBuilder.Entity("PIM.Models.WorkRecordBooklet", b =>
+                {
+                    b.Property<long>("WorkRecordBookletId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AdministratorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BirthPlace")
+                        .HasColumnType("NVARCHAR(10)");
+
+                    b.Property<string>("FatherName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MotherName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("NVARCHAR(10)");
+
+                    b.Property<string>("Serial")
+                        .HasColumnType("NVARCHAR(12)");
+
+                    b.Property<DateTime>("ShippingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("WorkRecordBookletId");
+
+                    b.ToTable("WorkRecordBooklets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -654,6 +726,13 @@ namespace PIM.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PIM.Models.PaymentReceipt", b =>
+                {
+                    b.HasOne("PIM.Models.Customer", null)
+                        .WithMany("PaymentReceipts")
+                        .HasForeignKey("CustomerCustumersId");
                 });
 #pragma warning restore 612, 618
         }
