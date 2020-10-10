@@ -7,19 +7,20 @@ namespace PIM.Models
     {
         [Key]
         public long CountryId { get; set; }
+
+        [Required]
         [Column(TypeName = "VARCHAR(35)")]
         public string CountryName { get; set; }
 
-        [ForeignKey("Address")]
-        public long AddressId { get; set; }
+        public Address Address { get; set; }
 
         public Country() { }
 
-        public Country(long countryId, string countryName, long addressId)
+        public Country(long countryId, string countryName, Address address)
         {
             CountryId = countryId;
             CountryName = countryName;
-            AddressId = addressId;
+            Address = address;
         }
     }
 }

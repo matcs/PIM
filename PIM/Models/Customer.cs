@@ -7,21 +7,28 @@ namespace PIM.Models
     public class Customer
     {
         [Key]
-        public long CustumersId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(TypeName = "NVARCHAR(40)")]
+        public string CustumersId { get; set; }
+
+        [Required]
         public bool AccountStatus { get; set; }
+
         public List<PaymentReceipt> PaymentReceipts { get; set; }
 
-        [ForeignKey("User")]
-        public long UserId { get; set; }
+        public List<Contract> Contracts { get; set; }
+
+        public User User { get; set; }
 
         public Customer() { }
 
-        public Customer(long custumersId, bool accountStatus, List<PaymentReceipt> paymentReceipts, long userId)
+        public Customer(string custumersId, bool accountStatus, List<PaymentReceipt> paymentReceipts, List<Contract> contracts, User user)
         {
             CustumersId = custumersId;
             AccountStatus = accountStatus;
             PaymentReceipts = paymentReceipts;
-            UserId = userId;
+            Contracts = contracts;
+            User = user;
         }
     }
 }

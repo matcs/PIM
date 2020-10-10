@@ -7,19 +7,29 @@ namespace PIM.Models
     {
         [Key]
         public long AddressId { get; set; }
+
+        //Logradouro
+        [Required]
         [Column(TypeName = "VARCHAR(25)")]
-        public string AddrType { get; set; }
+        public string PublicArea { get; set; }
+
+        [Required]
         [Column(TypeName = "VARCHAR(10)")]
-        public string AddrNumber { get; set; }
+        public string StreetNumber { get; set; }
+
+        [Required]
         [Column(TypeName = "VARCHAR(40)")]
-        public string AddrCity { get; set; }
+        public string City { get; set; }
+
+        [Required]
         [Column(TypeName = "VARCHAR(40)")]
-        public string AddrNeighbohood { get; set; }
+        public string Neighborhood { get; set; }
+
+        [Required]
         [Column(TypeName = "VARCHAR(25)")]
         public string ZipCode { get; set; }
 
-        [ForeignKey("User")]
-        public long UserId { get; set; }
+        public User User { get; set; }
 
         public Address() { }
 
@@ -28,14 +38,14 @@ namespace PIM.Models
             AddressId = addressId;
         }
 
-        public Address(long addressId, string addrType, string addrNumber, string addrCity, string addrNeighbohood, string zipCode, long userId) : this(addressId)
+        public Address(long addressId, string publicArea, string streetNumber, string city, string neighborhood, string zipCode, User user) : this(addressId)
         {
-            AddrType = addrType;
-            AddrNumber = addrNumber;
-            AddrCity = addrCity;
-            AddrNeighbohood = addrNeighbohood;
+            PublicArea = publicArea;
+            StreetNumber = streetNumber;
+            City = city;
+            Neighborhood = neighborhood;
             ZipCode = zipCode;
-            UserId = userId;
+            User = user;
         }
     }
 }

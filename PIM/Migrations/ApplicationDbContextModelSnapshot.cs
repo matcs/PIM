@@ -19,141 +19,6 @@ namespace PIM.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
-                });
-
             modelBuilder.Entity("PIM.Models.Address", b =>
                 {
                     b.Property<long>("AddressId")
@@ -161,25 +26,32 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddrCity")
+                    b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(40)");
 
-                    b.Property<string>("AddrNeighbohood")
+                    b.Property<string>("Neighborhood")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(40)");
 
-                    b.Property<string>("AddrNumber")
-                        .HasColumnType("VARCHAR(10)");
-
-                    b.Property<string>("AddrType")
+                    b.Property<string>("PublicArea")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(25)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("StreetNumber")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(10)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ZipCode")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(25)");
 
                     b.HasKey("AddressId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
 
@@ -187,31 +59,28 @@ namespace PIM.Migrations
                         new
                         {
                             AddressId = 1L,
-                            AddrCity = "São Paulo",
-                            AddrNeighbohood = "Republica",
-                            AddrNumber = "105B",
-                            AddrType = "Rua",
-                            UserId = 1L,
+                            City = "São Paulo",
+                            Neighborhood = "Republica",
+                            PublicArea = "Rua",
+                            StreetNumber = "105B",
                             ZipCode = "01045001"
                         },
                         new
                         {
                             AddressId = 2L,
-                            AddrCity = "São Paulo",
-                            AddrNeighbohood = "Pinheiros",
-                            AddrNumber = "125",
-                            AddrType = "Avenida",
-                            UserId = 2L,
+                            City = "São Paulo",
+                            Neighborhood = "Pinheiros",
+                            PublicArea = "Avenida",
+                            StreetNumber = "125",
                             ZipCode = "39100000"
                         },
                         new
                         {
                             AddressId = 3L,
-                            AddrCity = "Osasco",
-                            AddrNeighbohood = "Vila Yara",
-                            AddrNumber = "463",
-                            AddrType = "Rua",
-                            UserId = 3L,
+                            City = "Osasco",
+                            Neighborhood = "Vila Yara",
+                            PublicArea = "Rua",
+                            StreetNumber = "463",
                             ZipCode = "06026050"
                         });
                 });
@@ -223,10 +92,12 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("AdministratorId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Administrators");
                 });
@@ -239,12 +110,15 @@ namespace PIM.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte[]>("ContractTerms")
+                        .IsRequired()
                         .HasColumnType("VARBINARY(MAX)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CustomerCustumersId")
+                        .HasColumnType("NVARCHAR(40)");
 
                     b.HasKey("ContractId");
+
+                    b.HasIndex("CustomerCustumersId");
 
                     b.ToTable("Contracts");
                 });
@@ -256,13 +130,16 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("AddressId")
+                    b.Property<long?>("AddressId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("CountryName")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(35)");
 
                     b.HasKey("CountryId");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Countries");
 
@@ -270,19 +147,16 @@ namespace PIM.Migrations
                         new
                         {
                             CountryId = 1L,
-                            AddressId = 1L,
                             CountryName = "Brasil"
                         },
                         new
                         {
                             CountryId = 2L,
-                            AddressId = 2L,
                             CountryName = "Brasil"
                         },
                         new
                         {
                             CountryId = 3L,
-                            AddressId = 3L,
                             CountryName = "Brasil"
                         });
                 });
@@ -295,7 +169,7 @@ namespace PIM.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("Value")
-                        .HasColumnType("float");
+                        .HasColumnType("FLOAT");
 
                     b.Property<DateTime>("ValueDate")
                         .HasColumnType("datetime2");
@@ -307,39 +181,37 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.Customer", b =>
                 {
-                    b.Property<long>("CustumersId")
+                    b.Property<string>("CustumersId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("NVARCHAR(40)");
 
                     b.Property<bool>("AccountStatus")
                         .HasColumnType("bit");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CustumersId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Customers");
 
                     b.HasData(
                         new
                         {
-                            CustumersId = 1L,
-                            AccountStatus = false,
-                            UserId = 1L
+                            CustumersId = "1",
+                            AccountStatus = false
                         },
                         new
                         {
-                            CustumersId = 2L,
-                            AccountStatus = true,
-                            UserId = 2L
+                            CustumersId = "2",
+                            AccountStatus = true
                         },
                         new
                         {
-                            CustumersId = 3L,
-                            AccountStatus = true,
-                            UserId = 3L
+                            CustumersId = "3",
+                            AccountStatus = true
                         });
                 });
 
@@ -350,25 +222,29 @@ namespace PIM.Migrations
                         .HasColumnType("NVARCHAR(40)");
 
                     b.Property<string>("Identification")
+                        .IsRequired()
                         .HasColumnType("NVARCHAR(10)");
 
                     b.Property<string>("IndividualTaxpayerRegistration")
+                        .IsRequired()
                         .HasColumnType("NVARCHAR(12)");
 
                     b.Property<string>("IssuingBody")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(5)");
 
                     b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("IdentityCardId");
 
                     b.HasIndex("IndividualTaxpayerRegistration")
-                        .IsUnique()
-                        .HasFilter("[IndividualTaxpayerRegistration] IS NOT NULL");
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("IdentityCards");
 
@@ -379,8 +255,7 @@ namespace PIM.Migrations
                             Identification = "190471001",
                             IndividualTaxpayerRegistration = "53925227008",
                             IssuingBody = "SSP",
-                            ShippingDate = new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1L
+                            ShippingDate = new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -388,8 +263,7 @@ namespace PIM.Migrations
                             Identification = "362932888",
                             IndividualTaxpayerRegistration = "62472128010",
                             IssuingBody = "SSP",
-                            ShippingDate = new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2L
+                            ShippingDate = new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -397,24 +271,25 @@ namespace PIM.Migrations
                             Identification = "362932888",
                             IndividualTaxpayerRegistration = "06810592067",
                             IssuingBody = "SSP",
-                            ShippingDate = new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 3L
+                            ShippingDate = new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
             modelBuilder.Entity("PIM.Models.PaymentReceipt", b =>
                 {
                     b.Property<string>("PaymentReceiptsId")
-                        .HasColumnType("nvarchar(450)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NVARCHAR(40)");
 
                     b.Property<double>("Amount")
-                        .HasColumnType("float");
+                        .HasColumnType("FLOAT");
 
-                    b.Property<long?>("CustomerCustumersId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CustomerCustumersId")
+                        .HasColumnType("NVARCHAR(40)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(200)");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
@@ -433,13 +308,16 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("AddressId")
+                    b.Property<long?>("AddressId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("StateName")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(30)");
 
                     b.HasKey("StateId");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("States");
 
@@ -447,19 +325,16 @@ namespace PIM.Migrations
                         new
                         {
                             StateId = 1L,
-                            AddressId = 1L,
                             StateName = "São Paulo"
                         },
                         new
                         {
                             StateId = 2L,
-                            AddressId = 2L,
                             StateName = "São Paulo"
                         },
                         new
                         {
                             StateId = 3L,
-                            AddressId = 3L,
                             StateName = "São Paulo"
                         });
                 });
@@ -472,15 +347,19 @@ namespace PIM.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DDD")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(5)");
 
-                    b.Property<string>("TelephoneNumber")
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(11)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TelephoneId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Telephones");
 
@@ -489,22 +368,19 @@ namespace PIM.Migrations
                         {
                             TelephoneId = 1L,
                             DDD = "011",
-                            TelephoneNumber = "99507-9350",
-                            UserId = 1L
+                            PhoneNumber = "99507-9350"
                         },
                         new
                         {
                             TelephoneId = 2L,
                             DDD = "011",
-                            TelephoneNumber = "98732-0893",
-                            UserId = 2L
+                            PhoneNumber = "98732-0893"
                         },
                         new
                         {
                             TelephoneId = 3L,
                             DDD = "011",
-                            TelephoneNumber = "99970-7434",
-                            UserId = 3L
+                            PhoneNumber = "99970-7434"
                         });
                 });
 
@@ -516,108 +392,65 @@ namespace PIM.Migrations
                     b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CPF")
-                        .HasColumnType("VARCHAR(15)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(30)")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("First_Name")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(70)");
 
-                    b.Property<string>("Last_Name")
+                    b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(70)");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(50)");
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(15)");
 
                     b.Property<string>("SocialName")
                         .HasColumnType("VARCHAR(25)");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
                     b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Id = "ae6154b5-183b-4177-9cc7-e09cb1a09300",
+                            Id = "96c1116b-86dd-4179-9742-026910f2d65b",
                             BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CPF = "65519709076",
-                            ConcurrencyStamp = "25873d55-201a-43f7-98e5-b5868a4fdd7c",
                             Email = "ezratmp+lath6@gmail.com",
-                            EmailConfirmed = false,
-                            First_Name = "Mike",
+                            FirstName = "Mike",
+                            LastName = "Watzolski",
                             Password = "pass",
-                            PhoneNumberConfirmed = false,
                             Role = "USER",
                             SocialName = "null"
                         },
                         new
                         {
-                            Id = "fc9f69b8-f2b2-471d-9754-25d29efb57f1",
+                            Id = "9d3ef095-a97e-4d11-96fe-3b05e5e424ae",
                             BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CPF = "82124778005",
-                            ConcurrencyStamp = "f88d6fce-d993-4291-90fd-638c23fc0673",
                             Email = "lengtmp+lue5n@gmail.com",
-                            EmailConfirmed = false,
-                            First_Name = "Mackenzie",
+                            FirstName = "Mackenzie",
+                            LastName = "Kyle",
                             Password = "passWORLD",
-                            PhoneNumberConfirmed = false,
                             Role = "USER",
                             SocialName = "null"
                         },
                         new
                         {
-                            Id = "7b322217-7585-46b5-ab8a-f865ba7039a7",
+                            Id = "090ff2ac-f323-4186-934a-e2c1806abcb9",
                             BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CPF = "58113438092",
-                            ConcurrencyStamp = "d79c5d77-8c0a-4129-838e-7f3a62a95912",
                             Email = "banetmp+nqzlb@gmail.com",
-                            EmailConfirmed = false,
-                            First_Name = "Alexia",
+                            FirstName = "Alexia",
+                            LastName = "Joseph",
                             Password = "p4ssw0rld",
-                            PhoneNumberConfirmed = false,
                             Role = "USER",
                             SocialName = "null"
                         });
@@ -630,13 +463,15 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("CustomersId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CustomerCustumersId")
+                        .HasColumnType("NVARCHAR(40)");
 
                     b.Property<double>("WalletBalance")
                         .HasColumnType("float");
 
                     b.HasKey("WalletId");
+
+                    b.HasIndex("CustomerCustumersId");
 
                     b.ToTable("Wallets");
                 });
@@ -648,25 +483,30 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("AdministratorId")
+                    b.Property<long?>("AdministratorId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("BirthPlace")
-                        .HasColumnType("NVARCHAR(10)");
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR(30)");
 
                     b.Property<string>("FatherName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MotherName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
+                        .IsRequired()
                         .HasColumnType("NVARCHAR(10)");
 
                     b.Property<string>("Serial")
+                        .IsRequired()
                         .HasColumnType("NVARCHAR(12)");
 
                     b.Property<DateTime>("ShippingDate")
@@ -674,58 +514,51 @@ namespace PIM.Migrations
 
                     b.HasKey("WorkRecordBookletId");
 
+                    b.HasIndex("AdministratorId");
+
                     b.ToTable("WorkRecordBooklets");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("PIM.Models.Address", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("PIM.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("PIM.Models.Administrator", b =>
                 {
-                    b.HasOne("PIM.Models.User", null)
+                    b.HasOne("PIM.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("PIM.Models.Contract", b =>
                 {
-                    b.HasOne("PIM.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("PIM.Models.Customer", null)
+                        .WithMany("Contracts")
+                        .HasForeignKey("CustomerCustumersId");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("PIM.Models.Country", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("PIM.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PIM.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("PIM.Models.Customer", b =>
                 {
-                    b.HasOne("PIM.Models.User", null)
+                    b.HasOne("PIM.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("PIM.Models.IdentityCard", b =>
+                {
+                    b.HasOne("PIM.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("PIM.Models.PaymentReceipt", b =>
@@ -733,6 +566,34 @@ namespace PIM.Migrations
                     b.HasOne("PIM.Models.Customer", null)
                         .WithMany("PaymentReceipts")
                         .HasForeignKey("CustomerCustumersId");
+                });
+
+            modelBuilder.Entity("PIM.Models.State", b =>
+                {
+                    b.HasOne("PIM.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+                });
+
+            modelBuilder.Entity("PIM.Models.Telephone", b =>
+                {
+                    b.HasOne("PIM.Models.User", null)
+                        .WithMany("Telephones")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("PIM.Models.Wallet", b =>
+                {
+                    b.HasOne("PIM.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerCustumersId");
+                });
+
+            modelBuilder.Entity("PIM.Models.WorkRecordBooklet", b =>
+                {
+                    b.HasOne("PIM.Models.Administrator", "Administrator")
+                        .WithMany()
+                        .HasForeignKey("AdministratorId");
                 });
 #pragma warning restore 612, 618
         }

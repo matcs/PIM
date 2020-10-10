@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PIM.Models
 {
@@ -9,16 +8,15 @@ namespace PIM.Models
         public long WalletId { get; set; }
         public double WalletBalance { get; set; }
 
-        [ForeignKey("Customers")]
-        public long CustomersId { get; set; }
+        public Customer Customer { get; set; }
 
         public Wallet() { }
 
-        public Wallet(long walletId, double walletBalance, long customersId)
+        public Wallet(long walletId, double walletBalance, Customer customer)
         {
             WalletId = walletId;
             WalletBalance = walletBalance;
-            CustomersId = customersId;
+            Customer = customer;
         }
     }
 }
