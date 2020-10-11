@@ -17,13 +17,59 @@
     <Compile Remove="Migrations\20201006224825_InitialCreated.Designer.cs" />
     <Compile Remove="Migrations\20201006225543_initial.cs" />
     <Compile Remove="Migrations\20201006225543_initial.Designer.cs" />
+    <Compile Remove="Migrations\20201006230018_InitialCreated.cs" />
+    <Compile Remove="Migrations\20201006230018_InitialCreated.Designer.cs" />
+    <Compile Remove="Migrations\20201008185735_InitialCreated.cs" />
+    <Compile Remove="Migrations\20201008185735_InitialCreated.Designer.cs" />
+    <Compile Remove="Migrations\20201008213524_Initial.cs" />
+    <Compile Remove="Migrations\20201008213524_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008214431_Initial.cs" />
+    <Compile Remove="Migrations\20201008214431_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008214536_Initial.cs" />
+    <Compile Remove="Migrations\20201008214536_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008221005_Initial.cs" />
+    <Compile Remove="Migrations\20201008221005_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008222104_Initial.cs" />
+    <Compile Remove="Migrations\20201008222104_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008231406_Initial.cs" />
+    <Compile Remove="Migrations\20201008231406_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008231521_Initial.cs" />
+    <Compile Remove="Migrations\20201008231521_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008234124_Initial.cs" />
+    <Compile Remove="Migrations\20201008234124_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008234334_Initial.cs" />
+    <Compile Remove="Migrations\20201008234334_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201008235834_Initial.cs" />
+    <Compile Remove="Migrations\20201008235834_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201009010439_Initial.cs" />
+    <Compile Remove="Migrations\20201009010439_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201009010801_Initial.cs" />
+    <Compile Remove="Migrations\20201009010801_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201009011011_Initial.cs" />
+    <Compile Remove="Migrations\20201009011011_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010161552_Initial.cs" />
+    <Compile Remove="Migrations\20201010161552_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010165228_Initial.cs" />
+    <Compile Remove="Migrations\20201010165228_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010182218_Initial.cs" />
+    <Compile Remove="Migrations\20201010182218_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010182450_Initial.cs" />
+    <Compile Remove="Migrations\20201010182450_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010184313_Initial.cs" />
+    <Compile Remove="Migrations\20201010184313_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010184700_Initial.cs" />
+    <Compile Remove="Migrations\20201010184700_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
@@ -31,10 +77,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

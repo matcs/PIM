@@ -1,28 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PIM.Models
 {
     public class Customer
     {
         [Key]
-        public long CustumersId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(TypeName = "NVARCHAR(40)")]
+        public string CustumerId { get; set; }
+
+        [Required]
         public bool AccountStatus { get; set; }
 
-        [ForeignKey("User")]
-        public long UserId { get; set; }
+        public List<PaymentReceipt> PaymentReceipts { get; set; }
+
+        public List<Contract> Contracts { get; set; }
+
+        public User User { get; set; }
 
         public Customer() { }
 
-        public Customer(long custumersId, bool accountStatus, long userId)
+        public Customer(string custumersId, bool accountStatus, List<PaymentReceipt> paymentReceipts, List<Contract> contracts, User user)
         {
-            CustumersId = custumersId;
+            CustumerId = custumersId;
             AccountStatus = accountStatus;
-            UserId = userId;
+            PaymentReceipts = paymentReceipts;
+            Contracts = contracts;
+            User = user;
         }
     }
 }

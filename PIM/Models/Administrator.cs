@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PIM.Models
 {
@@ -12,15 +7,14 @@ namespace PIM.Models
         [Key]
         public long AdministratorId { get; set; }
 
-        [ForeignKey("User")]
-        public long UserId { get; set; }
+        public User User { get; set; }
 
         public Administrator() { }
 
-        public Administrator(long administratorId, long userId)
+        public Administrator(long administratorId, User user)
         {
             AdministratorId = administratorId;
-            UserId = userId;
+            User = user;
         }
     }
 }

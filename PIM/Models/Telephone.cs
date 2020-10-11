@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PIM.Models
 {
@@ -11,22 +7,22 @@ namespace PIM.Models
     {
         [Key]
         public long TelephoneId { get; set; }
+
+        [Required]
         [Column(TypeName = "VARCHAR(5)")]
         public string DDD { get; set; }
-        [Column(TypeName = "VARCHAR(11)")]
-        public String TelephoneNumber { get; set; }
 
-        [ForeignKey("User")]
-        public long UserId { get; set; }
+        [Required]
+        [Column(TypeName = "VARCHAR(11)")]
+        public string PhoneNumber { get; set; }
 
         public Telephone() { }
 
-        public Telephone(long telephoneId, string dDD, string telephoneNumber, long userId)
+        public Telephone(long telephoneId, string dDD, string phoneNumber)
         {
             TelephoneId = telephoneId;
             DDD = dDD;
-            TelephoneNumber = telephoneNumber;
-            UserId = userId;
+            PhoneNumber = phoneNumber;
         }
     }
 }
