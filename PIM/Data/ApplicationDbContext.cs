@@ -151,17 +151,17 @@ namespace PIM.Data
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
                 {
-                    CustumersId = 1.ToString(),
+                    CustumerId = 1.ToString(),
                     AccountStatus = false,
                 },
                 new Customer
                 {
-                    CustumersId = 2.ToString(),
+                    CustumerId = 2.ToString(),
                     AccountStatus = true,
                 },
                 new Customer
                 {
-                    CustumersId = 3.ToString(),
+                    CustumerId = 3.ToString(),
                     AccountStatus = true,
                 });
             modelBuilder.Entity<Address>().HasData(

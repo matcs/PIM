@@ -8,11 +8,10 @@ namespace PIM.Models
 {
     public class User : IdentityUser
     {
-        [Required]
+
         [Column(TypeName = "VARCHAR(70)")]
         public string FirstName { get; set; }
 
-        [Required]
         [Column(TypeName = "VARCHAR(70)")]
         public string LastName { get; set; }
 
@@ -30,7 +29,7 @@ namespace PIM.Models
         [Required]
         public DateTime BirthDay { get; set; }
 
-        [Required]
+
         [Column(TypeName = "VARCHAR(15)")]
         public string Role { get; set; }
 

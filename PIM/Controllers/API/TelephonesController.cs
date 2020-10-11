@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class TelephonesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public TelephonesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/Telephones
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<Telephone>>> GetTelephones()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.Telephones.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/Telephones/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<Telephone>> GetTelephone(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var telephone = await _context.Telephones.FindAsync(id);
 
-            if (identityCard == null)
+            if (telephone == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return telephone;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/Telephones/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutTelephone(long id, Telephone telephone)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != telephone.TelephoneId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(telephone).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!TelephoneExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/Telephones
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<Telephone>> PostTelephone(Telephone telephone)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.Telephones.Add(telephone);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetTelephone", new { id = telephone.TelephoneId }, telephone);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/Telephones/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<Telephone>> DeleteTelephone(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var telephone = await _context.Telephones.FindAsync(id);
+            if (telephone == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.Telephones.Remove(telephone);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return telephone;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool TelephoneExists(long id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.Telephones.Any(e => e.TelephoneId == id);
         }
     }
 }

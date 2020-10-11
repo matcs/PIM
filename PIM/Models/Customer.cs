@@ -9,7 +9,7 @@ namespace PIM.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(TypeName = "NVARCHAR(40)")]
-        public string CustumersId { get; set; }
+        public string CustumerId { get; set; }
 
         [Required]
         public bool AccountStatus { get; set; }
@@ -24,7 +24,7 @@ namespace PIM.Models
 
         public Customer(string custumersId, bool accountStatus, List<PaymentReceipt> paymentReceipts, List<Contract> contracts, User user)
         {
-            CustumersId = custumersId;
+            CustumerId = custumersId;
             AccountStatus = accountStatus;
             PaymentReceipts = paymentReceipts;
             Contracts = contracts;

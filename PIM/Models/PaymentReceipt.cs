@@ -21,6 +21,8 @@ namespace PIM.Models
         [Column(TypeName = "VARCHAR(200)")]
         public string Description { get; set; }
 
+        public Customer Customer { get; set; }
+
         public PaymentReceipt() { }
 
         public PaymentReceipt(string paymentReceiptsId, DateTime transactionDate, double amount, string description)

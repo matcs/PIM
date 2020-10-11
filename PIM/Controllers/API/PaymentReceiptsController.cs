@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class PaymentReceiptsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public PaymentReceiptsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/PaymentReceipts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<PaymentReceipt>>> GetPaymentReceipts()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.PaymentReceipts.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/PaymentReceipts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<PaymentReceipt>> GetPaymentReceipt(string id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var paymentReceipt = await _context.PaymentReceipts.FindAsync(id);
 
-            if (identityCard == null)
+            if (paymentReceipt == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return paymentReceipt;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/PaymentReceipts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutPaymentReceipt(string id, PaymentReceipt paymentReceipt)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != paymentReceipt.PaymentReceiptsId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(paymentReceipt).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!PaymentReceiptExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/PaymentReceipts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<PaymentReceipt>> PostPaymentReceipt(PaymentReceipt paymentReceipt)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.PaymentReceipts.Add(paymentReceipt);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetPaymentReceipt", new { id = paymentReceipt.PaymentReceiptsId }, paymentReceipt);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/PaymentReceipts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<PaymentReceipt>> DeletePaymentReceipt(string id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var paymentReceipt = await _context.PaymentReceipts.FindAsync(id);
+            if (paymentReceipt == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.PaymentReceipts.Remove(paymentReceipt);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return paymentReceipt;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool PaymentReceiptExists(string id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.PaymentReceipts.Any(e => e.PaymentReceiptsId == id);
         }
     }
 }

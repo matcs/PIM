@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class AdministratorsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public AdministratorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/Administrators
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<Administrator>>> GetAdministrators()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.Administrators.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/Administrators/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<Administrator>> GetAdministrator(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var administrator = await _context.Administrators.FindAsync(id);
 
-            if (identityCard == null)
+            if (administrator == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return administrator;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/Administrators/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutAdministrator(long id, Administrator administrator)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != administrator.AdministratorId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(administrator).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!AdministratorExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/Administrators
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<Administrator>> PostAdministrator(Administrator administrator)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.Administrators.Add(administrator);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetAdministrator", new { id = administrator.AdministratorId }, administrator);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/Administrators/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<Administrator>> DeleteAdministrator(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var administrator = await _context.Administrators.FindAsync(id);
+            if (administrator == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.Administrators.Remove(administrator);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return administrator;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool AdministratorExists(long id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.Administrators.Any(e => e.AdministratorId == id);
         }
     }
 }

@@ -10,7 +10,7 @@ using PIM.Data;
 namespace PIM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201010184700_Initial")]
+    [Migration("20201010221735_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,12 +115,12 @@ namespace PIM.Migrations
                         .IsRequired()
                         .HasColumnType("VARBINARY(MAX)");
 
-                    b.Property<string>("CustomerCustumersId")
+                    b.Property<string>("CustomerCustumerId")
                         .HasColumnType("NVARCHAR(40)");
 
                     b.HasKey("ContractId");
 
-                    b.HasIndex("CustomerCustumersId");
+                    b.HasIndex("CustomerCustumerId");
 
                     b.ToTable("Contracts");
                 });
@@ -183,7 +183,7 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.Customer", b =>
                 {
-                    b.Property<string>("CustumersId")
+                    b.Property<string>("CustumerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NVARCHAR(40)");
 
@@ -193,7 +193,7 @@ namespace PIM.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CustumersId");
+                    b.HasKey("CustumerId");
 
                     b.HasIndex("UserId");
 
@@ -202,17 +202,17 @@ namespace PIM.Migrations
                     b.HasData(
                         new
                         {
-                            CustumersId = "1",
+                            CustumerId = "1",
                             AccountStatus = false
                         },
                         new
                         {
-                            CustumersId = "2",
+                            CustumerId = "2",
                             AccountStatus = true
                         },
                         new
                         {
-                            CustumersId = "3",
+                            CustumerId = "3",
                             AccountStatus = true
                         });
                 });
@@ -286,7 +286,7 @@ namespace PIM.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("FLOAT");
 
-                    b.Property<string>("CustomerCustumersId")
+                    b.Property<string>("CustomerCustumerId")
                         .HasColumnType("NVARCHAR(40)");
 
                     b.Property<string>("Description")
@@ -298,7 +298,7 @@ namespace PIM.Migrations
 
                     b.HasKey("PaymentReceiptsId");
 
-                    b.HasIndex("CustomerCustumersId");
+                    b.HasIndex("CustomerCustumerId");
 
                     b.ToTable("PaymentReceipts");
                 });
@@ -400,11 +400,9 @@ namespace PIM.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(70)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(70)");
 
                     b.Property<string>("Password")
@@ -412,7 +410,6 @@ namespace PIM.Migrations
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(15)");
 
                     b.Property<string>("SocialName")
@@ -425,7 +422,7 @@ namespace PIM.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "96c1116b-86dd-4179-9742-026910f2d65b",
+                            Id = "6e227215-7f2a-482f-b826-99e2082c8a7f",
                             BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ezratmp+lath6@gmail.com",
                             FirstName = "Mike",
@@ -436,7 +433,7 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "9d3ef095-a97e-4d11-96fe-3b05e5e424ae",
+                            Id = "6d73e0ac-82ab-4141-9bca-2db4d7954509",
                             BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "lengtmp+lue5n@gmail.com",
                             FirstName = "Mackenzie",
@@ -447,7 +444,7 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "090ff2ac-f323-4186-934a-e2c1806abcb9",
+                            Id = "a157ac01-eaf0-42e7-bde5-ee1763422b7a",
                             BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "banetmp+nqzlb@gmail.com",
                             FirstName = "Alexia",
@@ -465,7 +462,7 @@ namespace PIM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerCustumersId")
+                    b.Property<string>("CustomerCustumerId")
                         .HasColumnType("NVARCHAR(40)");
 
                     b.Property<double>("WalletBalance")
@@ -473,7 +470,7 @@ namespace PIM.Migrations
 
                     b.HasKey("WalletId");
 
-                    b.HasIndex("CustomerCustumersId");
+                    b.HasIndex("CustomerCustumerId");
 
                     b.ToTable("Wallets");
                 });
@@ -539,7 +536,7 @@ namespace PIM.Migrations
                 {
                     b.HasOne("PIM.Models.Customer", null)
                         .WithMany("Contracts")
-                        .HasForeignKey("CustomerCustumersId");
+                        .HasForeignKey("CustomerCustumerId");
                 });
 
             modelBuilder.Entity("PIM.Models.Country", b =>
@@ -565,9 +562,9 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.PaymentReceipt", b =>
                 {
-                    b.HasOne("PIM.Models.Customer", null)
+                    b.HasOne("PIM.Models.Customer", "Customer")
                         .WithMany("PaymentReceipts")
-                        .HasForeignKey("CustomerCustumersId");
+                        .HasForeignKey("CustomerCustumerId");
                 });
 
             modelBuilder.Entity("PIM.Models.State", b =>
@@ -588,7 +585,7 @@ namespace PIM.Migrations
                 {
                     b.HasOne("PIM.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerCustumersId");
+                        .HasForeignKey("CustomerCustumerId");
                 });
 
             modelBuilder.Entity("PIM.Models.WorkRecordBooklet", b =>

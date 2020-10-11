@@ -26,13 +26,13 @@ namespace PIM.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(type: "VARCHAR(70)", nullable: false),
-                    LastName = table.Column<string>(type: "VARCHAR(70)", nullable: false),
+                    FirstName = table.Column<string>(type: "VARCHAR(70)", nullable: true),
+                    LastName = table.Column<string>(type: "VARCHAR(70)", nullable: true),
                     SocialName = table.Column<string>(type: "VARCHAR(25)", nullable: true),
                     Email = table.Column<string>(type: "VARCHAR(30)", maxLength: 256, nullable: false),
                     Password = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     BirthDay = table.Column<DateTime>(nullable: false),
-                    Role = table.Column<string>(type: "VARCHAR(15)", nullable: false)
+                    Role = table.Column<string>(type: "VARCHAR(15)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,13 +86,13 @@ namespace PIM.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustumersId = table.Column<string>(type: "NVARCHAR(40)", nullable: false),
+                    CustumerId = table.Column<string>(type: "NVARCHAR(40)", nullable: false),
                     AccountStatus = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.CustumersId);
+                    table.PrimaryKey("PK_Customers", x => x.CustumerId);
                     table.ForeignKey(
                         name: "FK_Customers_Users_UserId",
                         column: x => x.UserId,
@@ -217,16 +217,16 @@ namespace PIM.Migrations
                     ContractId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ContractTerms = table.Column<byte[]>(type: "VARBINARY(MAX)", nullable: false),
-                    CustomerCustumersId = table.Column<string>(nullable: true)
+                    CustomerCustumerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contracts", x => x.ContractId);
                     table.ForeignKey(
-                        name: "FK_Contracts_Customers_CustomerCustumersId",
-                        column: x => x.CustomerCustumersId,
+                        name: "FK_Contracts_Customers_CustomerCustumerId",
+                        column: x => x.CustomerCustumerId,
                         principalTable: "Customers",
-                        principalColumn: "CustumersId",
+                        principalColumn: "CustumerId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -238,16 +238,16 @@ namespace PIM.Migrations
                     TransactionDate = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<double>(type: "FLOAT", nullable: false),
                     Description = table.Column<string>(type: "VARCHAR(200)", nullable: false),
-                    CustomerCustumersId = table.Column<string>(nullable: true)
+                    CustomerCustumerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PaymentReceipts", x => x.PaymentReceiptsId);
                     table.ForeignKey(
-                        name: "FK_PaymentReceipts_Customers_CustomerCustumersId",
-                        column: x => x.CustomerCustumersId,
+                        name: "FK_PaymentReceipts_Customers_CustomerCustumerId",
+                        column: x => x.CustomerCustumerId,
                         principalTable: "Customers",
-                        principalColumn: "CustumersId",
+                        principalColumn: "CustumerId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -258,16 +258,16 @@ namespace PIM.Migrations
                     WalletId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WalletBalance = table.Column<double>(nullable: false),
-                    CustomerCustumersId = table.Column<string>(nullable: true)
+                    CustomerCustumerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Wallets", x => x.WalletId);
                     table.ForeignKey(
-                        name: "FK_Wallets_Customers_CustomerCustumersId",
-                        column: x => x.CustomerCustumersId,
+                        name: "FK_Wallets_Customers_CustomerCustumerId",
+                        column: x => x.CustomerCustumerId,
                         principalTable: "Customers",
-                        principalColumn: "CustumersId",
+                        principalColumn: "CustumerId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -293,7 +293,7 @@ namespace PIM.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustumersId", "AccountStatus", "UserId" },
+                columns: new[] { "CustumerId", "AccountStatus", "UserId" },
                 values: new object[,]
                 {
                     { "1", false, null },
@@ -336,9 +336,9 @@ namespace PIM.Migrations
                 columns: new[] { "Id", "BirthDay", "Email", "FirstName", "LastName", "Password", "Role", "SocialName" },
                 values: new object[,]
                 {
-                    { "96c1116b-86dd-4179-9742-026910f2d65b", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ezratmp+lath6@gmail.com", "Mike", "Watzolski", "pass", "USER", "null" },
-                    { "9d3ef095-a97e-4d11-96fe-3b05e5e424ae", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "lengtmp+lue5n@gmail.com", "Mackenzie", "Kyle", "passWORLD", "USER", "null" },
-                    { "090ff2ac-f323-4186-934a-e2c1806abcb9", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "banetmp+nqzlb@gmail.com", "Alexia", "Joseph", "p4ssw0rld", "USER", "null" }
+                    { "6e227215-7f2a-482f-b826-99e2082c8a7f", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ezratmp+lath6@gmail.com", "Mike", "Watzolski", "pass", "USER", "null" },
+                    { "6d73e0ac-82ab-4141-9bca-2db4d7954509", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "lengtmp+lue5n@gmail.com", "Mackenzie", "Kyle", "passWORLD", "USER", "null" },
+                    { "a157ac01-eaf0-42e7-bde5-ee1763422b7a", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "banetmp+nqzlb@gmail.com", "Alexia", "Joseph", "p4ssw0rld", "USER", "null" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -352,9 +352,9 @@ namespace PIM.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contracts_CustomerCustumersId",
+                name: "IX_Contracts_CustomerCustumerId",
                 table: "Contracts",
-                column: "CustomerCustumersId");
+                column: "CustomerCustumerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Countries_AddressId",
@@ -378,9 +378,9 @@ namespace PIM.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PaymentReceipts_CustomerCustumersId",
+                name: "IX_PaymentReceipts_CustomerCustumerId",
                 table: "PaymentReceipts",
-                column: "CustomerCustumersId");
+                column: "CustomerCustumerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_AddressId",
@@ -393,9 +393,9 @@ namespace PIM.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Wallets_CustomerCustumersId",
+                name: "IX_Wallets_CustomerCustumerId",
                 table: "Wallets",
-                column: "CustomerCustumersId");
+                column: "CustomerCustumerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkRecordBooklets_AdministratorId",

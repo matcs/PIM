@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class CryptoCurrenciesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public CryptoCurrenciesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/CryptoCurrencies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<CryptoCurrency>>> GetCryptoCurrencies()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.CryptoCurrencies.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/CryptoCurrencies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<CryptoCurrency>> GetCryptoCurrency(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var cryptoCurrency = await _context.CryptoCurrencies.FindAsync(id);
 
-            if (identityCard == null)
+            if (cryptoCurrency == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return cryptoCurrency;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/CryptoCurrencies/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutCryptoCurrency(long id, CryptoCurrency cryptoCurrency)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != cryptoCurrency.CryptoCurrencyId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(cryptoCurrency).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!CryptoCurrencyExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/CryptoCurrencies
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<CryptoCurrency>> PostCryptoCurrency(CryptoCurrency cryptoCurrency)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.CryptoCurrencies.Add(cryptoCurrency);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetCryptoCurrency", new { id = cryptoCurrency.CryptoCurrencyId }, cryptoCurrency);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/CryptoCurrencies/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<CryptoCurrency>> DeleteCryptoCurrency(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var cryptoCurrency = await _context.CryptoCurrencies.FindAsync(id);
+            if (cryptoCurrency == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.CryptoCurrencies.Remove(cryptoCurrency);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return cryptoCurrency;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool CryptoCurrencyExists(long id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.CryptoCurrencies.Any(e => e.CryptoCurrencyId == id);
         }
     }
 }

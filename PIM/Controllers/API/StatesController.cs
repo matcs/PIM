@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class StatesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public StatesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/States
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<State>>> GetStates()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.States.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/States/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<State>> GetState(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var state = await _context.States.FindAsync(id);
 
-            if (identityCard == null)
+            if (state == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return state;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/States/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutState(long id, State state)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != state.StateId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(state).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!StateExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/States
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<State>> PostState(State state)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.States.Add(state);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetState", new { id = state.StateId }, state);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/States/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<State>> DeleteState(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var state = await _context.States.FindAsync(id);
+            if (state == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.States.Remove(state);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return state;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool StateExists(long id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.States.Any(e => e.StateId == id);
         }
     }
 }

@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class AddressesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public AddressesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/Addresses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.Addresses.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/Addresses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<Address>> GetAddress(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var address = await _context.Addresses.FindAsync(id);
 
-            if (identityCard == null)
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return address;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/Addresses/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutAddress(long id, Address address)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != address.AddressId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(address).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!AddressExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/Addresses
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<Address>> PostAddress(Address address)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.Addresses.Add(address);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetAddress", new { id = address.AddressId }, address);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/Addresses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<Address>> DeleteAddress(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var address = await _context.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return address;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool AddressExists(long id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.Addresses.Any(e => e.AddressId == id);
         }
     }
 }

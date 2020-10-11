@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class ContractsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public ContractsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/Contracts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<Contract>>> GetContracts()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.Contracts.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/Contracts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<Contract>> GetContract(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var contract = await _context.Contracts.FindAsync(id);
 
-            if (identityCard == null)
+            if (contract == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return contract;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/Contracts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutContract(long id, Contract contract)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != contract.ContractId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(contract).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!ContractExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/Contracts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<Contract>> PostContract(Contract contract)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.Contracts.Add(contract);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetContract", new { id = contract.ContractId }, contract);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/Contracts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<Contract>> DeleteContract(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var contract = await _context.Contracts.FindAsync(id);
+            if (contract == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.Contracts.Remove(contract);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return contract;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool ContractExists(long id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.Contracts.Any(e => e.ContractId == id);
         }
     }
 }

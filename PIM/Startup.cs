@@ -30,7 +30,8 @@ namespace PIM
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                  .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
             services.AddMvc();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);

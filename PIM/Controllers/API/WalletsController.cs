@@ -12,48 +12,48 @@ namespace PIM.Controllers.API
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityCardsController : ControllerBase
+    public class WalletsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public IdentityCardsController(ApplicationDbContext context)
+        public WalletsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/IdentityCards
+        // GET: api/Wallets
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IdentityCard>>> GetIdentityCards()
+        public async Task<ActionResult<IEnumerable<Wallet>>> GetWallets()
         {
-            return await _context.IdentityCards.ToListAsync();
+            return await _context.Wallets.ToListAsync();
         }
 
-        // GET: api/IdentityCards/5
+        // GET: api/Wallets/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IdentityCard>> GetIdentityCard(string id)
+        public async Task<ActionResult<Wallet>> GetWallet(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
+            var wallet = await _context.Wallets.FindAsync(id);
 
-            if (identityCard == null)
+            if (wallet == null)
             {
                 return NotFound();
             }
 
-            return identityCard;
+            return wallet;
         }
 
-        // PUT: api/IdentityCards/5
+        // PUT: api/Wallets/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIdentityCard(string id, IdentityCard identityCard)
+        public async Task<IActionResult> PutWallet(long id, Wallet wallet)
         {
-            if (id != identityCard.IdentityCardId)
+            if (id != wallet.WalletId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(identityCard).State = EntityState.Modified;
+            _context.Entry(wallet).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IdentityCardExists(id))
+                if (!WalletExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/IdentityCards
+        // POST: api/Wallets
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<IdentityCard>> PostIdentityCard(IdentityCard identityCard)
+        public async Task<ActionResult<Wallet>> PostWallet(Wallet wallet)
         {
-            _context.IdentityCards.Add(identityCard);
+            _context.Wallets.Add(wallet);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIdentityCard", new { id = identityCard.IdentityCardId }, identityCard);
+            return CreatedAtAction("GetWallet", new { id = wallet.WalletId }, wallet);
         }
 
-        // DELETE: api/IdentityCards/5
+        // DELETE: api/Wallets/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IdentityCard>> DeleteIdentityCard(string id)
+        public async Task<ActionResult<Wallet>> DeleteWallet(long id)
         {
-            var identityCard = await _context.IdentityCards.FindAsync(id);
-            if (identityCard == null)
+            var wallet = await _context.Wallets.FindAsync(id);
+            if (wallet == null)
             {
                 return NotFound();
             }
 
-            _context.IdentityCards.Remove(identityCard);
+            _context.Wallets.Remove(wallet);
             await _context.SaveChangesAsync();
 
-            return identityCard;
+            return wallet;
         }
 
-        private bool IdentityCardExists(string id)
+        private bool WalletExists(long id)
         {
-            return _context.IdentityCards.Any(e => e.IdentityCardId == id);
+            return _context.Wallets.Any(e => e.WalletId == id);
         }
     }
 }
