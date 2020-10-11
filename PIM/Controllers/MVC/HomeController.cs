@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using PIM.Models;
 using System.Diagnostics;
 
-namespace PIM.Controllers
+namespace PIM.Controllers.MVC
 {
     public class HomeController : Controller
     {
