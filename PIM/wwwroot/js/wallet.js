@@ -1,40 +1,24 @@
-﻿var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
-
-/* large line chart */
-var chLine = document.getElementById("chLine");
-var chartData = {
-    labels: ["S", "M", "T", "W", "T", "F", "S"],
-    datasets: [{
-        data: [589, 445, 483, 503, 689, 692, 634],
-        backgroundColor: 'transparent',
-        borderColor: colors[0],
-        borderWidth: 4,
-        pointBackgroundColor: colors[0]
+﻿new Chart(document.getElementById("line-chart"), {
+    type: 'line',
+    data: {
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+        datasets: [{
+            data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
+            label: "Esperado",
+            borderColor: "#3e95cd",
+            fill: false
+        }, {
+            data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
+            label: "Atualmente",
+            borderColor: "#8e5ea2",
+            fill: false
+        },]
     },
-    {
-        data: [639, 465, 493, 478, 589, 632, 674],
-        backgroundColor: colors[3],
-        borderColor: colors[1],
-        borderWidth: 4,
-        pointBackgroundColor: colors[1]
-    }]
-};
-
-if (chLine) {
-    new Chart(chLine, {
-        type: 'line',
-        data: chartData,
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            legend: {
-                display: false
-            }
+    options: {
+        title: {
+            display: true,
+            text: 'Projeções'
         }
-    });
-}
+    }
+});
