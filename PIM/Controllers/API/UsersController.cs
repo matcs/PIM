@@ -10,8 +10,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace PIM.Controllers.API
 {
     [Authorize]
@@ -37,7 +35,8 @@ namespace PIM.Controllers.API
         {
             var user = await _context.Users.FindAsync(id);
 
-            if (user == null) return NotFound();
+            if (user == null)
+                return NotFound();
 
             return user;
         }
@@ -107,7 +106,6 @@ namespace PIM.Controllers.API
 
             return NoContent();
         }
-
 
         private bool UserExists(string id)
         {

@@ -1,31 +1,42 @@
-﻿async function getUserId() {
+﻿function getUserId() {
     const id = parseJwt(getCookie('jwt')).unique_name;
-    document.getElementById("userID").innerHTML = id;
-    const user = await getUserInfo();
-    //console.log(user);
-
     return id;
 }
 
 async function getUserInfo() {
     const id = getUserId();
-    const response = await fetch('https://localhost:44343/api/Users/' + id, {
+    const response = await fetch('https://localhost:44343/api/Customers/' + id, {
         method: 'get',
         headers: headersConstruct(),
     }).then(response => response.json());
 
+    changeHTMLlbl(response);
+
+    autoInsertDataInInput(response);
+    
     return response;
 };
 
-function updateUserData() {
-    const user = checkIfIsNull(getUserInputValue());
+function changeHTMLlbl(user) {
+    let accountStatus = document.getElementById("status");
+    document.getElementById("userID").innerHTML = user[0].user.id;
+
+    user[0].accountStatus ? accountStatus.innerHTML = "Ativo" : accountStatus.innerHTML = "Inativo";
+}
+
+async function updateUserData() {
+    const inputValues = await getUserInputValue();
+    const user = checkIfIsNull(inputValues);
     const id = getUserId();
     return fetch('https://localhost:44343/api/Users/' + id , {
         method: 'put',
         headers: headersConstruct(),
         body: JSON.stringify(user)
     }).then((response) => {
-        console.log(response.status)
+        if (response.status !== 204)
+            errorLogin();
+
+        sucessLogin();
     });
 }
 
@@ -40,20 +51,30 @@ function headersConstruct() {
     return headers;
 }
 
-function getUserInputValue() {
+async function getUserInputValue() {
     let email = document.getElementById("Email").value;
     let firstName = document.getElementById("FirstName").value;
     let lastName = document.getElementById("LastName").value;
     let socialName = document.getElementById("SocialName").value;
     let birth = document.getElementById("Birthday").value;
 
+    const userInfo = await getUserInfo();
+
     const user = {
         Email: email, FirstName: firstName, LastName: lastName,
         SocialName: socialName, BirthDay: birth, Id: getUserId(),
-        Password: "passWORLD", Role: "USER"
+        Password: userInfo[0].user.password, Role: "USER"
     };
 
     return user;
+}
+
+function autoInsertDataInInput(user) {
+    let email = document.getElementById("Email").value = user[0].user.email;
+    let firstName = document.getElementById("FirstName").value = user[0].user.firstName;
+    let lastName = document.getElementById("LastName").value = user[0].user.lastName;
+    let socialName = document.getElementById("SocialName").value;
+    let birth = document.getElementById("Birthday").value = user[0].user.birthDay.slice(0,10);
 }
 
 function getCookie(name) {
@@ -83,4 +104,24 @@ function checkIfIsNull(obj) {
     return obj;
 }
 
+function sucessLogin() {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Dados atualizados com sucesso',
+        showConfirmButton: true,
+        timer: 1500
+    });
+}
+
+function errorLogin() {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Erro ao atualizar os dados!',
+        footer: 'verificar se as credeniais estão corretas'
+    })
+}
+
 getUserId();
+getUserInfo();

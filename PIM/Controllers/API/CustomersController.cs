@@ -34,7 +34,7 @@ namespace PIM.Controllers.API
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer(string id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Users.FindAsync(id);
 
             if (customer == null)
                 return NotFound();
@@ -45,7 +45,7 @@ namespace PIM.Controllers.API
                                                 .Include(c => c.User)
                                                 .Include(c => c.PaymentReceipts)
                                                 .Include(c => c.Contracts)
-                                                .Where(c => c.CustumerId.Equals(id))
+                                                .Where(c => c.User.Id.Equals(id))
                                                 .ToListAsync();
 
             return FullCustomerInfo;

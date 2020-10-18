@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PIM.Migrations
 {
@@ -336,9 +336,9 @@ namespace PIM.Migrations
                 columns: new[] { "Id", "BirthDay", "Email", "FirstName", "LastName", "Password", "Role", "SocialName" },
                 values: new object[,]
                 {
-                    { "6e227215-7f2a-482f-b826-99e2082c8a7f", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ezratmp+lath6@gmail.com", "Mike", "Watzolski", "pass", "USER", "null" },
-                    { "6d73e0ac-82ab-4141-9bca-2db4d7954509", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "lengtmp+lue5n@gmail.com", "Mackenzie", "Kyle", "passWORLD", "USER", "null" },
-                    { "a157ac01-eaf0-42e7-bde5-ee1763422b7a", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "banetmp+nqzlb@gmail.com", "Alexia", "Joseph", "p4ssw0rld", "USER", "null" }
+                    { "672999b3-ca32-4a8d-bafe-189a3e090093", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ezratmp+lath6@gmail.com", "Mike", "Watzolski", "pass", "USER", "null" },
+                    { "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "lengtmp+lue5n@gmail.com", "Mackenzie", "Kyle", "passWORLD", "USER", "null" },
+                    { "2922c21c-5325-4856-b270-50b5aa9ab1ea", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "banetmp+nqzlb@gmail.com", "Alexia", "Joseph", "p4ssw0rld", "USER", "null" }
                 });
 
             migrationBuilder.CreateIndex(

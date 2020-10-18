@@ -59,6 +59,8 @@
     <Compile Remove="Migrations\20201010184313_Initial.Designer.cs" />
     <Compile Remove="Migrations\20201010184700_Initial.cs" />
     <Compile Remove="Migrations\20201010184700_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010221735_Initial.cs" />
+    <Compile Remove="Migrations\20201010221735_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,6 +79,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

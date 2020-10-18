@@ -420,7 +420,7 @@ namespace PIM.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e227215-7f2a-482f-b826-99e2082c8a7f",
+                            Id = "672999b3-ca32-4a8d-bafe-189a3e090093",
                             BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ezratmp+lath6@gmail.com",
                             FirstName = "Mike",
@@ -431,7 +431,7 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "6d73e0ac-82ab-4141-9bca-2db4d7954509",
+                            Id = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
                             BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "lengtmp+lue5n@gmail.com",
                             FirstName = "Mackenzie",
@@ -442,7 +442,7 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "a157ac01-eaf0-42e7-bde5-ee1763422b7a",
+                            Id = "2922c21c-5325-4856-b270-50b5aa9ab1ea",
                             BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "banetmp+nqzlb@gmail.com",
                             FirstName = "Alexia",
