@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace PIM.Migrations
 {
@@ -238,14 +238,14 @@ namespace PIM.Migrations
                     TransactionDate = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<double>(type: "FLOAT", nullable: false),
                     Description = table.Column<string>(type: "VARCHAR(200)", nullable: false),
-                    CustomerCustumerId = table.Column<string>(nullable: true)
+                    CustomerIdCustumerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PaymentReceipts", x => x.PaymentReceiptsId);
                     table.ForeignKey(
-                        name: "FK_PaymentReceipts_Customers_CustomerCustumerId",
-                        column: x => x.CustomerCustumerId,
+                        name: "FK_PaymentReceipts_Customers_CustomerIdCustumerId",
+                        column: x => x.CustomerIdCustumerId,
                         principalTable: "Customers",
                         principalColumn: "CustumerId",
                         onDelete: ReferentialAction.Restrict);
@@ -312,6 +312,11 @@ namespace PIM.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "PaymentReceipts",
+                columns: new[] { "PaymentReceiptsId", "Amount", "CustomerIdCustumerId", "Description", "TransactionDate" },
+                values: new object[] { "1askov", 100.55, null, "Sei Lá", new DateTime(2020, 10, 20, 1, 19, 46, 606, DateTimeKind.Utc).AddTicks(8280) });
+
+            migrationBuilder.InsertData(
                 table: "States",
                 columns: new[] { "StateId", "AddressId", "StateName" },
                 values: new object[,]
@@ -336,9 +341,9 @@ namespace PIM.Migrations
                 columns: new[] { "Id", "BirthDay", "Email", "FirstName", "LastName", "Password", "Role", "SocialName" },
                 values: new object[,]
                 {
-                    { "672999b3-ca32-4a8d-bafe-189a3e090093", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ezratmp+lath6@gmail.com", "Mike", "Watzolski", "pass", "USER", "null" },
-                    { "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "lengtmp+lue5n@gmail.com", "Mackenzie", "Kyle", "passWORLD", "USER", "null" },
-                    { "2922c21c-5325-4856-b270-50b5aa9ab1ea", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "banetmp+nqzlb@gmail.com", "Alexia", "Joseph", "p4ssw0rld", "USER", "null" }
+                    { "2922c21c-5325-4856-b270-50b5aa9ab1ea", new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ezratmp+lath6@gmail.com", "Mike", "Watzolski", "pass", "USER", "null" },
+                    { "672999b3-ca32-4a8d-bafe-189a3e090093", new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "lengtmp+lue5n@gmail.com", "Mackenzie", "Kyle", "passWORLD", "USER", "null" },
+                    { "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac", new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "banetmp+nqzlb@gmail.com", "Alexia", "Joseph", "p4ssw0rld", "USER", "null" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -378,9 +383,9 @@ namespace PIM.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PaymentReceipts_CustomerCustumerId",
+                name: "IX_PaymentReceipts_CustomerIdCustumerId",
                 table: "PaymentReceipts",
-                column: "CustomerCustumerId");
+                column: "CustomerIdCustumerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_AddressId",

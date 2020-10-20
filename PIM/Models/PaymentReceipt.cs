@@ -21,16 +21,22 @@ namespace PIM.Models
         [Column(TypeName = "VARCHAR(200)")]
         public string Description { get; set; }
 
-        public Customer Customer { get; set; }
+        public Customer CustomerId { get; set; }
 
         public PaymentReceipt() { }
 
-        public PaymentReceipt(string paymentReceiptsId, DateTime transactionDate, double amount, string description)
+        public PaymentReceipt(string paymentReceiptsId, DateTime transactionDate, double amount, string description, Customer customerId)
         {
             PaymentReceiptsId = paymentReceiptsId;
             TransactionDate = transactionDate;
             Amount = amount;
             Description = description;
+            CustomerId = customerId;
+        }
+
+        public override string ToString()
+        {
+            return PaymentReceiptsId + ", " + TransactionDate + ", " + Amount + ", " + Description;
         }
     }
 }

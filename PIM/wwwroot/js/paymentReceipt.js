@@ -1,5 +1,6 @@
 ﻿function getUserId() {
     const id = parseJwt(getCookie('jwt')).unique_name;
+
     return id;
 }
 
@@ -14,22 +15,30 @@ function headersConstruct() {
     return headers;
 }
 
-async function getUserInfo() {
+async function getPayments() {
     const id = getUserId();
     const response = await fetch('https://localhost:44343/api/Customers/' + id, {
         method: 'get',
         headers: headersConstruct(),
     }).then(response => response.json());
 
-    changeHTMLlbl(response);
+    console.log(response[0]);
 
     return response;
 };
 
-function changeHTMLlbl(user) {
-    const contracts = user[0].contracts;
-    console.log(contracts);
-}
+async function getUserInfo() {
+    const id = getUserId();
+    const response = await fetch('https://localhost:44343/api/Customers/' + id, {
+        method: 'get',
+        headers: headersConstruct(),
+    }).then(response => response.json());    
+
+    console.log(response[0].paymentReceipts[0]);
+    const payments = response[0].paymentReceipts;
+        
+    return response;
+};
 
 function parseJwt(token) {
     var base64Url = token.split('.')[1];
@@ -49,4 +58,5 @@ function getCookie(name) {
     })
     return cookie[name];
 }
+
 getUserInfo();

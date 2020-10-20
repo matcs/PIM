@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="~/css/register.css" />
 <section>
     <div class="col text-center">
-        <h1>Register</h1>
+        <h1>Cadastro</h1>
     </div>
     <hr />
     <div class="container">
@@ -20,50 +20,57 @@
                 <hr />
                 <div class="row align-items-center mt-4">
                     <div class="col">
+                        <label>Nome</label>
                         <input type="text" class="form-control" placeholder="Nome">
                     </div>
                     <div class="col">
+                        <label>Sobrenome</label>
                         <input type="text" class="form-control" placeholder="Sobrenome">
                     </div>
                 </div>
 
                 <div class="row align-items-center">
                     <div class="col mt-4">
+                        <label>Nome Social</label>
                         <input type="text" class="form-control" placeholder="Nome Social">
                     </div>
                 </div>
 
                 <div class="row align-items-center">
                     <div class="col-3 mt-4">
+                        <label>DDD</label>
                         <input type="number" class="form-control" id="email" placeholder="DDD">
                     </div>
                     <div class="col mt-4">
+                        <label>Número de celular</label>
                         <input type="number" class="form-control" id="email" placeholder="Numero de celular">
                     </div>
                 </div>
 
                 <div class="row align-items-center">
-                    <div class="col mt-4">
-                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    <div class="col-6 mt-4">
+                        <label>Data de aniversário</label>
+                        <input class="form-control" id="Birthday" type="date" name="birthday" required>
                     </div>
                 </div>
 
                 <div class="row align-items-center">
                     <div class="col mt-4">
-                        <input id="Birthday" type="date" name="birthday" required>
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email">
                     </div>
                 </div>
 
                 <div class="row align-items-center mt-4">
                     <div class="col">
+                        <label>Senha</label>
                         <input type="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="col">
-                        <input type="password" class="form-control" placeholder="Confirm Password">
+                        <label>Confirmação de Senha</label>
+                        <input type="password" class="form-control" placeholder="Confirmação de Senha">
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -83,34 +90,40 @@
                 <hr />
                 <div class="row align-items-center mt-4">
                     <div class="col">
+                        <label>Logradouro</label>
                         <input type="text" class="form-control" placeholder="Logradouro">
                     </div>
                     <div class="col">
+                        <label>Endereço</label>
                         <input type="text" class="form-control" placeholder="Endereço">
                     </div>
                 </div>
 
                 <div class="row align-items-center mt-4">
                     <div class="col">
+                        <label>Número</label>
                         <input type="text" class="form-control" placeholder="Número">
                     </div>
                     <div class="col">
+                        <label>Bairro</label>
                         <input type="text" class="form-control" placeholder="Bairro">
                     </div>
                 </div>
 
                 <div class="row align-items-center">
                     <div class="col mt-4">
+                        <label>Complemento</label>
                         <input type="text" class="form-control" placeholder="Complemento">
                     </div>
                 </div>
 
-
                 <div class="row align-items-center mt-4">
                     <div class="col">
+                        <label>CEP</label>
                         <input type="text" class="form-control" placeholder="CEP">
                     </div>
                     <div class="col">
+                        <label>Cidade</label>
                         <input type="text" class="form-control" placeholder="Cidade">
                     </div>
                 </div>
@@ -123,7 +136,6 @@
                                 I Read and Accept <a href="https://www.froala.com">Terms and Conditions</a>
                             </label>
                         </div>
-
                         <button class="btn btn-primary mt-4">Submit</button>
                     </div>
                 </div>

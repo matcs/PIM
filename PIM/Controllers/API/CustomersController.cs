@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using PIM.Data;
 using PIM.Models;
 using System.Collections.Generic;
@@ -30,9 +28,8 @@ namespace PIM.Controllers.API
             return await _context.Customers.ToListAsync();
         }
 
-        // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer(string id)
+        public async Task<ActionResult<List<Customer>>> GetCustomer(string id)
         {
             var customer = await _context.Users.FindAsync(id);
 
@@ -51,9 +48,6 @@ namespace PIM.Controllers.API
             return FullCustomerInfo;
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(string id, Customer customer)
         {
@@ -83,9 +77,6 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/Customers
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
@@ -95,7 +86,6 @@ namespace PIM.Controllers.API
             return CreatedAtAction("GetCustomer", new { id = customer.CustumerId }, customer);
         }
 
-        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Customer>> DeleteCustomer(string id)
         {

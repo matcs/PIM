@@ -15,7 +15,7 @@ namespace PIM.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -284,7 +284,7 @@ namespace PIM.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("FLOAT");
 
-                    b.Property<string>("CustomerCustumerId")
+                    b.Property<string>("CustomerIdCustumerId")
                         .HasColumnType("NVARCHAR(40)");
 
                     b.Property<string>("Description")
@@ -296,9 +296,18 @@ namespace PIM.Migrations
 
                     b.HasKey("PaymentReceiptsId");
 
-                    b.HasIndex("CustomerCustumerId");
+                    b.HasIndex("CustomerIdCustumerId");
 
                     b.ToTable("PaymentReceipts");
+
+                    b.HasData(
+                        new
+                        {
+                            PaymentReceiptsId = "1askov",
+                            Amount = 100.55,
+                            Description = "Sei Lá",
+                            TransactionDate = new DateTime(2020, 10, 20, 1, 19, 46, 606, DateTimeKind.Utc).AddTicks(8280)
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.State", b =>
@@ -420,7 +429,7 @@ namespace PIM.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "672999b3-ca32-4a8d-bafe-189a3e090093",
+                            Id = "2922c21c-5325-4856-b270-50b5aa9ab1ea",
                             BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ezratmp+lath6@gmail.com",
                             FirstName = "Mike",
@@ -431,7 +440,7 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
+                            Id = "672999b3-ca32-4a8d-bafe-189a3e090093",
                             BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "lengtmp+lue5n@gmail.com",
                             FirstName = "Mackenzie",
@@ -442,7 +451,7 @@ namespace PIM.Migrations
                         },
                         new
                         {
-                            Id = "2922c21c-5325-4856-b270-50b5aa9ab1ea",
+                            Id = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
                             BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "banetmp+nqzlb@gmail.com",
                             FirstName = "Alexia",
@@ -560,9 +569,9 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.PaymentReceipt", b =>
                 {
-                    b.HasOne("PIM.Models.Customer", "Customer")
+                    b.HasOne("PIM.Models.Customer", "CustomerId")
                         .WithMany("PaymentReceipts")
-                        .HasForeignKey("CustomerCustumerId");
+                        .HasForeignKey("CustomerIdCustumerId");
                 });
 
             modelBuilder.Entity("PIM.Models.State", b =>
