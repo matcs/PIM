@@ -50,6 +50,14 @@ namespace PIM.Controllers.MVC
             return RedirectToAction("Unauthorized", "Error");
         }
 
+        public IActionResult BuyCoin()
+        {
+            if (Request.Cookies["jwt"] == null)
+                return RedirectToAction("Unauthorized", "Error");
+
+            return View();
+        }
+
         [Route("User/Profile/PaymentReceipts")]
         public IActionResult PaymentReceipts()
         {

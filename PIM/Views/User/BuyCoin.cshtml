@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "BuyCoin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Comprar moeda</h1>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-3 mt-4">
+        <label for="money">Digite o valor desejado:</label>
+        <input type="number" class="form-control" id="money" min="100"/><h4 style="float: right">R$</h4>
+    </div>
+
+    <div class="col-3 mt-4">
+        <label for="Bitcoin">Selecione a moeda desejada</label>
+        <select id="select" class="custom-select my-1 mr-sm-2">
+            <option value=null >...</option>
+            <option value="72027.78" >BTC</option>
+            <option value="2227.56">ETH</option>
+            <option value="2227.80" >USDT</option>
+            <option value="1.42">XRP</option>
+            <option value="1,466.59">BCH</option>
+            <option value="165.39">BNB</option>
+            <option value="61.88">LINK</option>
+            <option value="22.9">DOT</option>
+            <option value="294.83">LTC</option>
+            <option value="0.60">ADA</option>
+        </select>
+    </div>
+
+</div>
+<br/>
+<div class="row justify-content-center">
+    <button type="submit" onclick="checkout()" class="btn btn-primary">Finalizar compra</button>
+</div>
+
+<script src="~/js/buyCoin.js"></script>

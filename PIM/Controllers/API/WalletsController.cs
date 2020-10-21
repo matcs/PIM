@@ -21,14 +21,12 @@ namespace PIM.Controllers.API
             _context = context;
         }
 
-        // GET: api/Wallets
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Wallet>>> GetWallets()
         {
             return await _context.Wallets.ToListAsync();
         }
 
-        // GET: api/Wallets/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Wallet>> GetWallet(long id)
         {
@@ -42,9 +40,6 @@ namespace PIM.Controllers.API
             return wallet;
         }
 
-        // PUT: api/Wallets/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutWallet(long id, Wallet wallet)
         {
@@ -74,9 +69,6 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/Wallets
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Wallet>> PostWallet(Wallet wallet)
         {
@@ -86,7 +78,6 @@ namespace PIM.Controllers.API
             return CreatedAtAction("GetWallet", new { id = wallet.WalletId }, wallet);
         }
 
-        // DELETE: api/Wallets/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Wallet>> DeleteWallet(long id)
         {

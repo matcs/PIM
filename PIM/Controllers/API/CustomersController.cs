@@ -21,7 +21,7 @@ namespace PIM.Controllers.API
             _context = context;
         }
 
-        // GET: api/Customers
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
@@ -46,6 +46,24 @@ namespace PIM.Controllers.API
                                                 .ToListAsync();
 
             return FullCustomerInfo;
+        }
+
+        [AllowAnonymous]
+        [HttpGet("Wallet/{id}")]
+        public async Task<ActionResult<List<Wallet>>> GetCustomerWallet(string id)
+        {
+            var customer = await _context.Users.FindAsync(id);
+
+            if (customer == null)
+                return NotFound();
+
+            var WalletInfo = await _context.Wallets
+                                           .AsNoTracking()
+                                           .AsQueryable()
+                                           .Where(w => w.Customer.User.Id.Equals(id))
+                                           .ToListAsync();
+
+            return WalletInfo;
         }
 
         [HttpPut("{id}")]
