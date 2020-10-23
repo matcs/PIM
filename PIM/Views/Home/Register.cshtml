@@ -5,33 +5,129 @@
 
 <link rel="stylesheet" href="~/css/register.css" />
 <section>
+    <div class="col text-center">
+        <h1>Cadastro</h1>
+    </div>
+    <hr />
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-8 col-xl-6">
                 <div class="row">
-                    <div class="col text-center">
-                        <h1>Register</h1>
-                        <p class="text-h3">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia. </p>
+                    <div class="col text-left">
+                        <h3>Dados pessoais</h3>
                     </div>
                 </div>
+                <hr />
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <label>Nome</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="Nome">
+                    </div>
+                    <div class="col">
+                        <label>Sobrenome</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Sobrenome">
+                    </div>
+                </div>
+
                 <div class="row align-items-center">
                     <div class="col mt-4">
-                        <input type="text" class="form-control" placeholder="Company Name">
+                        <label>Nome Social</label>
+                        <input type="text" id="socialName" class="form-control" placeholder="Nome Social">
                     </div>
                 </div>
+
+                <div class="row align-items-center">
+                    <div class="col-3 mt-4">
+                        <label>DDD</label>
+                        <input type="number" class="form-control" id="ddd" placeholder="DDD">
+                    </div>
+                    <div class="col mt-4">
+                        <label>Número de celular</label>
+                        <input type="number" class="form-control" id="phone" placeholder="Numero de celular">
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-6 mt-4">
+                        <label>Data de aniversário</label>
+                        <input class="form-control" id="birth" type="date" name="birthday" required>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col mt-4">
+                        <label>Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Email">
+                    </div>
+                </div>
+
                 <div class="row align-items-center mt-4">
                     <div class="col">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label>Senha</label>
+                        <input type="password" id="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="col">
+                        <label>Confirmação de Senha</label>
+                        <input type="password" id="confirmPassWord" class="form-control" placeholder="Confirmação de Senha">
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br />
+
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-8 col-xl-6">
+                <div class="row">
+                    <div class="col text-left">
+                        <h3>Endereço</h3>
+                    </div>
+                </div>
+                <hr />
                 <div class="row align-items-center mt-4">
                     <div class="col">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <label>Logradouro</label>
+                        <input type="text" id="publicArea" class="form-control" placeholder="Logradouro">
                     </div>
                     <div class="col">
-                        <input type="password" class="form-control" placeholder="Confirm Password">
+                        <label>Endereço</label>
+                        <input type="text"  class="form-control" placeholder="Endereço">
                     </div>
                 </div>
+
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <label>Número</label>
+                        <input type="text" id="streetNumber" class="form-control" placeholder="Número">
+                    </div>
+                    <div class="col">
+                        <label>Bairro</label>
+                        <input type="text" id="neighborhood" class="form-control" placeholder="Bairro">
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col mt-4">
+                        <label>Complemento</label>
+                        <input type="text" class="form-control" placeholder="Complemento">
+                    </div>
+                </div>
+
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <label>CEP</label>
+                        <input type="text" id="zipCode" class="form-control" placeholder="CEP">
+                    </div>
+                    <div class="col">
+                        <label>Cidade</label>
+                        <input type="text" id="city" class="form-control" placeholder="Cidade">
+                    </div>
+                </div>
+
                 <div class="row justify-content-start mt-4">
                     <div class="col">
                         <div class="form-check">
@@ -40,12 +136,12 @@
                                 I Read and Accept <a href="https://www.froala.com">Terms and Conditions</a>
                             </label>
                         </div>
-
-                        <button class="btn btn-primary mt-4">Submit</button>
+                        <button type="button" onclick="register()" class="btn btn-primary mt-4">Cadastrar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<script src="~/js/site.js"></script>
+
+<script src="~/js/register.js"></script>

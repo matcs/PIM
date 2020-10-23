@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using PIM.Data;
 using PIM.Models;
 using System.Collections.Generic;
@@ -23,18 +21,17 @@ namespace PIM.Controllers.API
             _context = context;
         }
 
-        // GET: api/Customers
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
             return await _context.Customers.ToListAsync();
         }
 
-        // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer(string id)
+        public async Task<ActionResult<List<Customer>>> GetCustomer(string id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Users.FindAsync(id);
 
             if (customer == null)
                 return NotFound();
@@ -45,15 +42,30 @@ namespace PIM.Controllers.API
                                                 .Include(c => c.User)
                                                 .Include(c => c.PaymentReceipts)
                                                 .Include(c => c.Contracts)
-                                                .Where(c => c.CustumerId.Equals(id))
+                                                .Where(c => c.User.Id.Equals(id))
                                                 .ToListAsync();
 
             return FullCustomerInfo;
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [AllowAnonymous]
+        [HttpGet("Wallet/{id}")]
+        public async Task<ActionResult<List<Wallet>>> GetCustomerWallet(string id)
+        {
+            var customer = await _context.Users.FindAsync(id);
+
+            if (customer == null)
+                return NotFound();
+
+            var WalletInfo = await _context.Wallets
+                                           .AsNoTracking()
+                                           .AsQueryable()
+                                           .Where(w => w.Customer.User.Id.Equals(id))
+                                           .ToListAsync();
+
+            return WalletInfo;
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(string id, Customer customer)
         {
@@ -83,9 +95,6 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/Customers
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
@@ -95,7 +104,6 @@ namespace PIM.Controllers.API
             return CreatedAtAction("GetCustomer", new { id = customer.CustumerId }, customer);
         }
 
-        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Customer>> DeleteCustomer(string id)
         {

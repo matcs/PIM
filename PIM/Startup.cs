@@ -13,6 +13,7 @@ using System.Text;
 
 namespace PIM
 {
+    //TODO: apagar partes sobre investimento
     public class Startup
     {
 

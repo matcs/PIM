@@ -10,14 +10,14 @@ using PIM.Data;
 namespace PIM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201010221735_Initial")]
+    [Migration("20201023003024_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -45,15 +45,13 @@ namespace PIM.Migrations
                         .HasColumnType("VARCHAR(10)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasColumnType("VARCHAR(25)");
 
                     b.HasKey("AddressId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
 
@@ -63,7 +61,7 @@ namespace PIM.Migrations
                             AddressId = 1L,
                             City = "São Paulo",
                             Neighborhood = "Republica",
-                            PublicArea = "Rua",
+                            PublicArea = "Rua His",
                             StreetNumber = "105B",
                             ZipCode = "01045001"
                         },
@@ -72,7 +70,7 @@ namespace PIM.Migrations
                             AddressId = 2L,
                             City = "São Paulo",
                             Neighborhood = "Pinheiros",
-                            PublicArea = "Avenida",
+                            PublicArea = "Avenida Dotovisk",
                             StreetNumber = "125",
                             ZipCode = "39100000"
                         },
@@ -81,7 +79,7 @@ namespace PIM.Migrations
                             AddressId = 3L,
                             City = "Osasco",
                             Neighborhood = "Vila Yara",
-                            PublicArea = "Rua",
+                            PublicArea = "Rua Pinheiros",
                             StreetNumber = "463",
                             ZipCode = "06026050"
                         });
@@ -286,7 +284,7 @@ namespace PIM.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("FLOAT");
 
-                    b.Property<string>("CustomerCustumerId")
+                    b.Property<string>("CustomerIdCustumerId")
                         .HasColumnType("NVARCHAR(40)");
 
                     b.Property<string>("Description")
@@ -298,9 +296,18 @@ namespace PIM.Migrations
 
                     b.HasKey("PaymentReceiptsId");
 
-                    b.HasIndex("CustomerCustumerId");
+                    b.HasIndex("CustomerIdCustumerId");
 
                     b.ToTable("PaymentReceipts");
+
+                    b.HasData(
+                        new
+                        {
+                            PaymentReceiptsId = "1askov",
+                            Amount = 100.55,
+                            Description = "Sei Lá",
+                            TransactionDate = new DateTime(2020, 10, 23, 0, 30, 23, 290, DateTimeKind.Utc).AddTicks(1368)
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.State", b =>
@@ -356,12 +363,12 @@ namespace PIM.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(11)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("stringId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TelephoneId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("stringId");
 
                     b.ToTable("Telephones");
 
@@ -383,75 +390,6 @@ namespace PIM.Migrations
                             TelephoneId = 3L,
                             DDD = "011",
                             PhoneNumber = "99970-7434"
-                        });
-                });
-
-            modelBuilder.Entity("PIM.Models.User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("BirthDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(30)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("VARCHAR(70)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("VARCHAR(70)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(50)");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("VARCHAR(15)");
-
-                    b.Property<string>("SocialName")
-                        .HasColumnType("VARCHAR(25)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "6e227215-7f2a-482f-b826-99e2082c8a7f",
-                            BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ezratmp+lath6@gmail.com",
-                            FirstName = "Mike",
-                            LastName = "Watzolski",
-                            Password = "pass",
-                            Role = "USER",
-                            SocialName = "null"
-                        },
-                        new
-                        {
-                            Id = "6d73e0ac-82ab-4141-9bca-2db4d7954509",
-                            BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "lengtmp+lue5n@gmail.com",
-                            FirstName = "Mackenzie",
-                            LastName = "Kyle",
-                            Password = "passWORLD",
-                            Role = "USER",
-                            SocialName = "null"
-                        },
-                        new
-                        {
-                            Id = "a157ac01-eaf0-42e7-bde5-ee1763422b7a",
-                            BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "banetmp+nqzlb@gmail.com",
-                            FirstName = "Alexia",
-                            LastName = "Joseph",
-                            Password = "p4ssw0rld",
-                            Role = "USER",
-                            SocialName = "null"
                         });
                 });
 
@@ -518,16 +456,78 @@ namespace PIM.Migrations
                     b.ToTable("WorkRecordBooklets");
                 });
 
-            modelBuilder.Entity("PIM.Models.Address", b =>
+            modelBuilder.Entity("PIM.Models.string", b =>
                 {
-                    b.HasOne("PIM.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("VARCHAR(70)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("VARCHAR(70)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("VARCHAR(15)");
+
+                    b.Property<string>("SocialName")
+                        .HasColumnType("VARCHAR(25)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2922c21c-5325-4856-b270-50b5aa9ab1ea",
+                            BirthDay = new DateTime(1999, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ezratmp+lath6@gmail.com",
+                            FirstName = "Mike",
+                            LastName = "Watzolski",
+                            Password = "pass",
+                            Role = "USER",
+                            SocialName = "null"
+                        },
+                        new
+                        {
+                            Id = "672999b3-ca32-4a8d-bafe-189a3e090093",
+                            BirthDay = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "lengtmp+lue5n@gmail.com",
+                            FirstName = "Mackenzie",
+                            LastName = "Kyle",
+                            Password = "passWORLD",
+                            Role = "USER",
+                            SocialName = "null"
+                        },
+                        new
+                        {
+                            Id = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
+                            BirthDay = new DateTime(2000, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "banetmp+nqzlb@gmail.com",
+                            FirstName = "Alexia",
+                            LastName = "Joseph",
+                            Password = "p4ssw0rld",
+                            Role = "USER",
+                            SocialName = "null"
+                        });
                 });
 
             modelBuilder.Entity("PIM.Models.Administrator", b =>
                 {
-                    b.HasOne("PIM.Models.User", "User")
+                    b.HasOne("PIM.Models.string", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -548,23 +548,23 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.Customer", b =>
                 {
-                    b.HasOne("PIM.Models.User", "User")
+                    b.HasOne("PIM.Models.string", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("PIM.Models.IdentityCard", b =>
                 {
-                    b.HasOne("PIM.Models.User", "User")
+                    b.HasOne("PIM.Models.string", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("PIM.Models.PaymentReceipt", b =>
                 {
-                    b.HasOne("PIM.Models.Customer", "Customer")
+                    b.HasOne("PIM.Models.Customer", "CustomerId")
                         .WithMany("PaymentReceipts")
-                        .HasForeignKey("CustomerCustumerId");
+                        .HasForeignKey("CustomerIdCustumerId");
                 });
 
             modelBuilder.Entity("PIM.Models.State", b =>
@@ -576,9 +576,9 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.Telephone", b =>
                 {
-                    b.HasOne("PIM.Models.User", null)
+                    b.HasOne("PIM.Models.string", null)
                         .WithMany("Telephones")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("stringId");
                 });
 
             modelBuilder.Entity("PIM.Models.Wallet", b =>

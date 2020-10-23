@@ -8,6 +8,8 @@ namespace PIM.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -71,6 +73,7 @@ namespace PIM.Data
             modelBuilder.Entity<User>().HasData(
                         new User
                         {
+                            Id = "2922c21c-5325-4856-b270-50b5aa9ab1ea",
                             FirstName = "Mike",
                             LastName = "Watzolski",
                             SocialName = "null",
@@ -81,6 +84,7 @@ namespace PIM.Data
                         },
                         new User
                         {
+                            Id = "672999b3-ca32-4a8d-bafe-189a3e090093",
                             FirstName = "Mackenzie",
                             LastName = "Kyle",
                             SocialName = "null",
@@ -91,6 +95,7 @@ namespace PIM.Data
                         },
                         new User
                         {
+                            Id = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
                             FirstName = "Alexia",
                             LastName = "Joseph",
                             SocialName = "null",
@@ -153,6 +158,7 @@ namespace PIM.Data
                 {
                     CustumerId = 1.ToString(),
                     AccountStatus = false,
+
                 },
                 new Customer
                 {
@@ -164,11 +170,19 @@ namespace PIM.Data
                     CustumerId = 3.ToString(),
                     AccountStatus = true,
                 });
+            modelBuilder.Entity<PaymentReceipt>().HasData(
+                new PaymentReceipt
+                {
+                    PaymentReceiptsId = "1askov",
+                    Amount = 100.55,
+                    Description = "Sei Lá",
+                    TransactionDate = DateTime.UtcNow,
+                });
             modelBuilder.Entity<Address>().HasData(
                 new Address
                 {
                     AddressId = 1,
-                    PublicArea = "Rua",
+                    PublicArea = "Rua His",
                     StreetNumber = "105B",
                     City = "São Paulo",
                     Neighborhood = "Republica",
@@ -177,7 +191,7 @@ namespace PIM.Data
                 new Address
                 {
                     AddressId = 2,
-                    PublicArea = "Avenida",
+                    PublicArea = "Avenida Dotovisk",
                     StreetNumber = "125",
                     City = "São Paulo",
                     Neighborhood = "Pinheiros",
@@ -186,7 +200,7 @@ namespace PIM.Data
                 new Address
                 {
                     AddressId = 3,
-                    PublicArea = "Rua",
+                    PublicArea = "Rua Pinheiros",
                     StreetNumber = "463",
                     City = "Osasco",
                     Neighborhood = "Vila Yara",

@@ -59,24 +59,49 @@
     <Compile Remove="Migrations\20201010184313_Initial.Designer.cs" />
     <Compile Remove="Migrations\20201010184700_Initial.cs" />
     <Compile Remove="Migrations\20201010184700_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201010221735_Initial.cs" />
+    <Compile Remove="Migrations\20201010221735_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201016190012_Initial.cs" />
+    <Compile Remove="Migrations\20201016190012_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201020003616_Initial.cs" />
+    <Compile Remove="Migrations\20201020003616_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201020004342_Initial.cs" />
+    <Compile Remove="Migrations\20201020004342_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201020004502_Initial.cs" />
+    <Compile Remove="Migrations\20201020004502_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201020010418_Initial.cs" />
+    <Compile Remove="Migrations\20201020010418_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201020011904_Initial.cs" />
+    <Compile Remove="Migrations\20201020011904_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201020011947_Initial.cs" />
+    <Compile Remove="Migrations\20201020011947_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201023000609_Initial.cs" />
+    <Compile Remove="Migrations\20201023000609_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201023001706_Initial.cs" />
+    <Compile Remove="Migrations\20201023001706_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
   </ItemGroup>
 
 </Project>
