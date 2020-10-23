@@ -182,7 +182,7 @@ namespace PIM.Data
                 new Address
                 {
                     AddressId = 1,
-                    PublicArea = "Rua",
+                    PublicArea = "Rua His",
                     StreetNumber = "105B",
                     City = "São Paulo",
                     Neighborhood = "Republica",
@@ -191,7 +191,7 @@ namespace PIM.Data
                 new Address
                 {
                     AddressId = 2,
-                    PublicArea = "Avenida",
+                    PublicArea = "Avenida Dotovisk",
                     StreetNumber = "125",
                     City = "São Paulo",
                     Neighborhood = "Pinheiros",
@@ -200,7 +200,7 @@ namespace PIM.Data
                 new Address
                 {
                     AddressId = 3,
-                    PublicArea = "Rua",
+                    PublicArea = "Rua Pinheiros",
                     StreetNumber = "463",
                     City = "Osasco",
                     Neighborhood = "Vila Yara",

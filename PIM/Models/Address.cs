@@ -29,7 +29,7 @@ namespace PIM.Models
         [Column(TypeName = "VARCHAR(25)")]
         public string ZipCode { get; set; }
 
-        public User User { get; set; }
+        public string UserId { get; set; }
 
         public Address() { }
 
@@ -38,14 +38,14 @@ namespace PIM.Models
             AddressId = addressId;
         }
 
-        public Address(long addressId, string publicArea, string streetNumber, string city, string neighborhood, string zipCode, User user) : this(addressId)
+        public Address(long addressId, string publicArea, string streetNumber, string city, string neighborhood, string zipCode, string userId) : this(addressId)
         {
             PublicArea = publicArea;
             StreetNumber = streetNumber;
             City = city;
             Neighborhood = neighborhood;
             ZipCode = zipCode;
-            User = user;
+            UserId = userId;
         }
     }
 }

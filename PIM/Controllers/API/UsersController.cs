@@ -74,6 +74,17 @@ namespace PIM.Controllers.API
             };
         }
 
+        [HttpPost]
+        [Route("Register")]
+        [AllowAnonymous]
+        public async Task<ActionResult<User>> PostRegister(User user)
+        {
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(string id, User user)
         {

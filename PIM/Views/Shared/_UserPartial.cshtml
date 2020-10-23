@@ -4,9 +4,6 @@
     @if (HttpContextAccessor.HttpContext.Request.Cookies["jwt"] != null)
     {
         <li class="nav-item">
-            <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Dashboard">Dashboard</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="News">Noticias</a>
         </li>
         <li class="nav-item">

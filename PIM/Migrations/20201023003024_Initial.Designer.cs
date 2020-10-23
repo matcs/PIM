@@ -10,7 +10,7 @@ using PIM.Data;
 namespace PIM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201020011947_Initial")]
+    [Migration("20201023003024_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,15 +45,13 @@ namespace PIM.Migrations
                         .HasColumnType("VARCHAR(10)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasColumnType("VARCHAR(25)");
 
                     b.HasKey("AddressId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
 
@@ -63,7 +61,7 @@ namespace PIM.Migrations
                             AddressId = 1L,
                             City = "São Paulo",
                             Neighborhood = "Republica",
-                            PublicArea = "Rua",
+                            PublicArea = "Rua His",
                             StreetNumber = "105B",
                             ZipCode = "01045001"
                         },
@@ -72,7 +70,7 @@ namespace PIM.Migrations
                             AddressId = 2L,
                             City = "São Paulo",
                             Neighborhood = "Pinheiros",
-                            PublicArea = "Avenida",
+                            PublicArea = "Avenida Dotovisk",
                             StreetNumber = "125",
                             ZipCode = "39100000"
                         },
@@ -81,7 +79,7 @@ namespace PIM.Migrations
                             AddressId = 3L,
                             City = "Osasco",
                             Neighborhood = "Vila Yara",
-                            PublicArea = "Rua",
+                            PublicArea = "Rua Pinheiros",
                             StreetNumber = "463",
                             ZipCode = "06026050"
                         });
@@ -308,7 +306,7 @@ namespace PIM.Migrations
                             PaymentReceiptsId = "1askov",
                             Amount = 100.55,
                             Description = "Sei Lá",
-                            TransactionDate = new DateTime(2020, 10, 20, 1, 19, 46, 606, DateTimeKind.Utc).AddTicks(8280)
+                            TransactionDate = new DateTime(2020, 10, 23, 0, 30, 23, 290, DateTimeKind.Utc).AddTicks(1368)
                         });
                 });
 
@@ -365,12 +363,12 @@ namespace PIM.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(11)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("stringId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TelephoneId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("stringId");
 
                     b.ToTable("Telephones");
 
@@ -395,7 +393,70 @@ namespace PIM.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PIM.Models.User", b =>
+            modelBuilder.Entity("PIM.Models.Wallet", b =>
+                {
+                    b.Property<long>("WalletId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CustomerCustumerId")
+                        .HasColumnType("NVARCHAR(40)");
+
+                    b.Property<double>("WalletBalance")
+                        .HasColumnType("float");
+
+                    b.HasKey("WalletId");
+
+                    b.HasIndex("CustomerCustumerId");
+
+                    b.ToTable("Wallets");
+                });
+
+            modelBuilder.Entity("PIM.Models.WorkRecordBooklet", b =>
+                {
+                    b.Property<long>("WorkRecordBookletId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("AdministratorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR(30)");
+
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MotherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR(10)");
+
+                    b.Property<string>("Serial")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR(12)");
+
+                    b.Property<DateTime>("ShippingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("WorkRecordBookletId");
+
+                    b.HasIndex("AdministratorId");
+
+                    b.ToTable("WorkRecordBooklets");
+                });
+
+            modelBuilder.Entity("PIM.Models.string", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -464,79 +525,9 @@ namespace PIM.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PIM.Models.Wallet", b =>
-                {
-                    b.Property<long>("WalletId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CustomerCustumerId")
-                        .HasColumnType("NVARCHAR(40)");
-
-                    b.Property<double>("WalletBalance")
-                        .HasColumnType("float");
-
-                    b.HasKey("WalletId");
-
-                    b.HasIndex("CustomerCustumerId");
-
-                    b.ToTable("Wallets");
-                });
-
-            modelBuilder.Entity("PIM.Models.WorkRecordBooklet", b =>
-                {
-                    b.Property<long>("WorkRecordBookletId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("AdministratorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("BirthPlace")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(30)");
-
-                    b.Property<string>("FatherName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MotherName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(10)");
-
-                    b.Property<string>("Serial")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(12)");
-
-                    b.Property<DateTime>("ShippingDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("WorkRecordBookletId");
-
-                    b.HasIndex("AdministratorId");
-
-                    b.ToTable("WorkRecordBooklets");
-                });
-
-            modelBuilder.Entity("PIM.Models.Address", b =>
-                {
-                    b.HasOne("PIM.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("PIM.Models.Administrator", b =>
                 {
-                    b.HasOne("PIM.Models.User", "User")
+                    b.HasOne("PIM.Models.string", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -557,14 +548,14 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.Customer", b =>
                 {
-                    b.HasOne("PIM.Models.User", "User")
+                    b.HasOne("PIM.Models.string", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("PIM.Models.IdentityCard", b =>
                 {
-                    b.HasOne("PIM.Models.User", "User")
+                    b.HasOne("PIM.Models.string", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -585,9 +576,9 @@ namespace PIM.Migrations
 
             modelBuilder.Entity("PIM.Models.Telephone", b =>
                 {
-                    b.HasOne("PIM.Models.User", null)
+                    b.HasOne("PIM.Models.string", null)
                         .WithMany("Telephones")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("stringId");
                 });
 
             modelBuilder.Entity("PIM.Models.Wallet", b =>

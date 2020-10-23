@@ -13,16 +13,6 @@ namespace PIM.Controllers.MVC
         {
             _context = context;
         }
-
-        public IActionResult Dashboard()
-        {
-            if (Request.Cookies["jwt"] != null)
-            {
-                return View();
-            }
-            return RedirectToAction("Unauthorized", "Error");
-        }
-
         public IActionResult News()
         {
             if (Request.Cookies["jwt"] != null)
@@ -31,7 +21,6 @@ namespace PIM.Controllers.MVC
             }
             return RedirectToAction("Unauthorized", "Error");
         }
-
         public IActionResult Investment()
         {
             if (Request.Cookies["jwt"] != null)
@@ -40,7 +29,6 @@ namespace PIM.Controllers.MVC
             }
             return RedirectToAction("Unauthorized", "Error");
         }
-
         public IActionResult Profile()
         {
             if (Request.Cookies["jwt"] != null)
@@ -49,7 +37,6 @@ namespace PIM.Controllers.MVC
             }
             return RedirectToAction("Unauthorized", "Error");
         }
-
         public IActionResult BuyCoin()
         {
             if (Request.Cookies["jwt"] == null)

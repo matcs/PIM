@@ -9,11 +9,7 @@ namespace PIM.Controllers.API
     [ApiController]
     public class HomeController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<bool>> IsValidToken()
-        {
-            return true;
-        }
+       
 
     }
 }

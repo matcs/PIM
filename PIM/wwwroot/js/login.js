@@ -32,7 +32,7 @@ function sucessLogin() {
         timer: 1500
     });
 
-    location.replace("https://localhost:44343/User/Dashboard");
+    location.replace("https://localhost:44343/User/News");
 }
 
 function errorLogin() {
