@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,7 +8,7 @@
 
 <div class="card">
     <article class="card-body">
-        <a href="" class="float-right btn btn-outline-primary">Cadastro</a>
+        <a asp-area="" asp-controller="Home" asp-action="Register" class="float-right btn btn-outline-primary">Cadastro</a>
         <h4 class="card-title mb-4 mt-1">Login</h4>
         <form>
             <div class="form-group">
@@ -20,7 +19,7 @@
                 <a class="float-right" href="#">Forgot?</a>
                 <label>Senha</label>
                 <input id="password" class="form-control" placeholder="******" type="password">
-            </div> 
+            </div>
             <div class="form-group">
                 <div class="checkbox">
                     <label> <input type="checkbox"> Save password </label>
@@ -34,3 +33,4 @@
 </div>
 
 <script src="~/js/login.js"></script>
+

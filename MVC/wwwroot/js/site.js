@@ -1,12 +1,4 @@
-﻿async function logout() {
-    setCookie('jwt', '', 0);    
-    location.replace("https://localhost:44343/");
-}
+﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// for details on configuring this project to bundle and minify static web assets.
 
-function setCookie(cname, cvalue, exMins) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exMins * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
+// Write your JavaScript code.

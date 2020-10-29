@@ -13,7 +13,7 @@ async function getUserInfo() {
     changeHTMLlbl(response);
 
     autoInsertDataInInput(response);
-    
+
     return response;
 };
 
@@ -28,7 +28,7 @@ async function updateUserData() {
     const inputValues = await getUserInputValue();
     const user = checkIfIsNull(inputValues);
     const id = getUserId();
-    return fetch('https://localhost:44343/api/Users/' + id , {
+    return fetch('https://localhost:44343/api/Users/' + id, {
         method: 'put',
         headers: headersConstruct(),
         body: JSON.stringify(user)
@@ -74,7 +74,7 @@ function autoInsertDataInInput(user) {
     let firstName = document.getElementById("FirstName").value = user[0].user.firstName;
     let lastName = document.getElementById("LastName").value = user[0].user.lastName;
     let socialName = document.getElementById("SocialName").value;
-    let birth = document.getElementById("Birthday").value = user[0].user.birthDay.slice(0,10);
+    let birth = document.getElementById("Birthday").value = user[0].user.birthDay.slice(0, 10);
 }
 
 function getCookie(name) {

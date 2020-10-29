@@ -94,5 +94,5 @@ function sucessRegister() {
         timer: 1500
     });
 
-    
+
 }
