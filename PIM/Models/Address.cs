@@ -29,7 +29,10 @@ namespace PIM.Models
         [Column(TypeName = "VARCHAR(25)")]
         public string ZipCode { get; set; }
 
+        [ForeignKey("User")]
         public string UserId { get; set; }
+
+        public User User { get; set; }
 
         public Address() { }
 

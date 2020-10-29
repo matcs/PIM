@@ -6,8 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PIM.Models
 {
-    public class User : IdentityUser
+    public class User
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(TypeName = "NVARCHAR(40)")]
+        public string Id { get; set; }
 
         [Column(TypeName = "VARCHAR(70)")]
         public string FirstName { get; set; }
@@ -20,7 +24,7 @@ namespace PIM.Models
 
         [Required]
         [Column(TypeName = "VARCHAR(30)")]
-        public override string Email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR(50)")]
@@ -29,7 +33,6 @@ namespace PIM.Models
         [Required]
         public DateTime BirthDay { get; set; }
 
-
         [Column(TypeName = "VARCHAR(15)")]
         public string Role { get; set; }
 
@@ -37,8 +40,9 @@ namespace PIM.Models
 
         public User() { }
 
-        public User(string firstName, string lastName, string socialName, string email, string password, DateTime birthDay, string role, List<Telephone> telephones)
+        public User(string id, string firstName, string lastName, string socialName, string email, string password, DateTime birthDay, string role, List<Telephone> telephones)
         {
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             SocialName = socialName;
@@ -48,6 +52,5 @@ namespace PIM.Models
             Role = role;
             Telephones = telephones;
         }
-
     }
 }

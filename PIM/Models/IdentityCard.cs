@@ -31,6 +31,9 @@ namespace PIM.Models
         [Required]
         public DateTime ShippingDate { get; set; }
 
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+
         public User User { get; set; }
 
         public IdentityCard() { }

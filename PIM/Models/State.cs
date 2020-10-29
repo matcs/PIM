@@ -12,6 +12,9 @@ namespace PIM.Models
         [Column(TypeName = "VARCHAR(30)")]
         public string StateName { get; set; }
 
+        [ForeignKey("Address")]
+        public long AddressId { get; set; }
+
         public Address Address { get; set; }
 
         public State() { }

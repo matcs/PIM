@@ -16,6 +16,11 @@ namespace PIM.Models
         [Column(TypeName = "VARCHAR(11)")]
         public string PhoneNumber { get; set; }
 
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+
+        public User User { get; set; }
+
         public Telephone() { }
 
         public Telephone(long telephoneId, string dDD, string phoneNumber)

@@ -6,7 +6,7 @@ using System;
 
 namespace PIM.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : DbContext
     {
 
 
@@ -24,14 +24,13 @@ namespace PIM.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Contract> Contracts { get; set; }
-        public DbSet<Country> Countries { get; set; }
         public DbSet<CryptoCurrency> CryptoCurrencies { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<IdentityCard> IdentityCards { get; set; }
         public DbSet<PaymentReceipt> PaymentReceipts { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
-        public override DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<WorkRecordBooklet> WorkRecordBooklets { get; set; }
 
@@ -49,26 +48,6 @@ namespace PIM.Data
             modelBuilder.Entity<IdentityCard>()
                 .HasIndex(index => index.IndividualTaxpayerRegistration)
                 .IsUnique();
-
-            modelBuilder.Entity<User>
-                (entity =>
-                {
-                    entity
-                           .Ignore(c => c.LockoutEnabled)
-                           .Ignore(c => c.ConcurrencyStamp)
-                           .Ignore(c => c.LockoutEnd)
-                           .Ignore(c => c.EmailConfirmed)
-                           .Ignore(c => c.TwoFactorEnabled)
-                           .Ignore(c => c.AccessFailedCount)
-                           .Ignore(c => c.PhoneNumberConfirmed)
-                           .Ignore(c => c.NormalizedEmail)
-                           .Ignore(c => c.PhoneNumber)
-                           .Ignore(c => c.PasswordHash)
-                           .Ignore(c => c.UserName)
-                           .Ignore(c => c.SecurityStamp)
-                           .Ignore(c => c.NormalizedUserName)
-                           .ToTable("Users");
-                });
 
             modelBuilder.Entity<User>().HasData(
                         new User
@@ -187,6 +166,7 @@ namespace PIM.Data
                     City = "São Paulo",
                     Neighborhood = "Republica",
                     ZipCode = "01045001",
+                    UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea"
                 },
                 new Address
                 {
@@ -196,6 +176,7 @@ namespace PIM.Data
                     City = "São Paulo",
                     Neighborhood = "Pinheiros",
                     ZipCode = "39100000",
+                    UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea"
                 },
                 new Address
                 {
@@ -205,6 +186,7 @@ namespace PIM.Data
                     City = "Osasco",
                     Neighborhood = "Vila Yara",
                     ZipCode = "06026050",
+                    UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea"
                 });
 
             modelBuilder.Entity<State>().HasData(
@@ -212,33 +194,19 @@ namespace PIM.Data
                 {
                     StateId = 1,
                     StateName = "São Paulo",
+                    AddressId = 1
                 },
                 new State
                 {
                     StateId = 2,
                     StateName = "São Paulo",
+                    AddressId = 2
                 },
                 new State
                 {
                     StateId = 3,
                     StateName = "São Paulo",
-                });
-
-            modelBuilder.Entity<Country>().HasData(
-                new Country
-                {
-                    CountryId = 1,
-                    CountryName = "Brasil",
-                },
-                new Country
-                {
-                    CountryId = 2,
-                    CountryName = "Brasil",
-                },
-                new Country
-                {
-                    CountryId = 3,
-                    CountryName = "Brasil",
+                    AddressId = 3
                 });
 
         }

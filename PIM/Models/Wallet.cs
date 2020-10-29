@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PIM.Models
 {
@@ -7,6 +8,9 @@ namespace PIM.Models
         [Key]
         public long WalletId { get; set; }
         public double WalletBalance { get; set; }
+
+        [ForeignKey("Customer")]
+        public string CustomerId { get; set; }
 
         public Customer Customer { get; set; }
 

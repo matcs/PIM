@@ -21,7 +21,10 @@ namespace PIM.Models
         [Column(TypeName = "VARCHAR(200)")]
         public string Description { get; set; }
 
-        public Customer CustomerId { get; set; }
+        [ForeignKey("Customer")]
+        public string CustomerId { get; set; }
+
+        public Customer Customer { get; set; }
 
         public PaymentReceipt() { }
 
@@ -31,7 +34,7 @@ namespace PIM.Models
             TransactionDate = transactionDate;
             Amount = amount;
             Description = description;
-            CustomerId = customerId;
+            Customer = customerId;
         }
 
         public override string ToString()

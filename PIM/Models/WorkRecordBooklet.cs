@@ -34,6 +34,9 @@ namespace PIM.Models
         [Required]
         public DateTime ShippingDate { get; set; }
 
+        [ForeignKey("Administrator")]
+        public long AdministratorId { get; set; }
+
         public Administrator Administrator { get; set; }
 
         public WorkRecordBooklet() { }

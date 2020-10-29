@@ -12,6 +12,11 @@ namespace PIM.Models
         [Column(TypeName = "VARBINARY(MAX)")]
         public string ContractTerms { get; set; }
 
+        [ForeignKey("Customer")]
+        public string CustomerId { get; set; }
+
+        public Customer Customer { get; set; }
+
         public Contract() { }
 
         public Contract(long contractId, string contractTerms)
