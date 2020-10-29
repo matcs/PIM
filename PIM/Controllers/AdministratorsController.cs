@@ -7,53 +7,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIM.Controllers.API
+namespace PIM.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CountriesController : ControllerBase
+    public class AdministratorsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public CountriesController(ApplicationDbContext context)
+        public AdministratorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Countries
+        // GET: api/Administrators
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
+        public async Task<ActionResult<IEnumerable<Administrator>>> GetAdministrators()
         {
-            return await _context.Countries.ToListAsync();
+            return await _context.Administrators.ToListAsync();
         }
 
-        // GET: api/Countries/5
+        // GET: api/Administrators/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Country>> GetCountry(long id)
+        public async Task<ActionResult<Administrator>> GetAdministrator(long id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var administrator = await _context.Administrators.FindAsync(id);
 
-            if (country == null)
+            if (administrator == null)
             {
                 return NotFound();
             }
 
-            return country;
+            return administrator;
         }
 
-        // PUT: api/Countries/5
+        // PUT: api/Administrators/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(long id, Country country)
+        public async Task<IActionResult> PutAdministrator(long id, Administrator administrator)
         {
-            if (id != country.CountryId)
+            if (id != administrator.AdministratorId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(country).State = EntityState.Modified;
+            _context.Entry(administrator).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace PIM.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CountryExists(id))
+                if (!AdministratorExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace PIM.Controllers.API
             return NoContent();
         }
 
-        // POST: api/Countries
+        // POST: api/Administrators
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Country>> PostCountry(Country country)
+        public async Task<ActionResult<Administrator>> PostAdministrator(Administrator administrator)
         {
-            _context.Countries.Add(country);
+            _context.Administrators.Add(administrator);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCountry", new { id = country.CountryId }, country);
+            return CreatedAtAction("GetAdministrator", new { id = administrator.AdministratorId }, administrator);
         }
 
-        // DELETE: api/Countries/5
+        // DELETE: api/Administrators/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Country>> DeleteCountry(long id)
+        public async Task<ActionResult<Administrator>> DeleteAdministrator(long id)
         {
-            var country = await _context.Countries.FindAsync(id);
-            if (country == null)
+            var administrator = await _context.Administrators.FindAsync(id);
+            if (administrator == null)
             {
                 return NotFound();
             }
 
-            _context.Countries.Remove(country);
+            _context.Administrators.Remove(administrator);
             await _context.SaveChangesAsync();
 
-            return country;
+            return administrator;
         }
 
-        private bool CountryExists(long id)
+        private bool AdministratorExists(long id)
         {
-            return _context.Countries.Any(e => e.CountryId == id);
+            return _context.Administrators.Any(e => e.AdministratorId == id);
         }
     }
 }

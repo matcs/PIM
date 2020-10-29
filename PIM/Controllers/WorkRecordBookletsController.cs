@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIM.Controllers.API
+namespace PIM.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

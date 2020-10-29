@@ -1,18 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PIM.Data;
 using System.Threading.Tasks;
 
-namespace PIM.Controllers.MVC
+namespace MVC.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public UserController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
         public IActionResult News()
         {
             if (Request.Cookies["jwt"] != null)
@@ -54,7 +46,7 @@ namespace PIM.Controllers.MVC
             return View();
         }
 
-        [Route("User/Profile/PaymentReceipt/{id}")]
+        /*[Route("User/Profile/PaymentReceipt/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -66,6 +58,6 @@ namespace PIM.Controllers.MVC
                 return NotFound();
 
             return View(paymentReceipt);
-        }
+        }*/
     }
 }

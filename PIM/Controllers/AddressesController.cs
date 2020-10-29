@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PIM.Data;
 using PIM.Models;
 
-namespace PIM.Controllers.API
+namespace PIM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

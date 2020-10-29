@@ -21,13 +21,9 @@ namespace PIM.Services
                 var result = responseTask.Result;
 
                 if (result.IsSuccessStatusCode)
-                {
                     return true;
-                }
                 else
-                {
                     return false;
-                }
             }
         }
     }
