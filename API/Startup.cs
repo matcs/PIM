@@ -58,14 +58,15 @@ namespace PIM
             {
                 app.UseDeveloperExceptionPage();
             }
-          
 
-            app.UseCors(x => x
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
+            app.UseCookiePolicy();
 
-            app.UseHttpsRedirection();
+            app.UseCors(policy =>
+            {
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+                policy.AllowAnyOrigin();
+            });
 
             app.UseRouting();
 

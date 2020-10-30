@@ -1,22 +1,29 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PIM.Data;
 using PIM.Models;
 using PIM.Services;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PIM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/Users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        
 
         public UsersController(ApplicationDbContext context)
         {
@@ -62,9 +69,10 @@ namespace PIM.Controllers
 
             var token = TokenService.GenerateToken(user);
             user.Password = "";
-
             var handler = new JwtSecurityTokenHandler();
             var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+
+            
 
             return new
             {
