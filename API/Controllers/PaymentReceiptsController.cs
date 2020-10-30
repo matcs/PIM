@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PIM.Data;
-using PIM.Models;
+using API.Data;
+using API.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 
-namespace PIM.Controllers
+namespace API.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -23,16 +24,25 @@ namespace PIM.Controllers
 
         // GET: api/PaymentReceipts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PaymentReceipt>>> GetPaymentReceipts()
-        {
-            return await _context.PaymentReceipts.ToListAsync();
-        }
-
-        // GET: api/PaymentReceipts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PaymentReceipt>> GetPaymentReceipt(string id)
+        [HttpGet("Details/{id}")]
+        public async Task<ActionResult<PaymentReceipt>> GetPaymentReceipts(string id)
         {
             var paymentReceipt = await _context.PaymentReceipts.FindAsync(id);
+
+            if (paymentReceipt == null)
+            {
+                return NotFound();
+            }
+
+            return paymentReceipt;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<PaymentReceipt>>> GetPaymentReceiptsByCustumer(string id)
+        {
+            var paymentReceipt = await _context.PaymentReceipts
+                                               .Where(c => c.Customer.UserId.Equals(id))
+                                               .ToListAsync();
 
             if (paymentReceipt == null)
             {

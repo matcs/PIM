@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PIM.Data;
-using PIM.Models;
+using API.Data;
+using API.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIM.Controllers
+namespace API.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

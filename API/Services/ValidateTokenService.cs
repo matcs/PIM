@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace PIM.Services
+namespace API.Services
 {
     public class ValidateTokenService
     {

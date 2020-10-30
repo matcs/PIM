@@ -7,11 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using PIM.Data;
-using PIM.Models;
+using API.Data;
+using API.Models;
 using System.Text;
 
-namespace PIM
+namespace API
 {
     public class Startup
     {

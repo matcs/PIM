@@ -1,4 +1,4 @@
-﻿namespace PIM
+﻿namespace API
 {
     public static class Settings
     {

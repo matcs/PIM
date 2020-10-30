@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PIM.Data;
-using PIM.Models;
-using PIM.Services;
+using API.Data;
+using API.Models;
+using API.Services;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,7 +15,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PIM.Controllers
+namespace API.Controllers
 {
     //[Authorize]
     [Route("api/Users")]

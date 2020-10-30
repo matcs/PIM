@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MVC.Models.PaymentReceiptViewModel>
+
+@{
+    ViewData["Title"] = "PaymentRecptis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Recibos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentReceiptsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentReceiptsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "PaymentDetails", new { id = item.PaymentReceiptsId }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

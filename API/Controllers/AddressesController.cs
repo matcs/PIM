@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PIM.Data;
-using PIM.Models;
+using API.Data;
+using API.Models;
 
-namespace PIM.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

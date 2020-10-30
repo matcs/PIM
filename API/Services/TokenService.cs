@@ -1,11 +1,11 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using PIM.Models;
+using API.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PIM.Services
+namespace API.Services
 {
     public static class TokenService
     {

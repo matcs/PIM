@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PIM.Models;
+using API.Models;
 using System;
 
-namespace PIM.Data
+namespace API.Data
 {
     public class ApplicationDbContext : DbContext
     {
