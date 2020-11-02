@@ -72,8 +72,6 @@ namespace API.Controllers
             var handler = new JwtSecurityTokenHandler();
             var tokenS = handler.ReadToken(token) as JwtSecurityToken;
 
-            
-
             return new
             {
                 User = user,

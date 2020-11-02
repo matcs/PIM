@@ -79,7 +79,12 @@ namespace MVC.Controllers
 
                 return View(PaymentReceipt);
             }
+
         }
 
+        public IActionResult BuyCurrency()
+        {
+            return View();
+        }
     }
 }

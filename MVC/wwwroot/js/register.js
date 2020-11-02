@@ -81,7 +81,7 @@ async function registerAddress(address) {
         return response.json();
     }).then(() => {
         sucessRegister();
-        location.replace("https://localhost:44343/Home/Login");
+        location.replace("https://localhost:44345/Home/Login");
     })
 }
 

@@ -28,13 +28,13 @@ namespace API.Models
 
         public PaymentReceipt() { }
 
-        public PaymentReceipt(string paymentReceiptsId, DateTime transactionDate, double amount, string description, Customer customerId)
+        public PaymentReceipt(string paymentReceiptsId, DateTime transactionDate, double amount, string description, string customerId)
         {
             PaymentReceiptsId = paymentReceiptsId;
             TransactionDate = transactionDate;
             Amount = amount;
             Description = description;
-            Customer = customerId;
+            CustomerId = customerId;
         }
 
         public override string ToString()

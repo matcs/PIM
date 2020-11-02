@@ -13,17 +13,17 @@
         body: JSON.stringify(LoginInfo)
     }).then((response) => {
         if (!response.ok) {
-            return errorLogin();
+            return errorUpdate();
         }
         console.log(response.json);
         return response.json();
     }).then((data) => {
         document.cookie = "jwt = " + data.beaver + "; path=/";
-        sucessLogin();
+        sucessUpdate();
     });
 }
 
-function sucessLogin() {
+function sucessUpdate() {
     Swal.fire({
         position: 'center',
         icon: 'success',
@@ -32,10 +32,10 @@ function sucessLogin() {
         timer: 1500
     });
 
-    location.replace("https://localhost:44343/User/News");
+    location.replace("https://localhost:44345/User/News");
 }
 
-function errorLogin() {
+function errorUpdate() {
     Swal.fire({
         icon: 'error',
         title: 'Oops...',

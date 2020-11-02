@@ -34,9 +34,9 @@ async function updateUserData() {
         body: JSON.stringify(user)
     }).then((response) => {
         if (response.status !== 204)
-            errorLogin();
+            errorUpdate();
 
-        sucessLogin();
+        sucessUpdate();
     });
 }
 
@@ -104,7 +104,7 @@ function checkIfIsNull(obj) {
     return obj;
 }
 
-function sucessLogin() {
+function sucessUpdate() {
     Swal.fire({
         position: 'center',
         icon: 'success',
@@ -114,7 +114,7 @@ function sucessLogin() {
     });
 }
 
-function errorLogin() {
+function errorUpdate() {
     Swal.fire({
         icon: 'error',
         title: 'Oops...',

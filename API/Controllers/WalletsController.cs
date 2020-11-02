@@ -28,9 +28,9 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Wallet>> GetWallet(long id)
+        public async Task<ActionResult<IEnumerable<Wallet>>> GetWallet(string id)
         {
-            var wallet = await _context.Wallets.FindAsync(id);
+            var wallet = await _context.Wallets.Where(w => w.Customer.UserId.Equals(id)).ToListAsync();
 
             if (wallet == null)
             {
