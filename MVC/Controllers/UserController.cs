@@ -41,7 +41,7 @@ namespace MVC.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", cookie);
 
-                HttpResponseMessage Res = await client.GetAsync("PaymentReceipts/" + userId);
+                HttpResponseMessage Res = await client.GetAsync("PaymentReceipts/By/" + userId);
 
                 if (Res.IsSuccessStatusCode)
                 {

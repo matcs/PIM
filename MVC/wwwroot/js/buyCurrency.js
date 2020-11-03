@@ -77,6 +77,7 @@ function confirmPayment() {
                 'success'
             );
             postInWallet();
+            createPaymentRecipt();
         } else if (
             result.dismiss === Swal.DismissReason.cancel
         ) {
@@ -114,6 +115,33 @@ async function getCustomerWallet() {
     return response[0];
 }
 
-async function postPaymentRecipt() {
+async function createPaymentRecipt() {
+    const user = await getUserInfo();
+    
+    const customerId = user[0].custumerId;
 
+    const data = getDateNow();
+    const description = generateDescription();
+    const amount = Number.parseFloat(getValueInput().amount);
+
+    const PaymentReceipt = { TransactionDate: data, Amount: amount, Description: description, CustomerId: customerId };
+    
+    const response = await fetch('https://localhost:44343/api/PaymentReceipts', {
+        method: 'post',
+        headers: headersConstruct(),
+        body: JSON.stringify(PaymentReceipt)
+    });
+
+    console.log(response);
+}
+
+function getDateNow() {
+    var now = new Date();
+    var dateString = moment(now).format('YYYY-MM-DD');
+
+    return dateString;
+}
+
+function generateDescription() {
+    return "Compra realizada em " + getDateNow();
 }
