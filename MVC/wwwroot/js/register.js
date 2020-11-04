@@ -1,6 +1,6 @@
 ﻿async function register() {
     const user = getHtmlElementsOfUser();
-    fetch('https://localhost:44343/api/Users/Register', {
+    const resonse = await fetch('https://localhost:44343/api/Users/Register', {
         method: 'post',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -11,12 +11,14 @@
         if (!response.ok) {
             console.log('error');
         }
-        console.log(response.json);
         return response.json();
     }).then((data) => {
         const address = getHtmlElementsOfaddress(data.id);
-        registerAddress(address);
+        createAddress(address);
+        createCustomer(data.id);
     });
+
+    return resonse;
 }
 
 function getHtmlElementsOfUser() {
@@ -65,24 +67,51 @@ function getAge(dateString) {
     return age;
 }
 
-async function registerAddress(address) {
-    fetch('https://localhost:44343/api/Addresses', {
+async function createAddress(address) {
+    const response = await fetch('https://localhost:44343/api/Addresses', {
         method: 'post',
         headers: {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(address)
-    }).then((response) => {
-        if (!response.ok) {
-            console.log('error');
-        }
-        console.log(response.json);
-        return response.json();
-    }).then(() => {
+    }).then(resp => resp.json()
+    ).then((data) => {
+        console.log(data)
         sucessRegister();
-        location.replace("https://localhost:44345/Home/Login");
     })
+
+    return response;
+}
+
+async function createCustomer(userId) {
+    const User = { AccountStatus: true, UserId: userId }
+    const response = await fetch('https://localhost:44343/api/Customers', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(User)
+    }).then(resp => resp.json())
+      .then((data) => {
+          createWallet(data.custumerId)
+      });
+
+    return response;
+}
+
+async function createWallet(customerId) {
+    console.log(customerId)
+    const Wallet = { walletBalance: 0, customerId: customerId };
+    fetch('https://localhost:44343/api/Wallets', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Wallet)
+    }).then(resp => resp.json()).then(data => console.log(data))
 }
 
 function sucessRegister() {
@@ -94,5 +123,7 @@ function sucessRegister() {
         timer: 1500
     });
 
+    location.replace("https://localhost:44345/Home/Login");
 
 }
+

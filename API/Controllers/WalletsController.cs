@@ -70,6 +70,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<Wallet>> PostWallet(Wallet wallet)
         {
             _context.Wallets.Add(wallet);

@@ -29,18 +29,6 @@ function getCryptoCurrencyType() {
         case 'Bitcoin':
             cryptoCurrencyValue = 78879;
             break;
-        case 'Ethereum':
-            cryptoCurrencyValue = 2227.80;
-            break;
-        case 'BasicAttentionToken':
-            cryptoCurrencyValue = 1.09;
-            break;
-        case 'Ripple':
-            cryptoCurrencyValue = 1.38;
-            break;
-        case 'Maker':
-            cryptoCurrencyValue = 3084.11;
-            break;
     }
 
     return cryptoCurrencyValue;

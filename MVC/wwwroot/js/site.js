@@ -1,4 +1,16 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function deleteAllCookies(name) {
+    var pathBits = location.pathname.split('/');
+    var pathCurrent = ' path=';
 
-// Write your JavaScript code.
+    document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;';
+
+    for (var i = 0; i < pathBits.length; i++) {
+        pathCurrent += ((pathCurrent.substr(-1) != '/') ? '/' : '') + pathBits[i];
+        document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;' + pathCurrent + ';';
+    }
+}
+
+function logout() {
+    deleteAllCookies("jwt");
+    location.replace("https://localhost:44345/");
+}
