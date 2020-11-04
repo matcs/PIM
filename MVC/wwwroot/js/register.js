@@ -124,6 +124,5 @@ function sucessRegister() {
     });
 
     location.replace("https://localhost:44345/Home/Login");
-
 }
 
