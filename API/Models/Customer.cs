@@ -9,7 +9,7 @@ namespace API.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(TypeName = "NVARCHAR(40)")]
-        public string CustumerId { get; set; }
+        public string CustomerId { get; set; }
 
         [Required]
         public bool AccountStatus { get; set; }
@@ -27,7 +27,7 @@ namespace API.Models
 
         public Customer(string custumersId, bool accountStatus, List<PaymentReceipt> paymentReceipts, List<Contract> contracts, User user)
         {
-            CustumerId = custumersId;
+            CustomerId = custumersId;
             AccountStatus = accountStatus;
             PaymentReceipts = paymentReceipts;
             Contracts = contracts;

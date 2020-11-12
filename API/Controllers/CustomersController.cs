@@ -49,7 +49,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(string id, Customer customer)
         {
-            if (id != customer.CustumerId)
+            if (id != customer.CustomerId)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace API.Controllers
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.CustumerId }, customer);
+            return CreatedAtAction("GetCustomer", new { id = customer.CustomerId }, customer);
         }
 
         [HttpDelete("{id}")]
@@ -102,7 +102,7 @@ namespace API.Controllers
 
         private bool CustomerExists(string id)
         {
-            return _context.Customers.Any(e => e.CustumerId == id);
+            return _context.Customers.Any(e => e.CustomerId == id);
         }
     }
 }

@@ -38,13 +38,6 @@ namespace API.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Ignore<IdentityRole>();
-            modelBuilder.Ignore<IdentityUserToken<string>>();
-            modelBuilder.Ignore<IdentityUserRole<string>>();
-            modelBuilder.Ignore<IdentityUserLogin<string>>();
-            modelBuilder.Ignore<IdentityUserClaim<string>>();
-            modelBuilder.Ignore<IdentityRoleClaim<string>>();
-
             modelBuilder.Entity<IdentityCard>()
                 .HasIndex(index => index.IndividualTaxpayerRegistration)
                 .IsUnique();
@@ -94,6 +87,7 @@ namespace API.Data
                     Identification = "190471001",
                     IssuingBody = "SSP",
                     ShippingDate = DateTime.Parse("Dez 15, 2000"),
+                    UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea"
                 },
                 new IdentityCard
                 {
@@ -102,6 +96,7 @@ namespace API.Data
                     Identification = "362932888",
                     IssuingBody = "SSP",
                     ShippingDate = DateTime.Parse("Jan 10, 1995"),
+                    UserId = "672999b3-ca32-4a8d-bafe-189a3e090093",
                 },
                 new IdentityCard
                 {
@@ -110,6 +105,7 @@ namespace API.Data
                     Identification = "362932888",
                     IssuingBody = "SSP",
                     ShippingDate = DateTime.Parse("Oct 2, 2006"),
+                    UserId = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
                 });
 
             modelBuilder.Entity<Telephone>().HasData(
@@ -135,20 +131,24 @@ namespace API.Data
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
                 {
-                    CustumerId = 1.ToString(),
-                    AccountStatus = false,
+                    UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea",
+                    CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac",
+                    AccountStatus = true,
 
                 },
                 new Customer
                 {
-                    CustumerId = 2.ToString(),
+                    UserId = "672999b3-ca32-4a8d-bafe-189a3e090093",
+                    CustomerId = "e0456d51-5f43-42cb-ad91-d6c404d2aaac",
                     AccountStatus = true,
                 },
                 new Customer
                 {
-                    CustumerId = 3.ToString(),
+                    UserId = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
+                    CustomerId = "e0456d51-jdfi-42cb-4658-d6c40sd2aaac",
                     AccountStatus = true,
                 });
+
             modelBuilder.Entity<PaymentReceipt>().HasData(
                 new PaymentReceipt
                 {
@@ -156,7 +156,9 @@ namespace API.Data
                     Amount = 100.55,
                     Description = "Sei Lá",
                     TransactionDate = DateTime.UtcNow,
+                    CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac"
                 });
+
             modelBuilder.Entity<Address>().HasData(
                 new Address
                 {
@@ -176,7 +178,7 @@ namespace API.Data
                     City = "São Paulo",
                     Neighborhood = "Pinheiros",
                     ZipCode = "39100000",
-                    UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea"
+                    UserId = "672999b3-ca32-4a8d-bafe-189a3e090093"
                 },
                 new Address
                 {
@@ -186,7 +188,7 @@ namespace API.Data
                     City = "Osasco",
                     Neighborhood = "Vila Yara",
                     ZipCode = "06026050",
-                    UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea"
+                    UserId = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac"
                 });
 
             modelBuilder.Entity<State>().HasData(

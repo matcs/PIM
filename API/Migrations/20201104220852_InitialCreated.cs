@@ -86,13 +86,13 @@ namespace API.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustumerId = table.Column<string>(type: "NVARCHAR(40)", nullable: false),
+                    CustomerId = table.Column<string>(type: "NVARCHAR(40)", nullable: false),
                     AccountStatus = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.CustumerId);
+                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
                     table.ForeignKey(
                         name: "FK_Customers_Users_UserId",
                         column: x => x.UserId,
@@ -206,7 +206,7 @@ namespace API.Migrations
                         name: "FK_Contracts_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "CustumerId",
+                        principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -227,7 +227,7 @@ namespace API.Migrations
                         name: "FK_PaymentReceipts_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "CustumerId",
+                        principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -247,34 +247,9 @@ namespace API.Migrations
                         name: "FK_Wallets_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "CustumerId",
+                        principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Customers",
-                columns: new[] { "CustumerId", "AccountStatus", "UserId" },
-                values: new object[,]
-                {
-                    { "1", false, null },
-                    { "2", true, null },
-                    { "3", true, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "IdentityCards",
-                columns: new[] { "IdentityCardId", "Identification", "IndividualTaxpayerRegistration", "IssuingBody", "ShippingDate", "UserId" },
-                values: new object[,]
-                {
-                    { "abc", "190471001", "53925227008", "SSP", new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
-                    { "abc1", "362932888", "62472128010", "SSP", new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
-                    { "abc2", "362932888", "06810592067", "SSP", new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "PaymentReceipts",
-                columns: new[] { "PaymentReceiptsId", "Amount", "CustomerId", "Description", "TransactionDate" },
-                values: new object[] { "1askov", 100.55, null, "Sei Lá", new DateTime(2020, 10, 29, 2, 57, 12, 645, DateTimeKind.Utc).AddTicks(8413) });
 
             migrationBuilder.InsertData(
                 table: "Telephones",
@@ -299,32 +274,47 @@ namespace API.Migrations
             migrationBuilder.InsertData(
                 table: "Addresses",
                 columns: new[] { "AddressId", "City", "Neighborhood", "PublicArea", "StreetNumber", "UserId", "ZipCode" },
-                values: new object[] { 1L, "São Paulo", "Republica", "Rua His", "105B", "2922c21c-5325-4856-b270-50b5aa9ab1ea", "01045001" });
+                values: new object[,]
+                {
+                    { 1L, "São Paulo", "Republica", "Rua His", "105B", "2922c21c-5325-4856-b270-50b5aa9ab1ea", "01045001" },
+                    { 2L, "São Paulo", "Pinheiros", "Avenida Dotovisk", "125", "672999b3-ca32-4a8d-bafe-189a3e090093", "39100000" },
+                    { 3L, "Osasco", "Vila Yara", "Rua Pinheiros", "463", "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac", "06026050" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Addresses",
-                columns: new[] { "AddressId", "City", "Neighborhood", "PublicArea", "StreetNumber", "UserId", "ZipCode" },
-                values: new object[] { 2L, "São Paulo", "Pinheiros", "Avenida Dotovisk", "125", "2922c21c-5325-4856-b270-50b5aa9ab1ea", "39100000" });
+                table: "Customers",
+                columns: new[] { "CustomerId", "AccountStatus", "UserId" },
+                values: new object[,]
+                {
+                    { "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", true, "2922c21c-5325-4856-b270-50b5aa9ab1ea" },
+                    { "e0456d51-5f43-42cb-ad91-d6c404d2aaac", true, "672999b3-ca32-4a8d-bafe-189a3e090093" },
+                    { "e0456d51-jdfi-42cb-4658-d6c40sd2aaac", true, "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Addresses",
-                columns: new[] { "AddressId", "City", "Neighborhood", "PublicArea", "StreetNumber", "UserId", "ZipCode" },
-                values: new object[] { 3L, "Osasco", "Vila Yara", "Rua Pinheiros", "463", "2922c21c-5325-4856-b270-50b5aa9ab1ea", "06026050" });
+                table: "IdentityCards",
+                columns: new[] { "IdentityCardId", "Identification", "IndividualTaxpayerRegistration", "IssuingBody", "ShippingDate", "UserId" },
+                values: new object[,]
+                {
+                    { "abc", "190471001", "53925227008", "SSP", new DateTime(2000, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "2922c21c-5325-4856-b270-50b5aa9ab1ea" },
+                    { "abc1", "362932888", "62472128010", "SSP", new DateTime(1995, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "672999b3-ca32-4a8d-bafe-189a3e090093" },
+                    { "abc2", "362932888", "06810592067", "SSP", new DateTime(2006, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PaymentReceipts",
+                columns: new[] { "PaymentReceiptsId", "Amount", "CustomerId", "Description", "TransactionDate" },
+                values: new object[] { "1askov", 100.55, "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", "Sei Lá", new DateTime(2020, 11, 4, 22, 8, 51, 244, DateTimeKind.Utc).AddTicks(8636) });
 
             migrationBuilder.InsertData(
                 table: "States",
                 columns: new[] { "StateId", "AddressId", "StateName" },
-                values: new object[] { 1L, 1L, "São Paulo" });
-
-            migrationBuilder.InsertData(
-                table: "States",
-                columns: new[] { "StateId", "AddressId", "StateName" },
-                values: new object[] { 2L, 2L, "São Paulo" });
-
-            migrationBuilder.InsertData(
-                table: "States",
-                columns: new[] { "StateId", "AddressId", "StateName" },
-                values: new object[] { 3L, 3L, "São Paulo" });
+                values: new object[,]
+                {
+                    { 1L, 1L, "São Paulo" },
+                    { 2L, 2L, "São Paulo" },
+                    { 3L, 3L, "São Paulo" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_UserId",

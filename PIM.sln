@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{8ACFAC2B-2278-43EC-AB6D-EA41D4BC25E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{65426E9B-6B83-40C7-A50F-80E15FDF4F8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{0D737470-452D-4C80-B464-16CAEE005D46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{8ACFAC2B-2278-43EC-AB6D-EA41D4BC25E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ACFAC2B-2278-43EC-AB6D-EA41D4BC25E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ACFAC2B-2278-43EC-AB6D-EA41D4BC25E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D737470-452D-4C80-B464-16CAEE005D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D737470-452D-4C80-B464-16CAEE005D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D737470-452D-4C80-B464-16CAEE005D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D737470-452D-4C80-B464-16CAEE005D46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D737470-452D-4C80-B464-16CAEE005D46} = {65426E9B-6B83-40C7-A50F-80E15FDF4F8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A95BDCAB-B413-41BD-B92B-92D7FAC84F98}
