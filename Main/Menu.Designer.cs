@@ -1,4 +1,4 @@
-﻿namespace Main
+﻿namespace Desktop
 {
     partial class Menu
     {
