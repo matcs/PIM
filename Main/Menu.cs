@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,13 @@ namespace Desktop
 {
     public partial class MainMenu : Form
     {
+        private SqlConnection conn = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=PIM_DB;Trusted_Connection=True;");
+
         public MainMenu()
         {
             InitializeComponent();
         }
-
+        
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -30,19 +33,7 @@ namespace Desktop
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            string[] seriesArray = { "Ativas", "Inativas" };
-            int[] pointsArray = { 10, 2 };
-
-            this.chartActives.Palette = ChartColorPalette.SeaGreen;
-
-            this.chartActives.Titles.Add("Contas ativas");
-
-            for (int i = 0; i < seriesArray.Length; i++)
-            {
-                Series series = this.chartActives.Series.Add(seriesArray[i]);
-
-                series.Points.Add(pointsArray[i]);
-            }
+            
         }
 
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
@@ -56,7 +47,20 @@ namespace Desktop
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             this.chartActives.Visible = true;
+            this.chartActives.Series.Clear();
+
+            conn.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "SELECT COUNT(AccountStatus) FROM Customers WHERE AccountStatus = 1;";
+            int[] pointsArray = { int.Parse(cmd.ExecuteScalar().ToString()) };
+            conn.Close();
+            this.chartActives.Palette = ChartColorPalette.SeaGreen;
+
+            Series series = this.chartActives.Series.Add("Ativas");
+            series.Points.Add(pointsArray[0]);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -66,7 +70,7 @@ namespace Desktop
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.chartActives.Visible = true;
+            this.chartActives.Visible = false;
         }
 
         private void chart1_Click(object sender, EventArgs e)

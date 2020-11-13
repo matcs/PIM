@@ -40,8 +40,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Button1 = new System.Windows.Forms.Button();
             this.Button2 = new System.Windows.Forms.Button();
-            this.Button4 = new System.Windows.Forms.Button();
-            this.Button3 = new System.Windows.Forms.Button();
             this.chartActives = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.fisrtPanel.SuspendLayout();
             this.Nav_panel.SuspendLayout();
@@ -74,8 +72,6 @@
             this.Nav_panel.Controls.Add(this.header_panel);
             this.Nav_panel.Controls.Add(this.Button1);
             this.Nav_panel.Controls.Add(this.Button2);
-            this.Nav_panel.Controls.Add(this.Button4);
-            this.Nav_panel.Controls.Add(this.Button3);
             this.Nav_panel.Dock = System.Windows.Forms.DockStyle.Left;
             this.Nav_panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Nav_panel.Location = new System.Drawing.Point(0, 0);
@@ -158,51 +154,7 @@
             this.Button2.UseVisualStyleBackColor = true;
             this.Button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Button4
-            // 
-            this.Button4.AutoSize = true;
-            this.Button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            this.Button4.FlatAppearance.BorderSize = 0;
-            this.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(183)))));
-            this.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button4.Font = new System.Drawing.Font("Yu Gothic UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button4.ForeColor = System.Drawing.Color.White;
-            this.Button4.Image = ((System.Drawing.Image)(resources.GetObject("Button4.Image")));
-            this.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button4.Location = new System.Drawing.Point(3, 188);
-            this.Button4.Margin = new System.Windows.Forms.Padding(3, 7, 7, 3);
-            this.Button4.Name = "Button4";
-            this.Button4.Size = new System.Drawing.Size(220, 66);
-            this.Button4.TabIndex = 5;
-            this.Button4.Text = "Maiores\r\nInvestidores";
-            this.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Button4.UseVisualStyleBackColor = true;
-            this.Button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // Button3
-            // 
-            this.Button3.AutoSize = true;
-            this.Button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            this.Button3.FlatAppearance.BorderSize = 0;
-            this.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(183)))));
-            this.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button3.Font = new System.Drawing.Font("Yu Gothic UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button3.ForeColor = System.Drawing.Color.White;
-            this.Button3.Image = ((System.Drawing.Image)(resources.GetObject("Button3.Image")));
-            this.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button3.Location = new System.Drawing.Point(3, 264);
-            this.Button3.Margin = new System.Windows.Forms.Padding(3, 7, 7, 3);
-            this.Button3.Name = "Button3";
-            this.Button3.Size = new System.Drawing.Size(220, 50);
-            this.Button3.TabIndex = 6;
-            this.Button3.Text = "Investimentos";
-            this.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Button3.UseVisualStyleBackColor = true;
-            this.Button3.Click += new System.EventHandler(this.Button3_Click);
-            // 
-            // chart1
+            // chartActives
             // 
             chartArea1.Name = "ChartArea1";
             this.chartActives.ChartAreas.Add(chartArea1);
@@ -210,7 +162,7 @@
             legend1.Name = "Legend1";
             this.chartActives.Legends.Add(legend1);
             this.chartActives.Location = new System.Drawing.Point(229, 100);
-            this.chartActives.Name = "chart1";
+            this.chartActives.Name = "chartActives";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
@@ -219,7 +171,7 @@
             this.chartActives.TabIndex = 2;
             this.chartActives.Text = "chart1";
             // 
-            // Menu
+            // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -229,7 +181,7 @@
             this.Controls.Add(this.fisrtPanel);
             this.Controls.Add(this.Nav_panel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Menu";
+            this.Name = "MainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Menu_Load);
             this.fisrtPanel.ResumeLayout(false);
@@ -253,8 +205,6 @@
         private System.Windows.Forms.Button Button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button Button4;
-        private System.Windows.Forms.Button Button3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartActives;
     }
 }
