@@ -1,5 +1,5 @@
 ﻿
-namespace Main
+namespace Desktop
 {
     partial class Register
     {
@@ -61,6 +61,7 @@ namespace Main
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.Confirm_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FirstName
@@ -372,12 +373,25 @@ namespace Main
             this.label17.Text = "CTPS";
             this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
+            // Confirm_btn
+            // 
+            this.Confirm_btn.Font = new System.Drawing.Font("Yu Gothic UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Confirm_btn.Location = new System.Drawing.Point(593, 379);
+            this.Confirm_btn.Name = "Confirm_btn";
+            this.Confirm_btn.Size = new System.Drawing.Size(236, 38);
+            this.Confirm_btn.TabIndex = 36;
+            this.Confirm_btn.Text = "Confirmar Cadastro";
+            this.Confirm_btn.UseVisualStyleBackColor = true;
+            this.Confirm_btn.Click += new System.EventHandler(this.Confirm_btn_Click);
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 554);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ClientSize = new System.Drawing.Size(871, 447);
             this.ControlBox = false;
+            this.Controls.Add(this.Confirm_btn);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -453,5 +467,6 @@ namespace Main
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button Confirm_btn;
     }
 }

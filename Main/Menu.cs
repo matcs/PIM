@@ -11,9 +11,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Desktop
 {
-    public partial class Menu : Form
+    public partial class MainMenu : Form
     {
-        public Menu()
+        public MainMenu()
         {
             InitializeComponent();
         }
