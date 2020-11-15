@@ -34,14 +34,14 @@ namespace API.Models
         [Required]
         public DateTime ShippingDate { get; set; }
 
-        [ForeignKey("Administrator")]
-        public long AdministratorId { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
 
-        public Administrator Administrator { get; set; }
+        public User User { get; set; }
 
         public WorkRecordBooklet() { }
 
-        public WorkRecordBooklet(long workRecordBookletId, string number, string serial, string birthPlace, DateTime birthDate, string fatherName, string motherName, DateTime shippingDate, Administrator administrator)
+        public WorkRecordBooklet(long workRecordBookletId, string number, string serial, string birthPlace, DateTime birthDate, string fatherName, string motherName, DateTime shippingDate, string userId)
         {
             WorkRecordBookletId = workRecordBookletId;
             Number = number;
@@ -51,7 +51,7 @@ namespace API.Models
             FatherName = fatherName;
             MotherName = motherName;
             ShippingDate = shippingDate;
-            Administrator = administrator;
+            UserId = userId;
         }
     }
 }

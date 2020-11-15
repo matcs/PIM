@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201104220852_InitialCreated")]
+    [Migration("20201114225519_InitialCreated")]
     partial class InitialCreated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,23 +90,6 @@ namespace API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("API.Models.Administrator", b =>
-                {
-                    b.Property<long>("AdministratorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("NVARCHAR(40)");
-
-                    b.HasKey("AdministratorId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Administrators");
-                });
-
             modelBuilder.Entity("API.Models.Contract", b =>
                 {
                     b.Property<long>("ContractId")
@@ -155,6 +138,9 @@ namespace API.Migrations
                     b.Property<bool>("AccountStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int>("TotalOfPayments")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("NVARCHAR(40)");
 
@@ -169,18 +155,21 @@ namespace API.Migrations
                         {
                             CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac",
                             AccountStatus = true,
+                            TotalOfPayments = 3,
                             UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea"
                         },
                         new
                         {
                             CustomerId = "e0456d51-5f43-42cb-ad91-d6c404d2aaac",
                             AccountStatus = true,
+                            TotalOfPayments = 0,
                             UserId = "672999b3-ca32-4a8d-bafe-189a3e090093"
                         },
                         new
                         {
                             CustomerId = "e0456d51-jdfi-42cb-4658-d6c40sd2aaac",
                             AccountStatus = true,
+                            TotalOfPayments = 0,
                             UserId = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac"
                         });
                 });
@@ -276,11 +265,51 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            PaymentReceiptsId = "1askov",
+                            PaymentReceiptsId = "esoijf1-5f43-42cb-ad91-d6cdgjiorsjgorc",
                             Amount = 100.55,
                             CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac",
-                            Description = "Sei Lá",
-                            TransactionDate = new DateTime(2020, 11, 4, 22, 8, 51, 244, DateTimeKind.Utc).AddTicks(8636)
+                            Description = "Compra feita em : 14/11/2020 22:55:18",
+                            TransactionDate = new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(5304)
+                        },
+                        new
+                        {
+                            PaymentReceiptsId = "esoijf1-5f43-sadf-ad91-d6cdgjiorsjgorc",
+                            Amount = 100.55,
+                            CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac",
+                            Description = "Compra feita em : 14/11/2020 22:55:18",
+                            TransactionDate = new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(6959)
+                        },
+                        new
+                        {
+                            PaymentReceiptsId = "esoijf1-fghj-42cb-ad91-d6cdgjiorsjgorc",
+                            Amount = 100.55,
+                            CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac",
+                            Description = "Compra feita em : 14/11/2020 22:55:18",
+                            TransactionDate = new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(6998)
+                        },
+                        new
+                        {
+                            PaymentReceiptsId = "esoijf1-çpol-42cb-ad91-d6cdgjiorsjgorc",
+                            Amount = 100.55,
+                            CustomerId = "e0456d51-5f43-42cb-ad91-d6c404d2aaac",
+                            Description = "Compra feita em : 14/11/2020 22:55:18",
+                            TransactionDate = new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(7007)
+                        },
+                        new
+                        {
+                            PaymentReceiptsId = "esoijf1-bgrt-42cb-ad91-d6cdgjiorsjgorc",
+                            Amount = 100.55,
+                            CustomerId = "e0456d51-5f43-42cb-ad91-d6c404d2aaac",
+                            Description = "Compra feita em : 14/11/2020 22:55:18",
+                            TransactionDate = new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(7015)
+                        },
+                        new
+                        {
+                            PaymentReceiptsId = "esoijf1-mjy-42cb-ad91-d6cdgjiorsjgorc",
+                            Amount = 100.55,
+                            CustomerId = "e0456d51-jdfi-42cb-4658-d6c40sd2aaac",
+                            Description = "Compra feita em : 14/11/2020 22:55:18",
+                            TransactionDate = new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(7023)
                         });
                 });
 
@@ -466,9 +495,6 @@ namespace API.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("AdministratorId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
@@ -495,21 +521,17 @@ namespace API.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("NVARCHAR(40)");
+
                     b.HasKey("WorkRecordBookletId");
 
-                    b.HasIndex("AdministratorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("WorkRecordBooklets");
                 });
 
             modelBuilder.Entity("API.Models.Address", b =>
-                {
-                    b.HasOne("API.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("API.Models.Administrator", b =>
                 {
                     b.HasOne("API.Models.User", "User")
                         .WithMany()
@@ -569,11 +591,9 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.WorkRecordBooklet", b =>
                 {
-                    b.HasOne("API.Models.Administrator", "Administrator")
+                    b.HasOne("API.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("AdministratorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

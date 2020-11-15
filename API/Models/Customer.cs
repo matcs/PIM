@@ -14,6 +14,8 @@ namespace API.Models
         [Required]
         public bool AccountStatus { get; set; }
 
+        public int TotalOfPayments { get; set; }
+
         public List<PaymentReceipt> PaymentReceipts { get; set; }
 
         public List<Contract> Contracts { get; set; }
@@ -25,10 +27,11 @@ namespace API.Models
 
         public Customer() { }
 
-        public Customer(string custumersId, bool accountStatus, List<PaymentReceipt> paymentReceipts, List<Contract> contracts, User user)
+        public Customer(string custumersId, bool accountStatus, int totalOfPayments, List<PaymentReceipt> paymentReceipts, List<Contract> contracts, User user)
         {
             CustomerId = custumersId;
             AccountStatus = accountStatus;
+            TotalOfPayments = totalOfPayments;
             PaymentReceipts = paymentReceipts;
             Contracts = contracts;
             User = user;

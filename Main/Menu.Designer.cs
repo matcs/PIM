@@ -41,6 +41,8 @@
             this.Button1 = new System.Windows.Forms.Button();
             this.Button2 = new System.Windows.Forms.Button();
             this.chartActives = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.BestCustomers = new System.Windows.Forms.Button();
+            this.ListBestCustomers = new System.Windows.Forms.ListBox();
             this.fisrtPanel.SuspendLayout();
             this.Nav_panel.SuspendLayout();
             this.header_panel.SuspendLayout();
@@ -72,6 +74,7 @@
             this.Nav_panel.Controls.Add(this.header_panel);
             this.Nav_panel.Controls.Add(this.Button1);
             this.Nav_panel.Controls.Add(this.Button2);
+            this.Nav_panel.Controls.Add(this.BestCustomers);
             this.Nav_panel.Dock = System.Windows.Forms.DockStyle.Left;
             this.Nav_panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Nav_panel.Location = new System.Drawing.Point(0, 0);
@@ -171,12 +174,44 @@
             this.chartActives.TabIndex = 2;
             this.chartActives.Text = "chart1";
             // 
+            // BestCustomers
+            // 
+            this.BestCustomers.AutoSize = true;
+            this.BestCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BestCustomers.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
+            this.BestCustomers.FlatAppearance.BorderSize = 0;
+            this.BestCustomers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(183)))));
+            this.BestCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BestCustomers.Font = new System.Drawing.Font("Yu Gothic UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BestCustomers.ForeColor = System.Drawing.Color.White;
+            this.BestCustomers.Image = ((System.Drawing.Image)(resources.GetObject("BestCustomers.Image")));
+            this.BestCustomers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BestCustomers.Location = new System.Drawing.Point(3, 188);
+            this.BestCustomers.Margin = new System.Windows.Forms.Padding(3, 7, 7, 3);
+            this.BestCustomers.Name = "BestCustomers";
+            this.BestCustomers.Size = new System.Drawing.Size(220, 66);
+            this.BestCustomers.TabIndex = 4;
+            this.BestCustomers.Text = "Maiores\r\nInvestidores";
+            this.BestCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BestCustomers.UseVisualStyleBackColor = true;
+            this.BestCustomers.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // ListBestCustomers
+            // 
+            this.ListBestCustomers.FormattingEnabled = true;
+            this.ListBestCustomers.Location = new System.Drawing.Point(287, 138);
+            this.ListBestCustomers.Name = "ListBestCustomers";
+            this.ListBestCustomers.Size = new System.Drawing.Size(383, 251);
+            this.ListBestCustomers.TabIndex = 3;
+            this.ListBestCustomers.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.ListBestCustomers);
             this.Controls.Add(this.chartActives);
             this.Controls.Add(this.fisrtPanel);
             this.Controls.Add(this.Nav_panel);
@@ -206,6 +241,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartActives;
+        private System.Windows.Forms.Button BestCustomers;
+        private System.Windows.Forms.ListBox ListBestCustomers;
     }
 }
 

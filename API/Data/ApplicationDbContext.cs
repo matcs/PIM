@@ -22,7 +22,6 @@ namespace API.Data
         { }
 
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<CryptoCurrency> CryptoCurrencies { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -133,6 +132,7 @@ namespace API.Data
                 {
                     UserId = "2922c21c-5325-4856-b270-50b5aa9ab1ea",
                     CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac",
+                    TotalOfPayments = 3,
                     AccountStatus = true,
 
                 },
@@ -140,24 +140,69 @@ namespace API.Data
                 {
                     UserId = "672999b3-ca32-4a8d-bafe-189a3e090093",
                     CustomerId = "e0456d51-5f43-42cb-ad91-d6c404d2aaac",
+                    TotalOfPayments = 2,
                     AccountStatus = true,
                 },
                 new Customer
                 {
                     UserId = "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac",
                     CustomerId = "e0456d51-jdfi-42cb-4658-d6c40sd2aaac",
+                    TotalOfPayments = 1,
                     AccountStatus = true,
                 });
 
             modelBuilder.Entity<PaymentReceipt>().HasData(
                 new PaymentReceipt
                 {
-                    PaymentReceiptsId = "1askov",
+                    PaymentReceiptsId = "esoijf1-5f43-42cb-ad91-d6cdgjiorsjgorc",
                     Amount = 100.55,
-                    Description = "Sei Lá",
+                    Description = "Compra feita em : " + DateTime.UtcNow,
                     TransactionDate = DateTime.UtcNow,
                     CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac"
-                });
+                },
+                new PaymentReceipt
+                {
+                    PaymentReceiptsId = "esoijf1-5f43-sadf-ad91-d6cdgjiorsjgorc",
+                    Amount = 100.55,
+                    Description = "Compra feita em : " + DateTime.UtcNow,
+                    TransactionDate = DateTime.UtcNow,
+                    CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac"
+                },
+                new PaymentReceipt
+                {
+                    PaymentReceiptsId = "esoijf1-fghj-42cb-ad91-d6cdgjiorsjgorc",
+                    Amount = 100.55,
+                    Description = "Compra feita em : " + DateTime.UtcNow,
+                    TransactionDate = DateTime.UtcNow,
+                    CustomerId = "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac"
+                },
+                //Customer 2
+                new PaymentReceipt
+                {
+                    PaymentReceiptsId = "esoijf1-çpol-42cb-ad91-d6cdgjiorsjgorc",
+                    Amount = 100.55,
+                    Description = "Compra feita em : " + DateTime.UtcNow,
+                    TransactionDate = DateTime.UtcNow,
+                    CustomerId = "e0456d51-5f43-42cb-ad91-d6c404d2aaac"
+                },
+                new PaymentReceipt
+                {
+                    PaymentReceiptsId = "esoijf1-bgrt-42cb-ad91-d6cdgjiorsjgorc",
+                    Amount = 100.55,
+                    Description = "Compra feita em : " + DateTime.UtcNow,
+                    TransactionDate = DateTime.UtcNow,
+                    CustomerId = "e0456d51-5f43-42cb-ad91-d6c404d2aaac"
+                },
+                //Customer 3
+                new PaymentReceipt
+                {
+                    PaymentReceiptsId = "esoijf1-mjy-42cb-ad91-d6cdgjiorsjgorc",
+                    Amount = 100.55,
+                    Description = "Compra feita em : " + DateTime.UtcNow,
+                    TransactionDate = DateTime.UtcNow,
+                    CustomerId = "e0456d51-jdfi-42cb-4658-d6c40sd2aaac"
+                }
+                );
 
             modelBuilder.Entity<Address>().HasData(
                 new Address

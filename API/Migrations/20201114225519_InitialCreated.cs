@@ -64,30 +64,12 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Administrators",
-                columns: table => new
-                {
-                    AdministratorId = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administrators", x => x.AdministratorId);
-                    table.ForeignKey(
-                        name: "FK_Administrators_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
                     CustomerId = table.Column<string>(type: "NVARCHAR(40)", nullable: false),
                     AccountStatus = table.Column<bool>(nullable: false),
+                    TotalOfPayments = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -145,6 +127,32 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WorkRecordBooklets",
+                columns: table => new
+                {
+                    WorkRecordBookletId = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<string>(type: "NVARCHAR(10)", nullable: false),
+                    Serial = table.Column<string>(type: "NVARCHAR(12)", nullable: false),
+                    BirthPlace = table.Column<string>(type: "NVARCHAR(30)", nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    FatherName = table.Column<string>(nullable: false),
+                    MotherName = table.Column<string>(nullable: false),
+                    ShippingDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkRecordBooklets", x => x.WorkRecordBookletId);
+                    table.ForeignKey(
+                        name: "FK_WorkRecordBooklets_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "States",
                 columns: table => new
                 {
@@ -161,32 +169,6 @@ namespace API.Migrations
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "AddressId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkRecordBooklets",
-                columns: table => new
-                {
-                    WorkRecordBookletId = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<string>(type: "NVARCHAR(10)", nullable: false),
-                    Serial = table.Column<string>(type: "NVARCHAR(12)", nullable: false),
-                    BirthPlace = table.Column<string>(type: "NVARCHAR(30)", nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    FatherName = table.Column<string>(nullable: false),
-                    MotherName = table.Column<string>(nullable: false),
-                    ShippingDate = table.Column<DateTime>(nullable: false),
-                    AdministratorId = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkRecordBooklets", x => x.WorkRecordBookletId);
-                    table.ForeignKey(
-                        name: "FK_WorkRecordBooklets_Administrators_AdministratorId",
-                        column: x => x.AdministratorId,
-                        principalTable: "Administrators",
-                        principalColumn: "AdministratorId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -283,12 +265,12 @@ namespace API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "AccountStatus", "UserId" },
+                columns: new[] { "CustomerId", "AccountStatus", "TotalOfPayments", "UserId" },
                 values: new object[,]
                 {
-                    { "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", true, "2922c21c-5325-4856-b270-50b5aa9ab1ea" },
-                    { "e0456d51-5f43-42cb-ad91-d6c404d2aaac", true, "672999b3-ca32-4a8d-bafe-189a3e090093" },
-                    { "e0456d51-jdfi-42cb-4658-d6c40sd2aaac", true, "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac" }
+                    { "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", true, 3, "2922c21c-5325-4856-b270-50b5aa9ab1ea" },
+                    { "e0456d51-5f43-42cb-ad91-d6c404d2aaac", true, 0, "672999b3-ca32-4a8d-bafe-189a3e090093" },
+                    { "e0456d51-jdfi-42cb-4658-d6c40sd2aaac", true, 0, "e0eb6d51-5f43-42cb-ad91-d6c404d2aaac" }
                 });
 
             migrationBuilder.InsertData(
@@ -304,7 +286,15 @@ namespace API.Migrations
             migrationBuilder.InsertData(
                 table: "PaymentReceipts",
                 columns: new[] { "PaymentReceiptsId", "Amount", "CustomerId", "Description", "TransactionDate" },
-                values: new object[] { "1askov", 100.55, "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", "Sei Lá", new DateTime(2020, 11, 4, 22, 8, 51, 244, DateTimeKind.Utc).AddTicks(8636) });
+                values: new object[,]
+                {
+                    { "esoijf1-5f43-42cb-ad91-d6cdgjiorsjgorc", 100.55, "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", "Compra feita em : 14/11/2020 22:55:18", new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(5304) },
+                    { "esoijf1-5f43-sadf-ad91-d6cdgjiorsjgorc", 100.55, "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", "Compra feita em : 14/11/2020 22:55:18", new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(6959) },
+                    { "esoijf1-fghj-42cb-ad91-d6cdgjiorsjgorc", 100.55, "e0eb6d51-gtdS-36cb-ad91-d6c404d2aaac", "Compra feita em : 14/11/2020 22:55:18", new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(6998) },
+                    { "esoijf1-çpol-42cb-ad91-d6cdgjiorsjgorc", 100.55, "e0456d51-5f43-42cb-ad91-d6c404d2aaac", "Compra feita em : 14/11/2020 22:55:18", new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(7007) },
+                    { "esoijf1-bgrt-42cb-ad91-d6cdgjiorsjgorc", 100.55, "e0456d51-5f43-42cb-ad91-d6c404d2aaac", "Compra feita em : 14/11/2020 22:55:18", new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(7015) },
+                    { "esoijf1-mjy-42cb-ad91-d6cdgjiorsjgorc", 100.55, "e0456d51-jdfi-42cb-4658-d6c40sd2aaac", "Compra feita em : 14/11/2020 22:55:18", new DateTime(2020, 11, 14, 22, 55, 18, 576, DateTimeKind.Utc).AddTicks(7023) }
+                });
 
             migrationBuilder.InsertData(
                 table: "States",
@@ -319,11 +309,6 @@ namespace API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_UserId",
                 table: "Addresses",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Administrators_UserId",
-                table: "Administrators",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -368,9 +353,9 @@ namespace API.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkRecordBooklets_AdministratorId",
+                name: "IX_WorkRecordBooklets_UserId",
                 table: "WorkRecordBooklets",
-                column: "AdministratorId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -404,9 +389,6 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Customers");
-
-            migrationBuilder.DropTable(
-                name: "Administrators");
 
             migrationBuilder.DropTable(
                 name: "Users");

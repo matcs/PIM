@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,7 +34,7 @@ namespace Desktop
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            
+            this.ListBestCustomers.Visible = false;
         }
 
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
@@ -49,6 +50,7 @@ namespace Desktop
         {
 
             this.chartActives.Visible = true;
+            this.ListBestCustomers.Visible = false;
             this.chartActives.Series.Clear();
 
             conn.Open();
@@ -79,6 +81,32 @@ namespace Desktop
         }
 
         private void Button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            int i = 0;
+            this.ListBestCustomers.Items.Clear();
+            this.chartActives.Visible = false;
+            this.ListBestCustomers.Visible = true;
+            List<int> _items = new SQLServices().GetBestClientsNumbers();
+
+            List<string> _items2 = new SQLServices().GetBestClientsEmail();
+
+
+            this.ListBestCustomers.Items.AddRange(new object[] {"Quatidade de compras || Email" });
+
+            foreach (int item in _items)
+            {
+                this.ListBestCustomers.Items.AddRange(new object[] { _items[i]+"                                   || "+_items2[i] });
+                i++;
+            }
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
