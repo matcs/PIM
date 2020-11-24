@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Main.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -127,9 +131,39 @@ namespace Desktop
 
         }
 
-        private void Confirm_btn_Click(object sender, EventArgs e)
+        private async void Confirm_btn_Click(object sender, EventArgs e)
         {
+            var client = new HttpClient();
+            Admin Admin = new Admin(FirstName.Text, LastName.Text, SocialName.Text, Email.Text, Password.Text, BirthDay.Value.Date);
+            var jsonAdmin = JsonConvert.SerializeObject(Admin);
+            var stringContent = new StringContent(jsonAdmin, UnicodeEncoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:44343/api/Users/Register", stringContent);
+            RegisterWorkRecordBooklet(Email.Text);
+        }
 
+        private async void RegisterWorkRecordBooklet(string email)
+        {
+            var client = new HttpClient();
+            SqlConnection conn = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=PIM_DB;Trusted_Connection=True;");
+            string SQLQuery = "SELECT Id FROM Users WHERE Email='{0}'";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = string.Format(SQLQuery, email);
+            
+            string UserId = cmd.ExecuteScalar().ToString();
+            WorkRecordBooklet WorkRecordBooklet = new WorkRecordBooklet(Number.Text,Serial.Text,BirthPlace.Text,BirthDay.Value.Date,FatherName.Text,MotherName.Text,ShippingDate.Value.Date,UserId);
+            var jsonAdmin = JsonConvert.SerializeObject(WorkRecordBooklet);
+            var stringContent = new StringContent(jsonAdmin, UnicodeEncoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:44343/api/WorkRecordBooklets", stringContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("CADASTRO REALIZADO COM SUCESSO");
+                this.Visible = false;
+                new MainMenu().Visible = true;
+            }
+            conn.Close();
         }
     }
 }

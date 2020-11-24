@@ -40,9 +40,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Button1 = new System.Windows.Forms.Button();
             this.Button2 = new System.Windows.Forms.Button();
-            this.chartActives = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.BestCustomers = new System.Windows.Forms.Button();
+            this.chartActives = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ListBestCustomers = new System.Windows.Forms.ListBox();
+            this.Exit = new System.Windows.Forms.Button();
             this.fisrtPanel.SuspendLayout();
             this.Nav_panel.SuspendLayout();
             this.header_panel.SuspendLayout();
@@ -75,6 +76,7 @@
             this.Nav_panel.Controls.Add(this.Button1);
             this.Nav_panel.Controls.Add(this.Button2);
             this.Nav_panel.Controls.Add(this.BestCustomers);
+            this.Nav_panel.Controls.Add(this.Exit);
             this.Nav_panel.Dock = System.Windows.Forms.DockStyle.Left;
             this.Nav_panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Nav_panel.Location = new System.Drawing.Point(0, 0);
@@ -157,23 +159,6 @@
             this.Button2.UseVisualStyleBackColor = true;
             this.Button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // chartActives
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chartActives.ChartAreas.Add(chartArea1);
-            this.chartActives.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartActives.Legends.Add(legend1);
-            this.chartActives.Location = new System.Drawing.Point(229, 100);
-            this.chartActives.Name = "chartActives";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartActives.Series.Add(series1);
-            this.chartActives.Size = new System.Drawing.Size(571, 350);
-            this.chartActives.TabIndex = 2;
-            this.chartActives.Text = "chart1";
-            // 
             // BestCustomers
             // 
             this.BestCustomers.AutoSize = true;
@@ -196,6 +181,23 @@
             this.BestCustomers.UseVisualStyleBackColor = true;
             this.BestCustomers.Click += new System.EventHandler(this.button3_Click_1);
             // 
+            // chartActives
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartActives.ChartAreas.Add(chartArea1);
+            this.chartActives.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.chartActives.Legends.Add(legend1);
+            this.chartActives.Location = new System.Drawing.Point(229, 100);
+            this.chartActives.Name = "chartActives";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartActives.Series.Add(series1);
+            this.chartActives.Size = new System.Drawing.Size(571, 350);
+            this.chartActives.TabIndex = 2;
+            this.chartActives.Text = "chart1";
+            // 
             // ListBestCustomers
             // 
             this.ListBestCustomers.FormattingEnabled = true;
@@ -204,6 +206,16 @@
             this.ListBestCustomers.Size = new System.Drawing.Size(383, 251);
             this.ListBestCustomers.TabIndex = 3;
             this.ListBestCustomers.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // Exit
+            // 
+            this.Exit.Location = new System.Drawing.Point(3, 260);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(75, 23);
+            this.Exit.TabIndex = 10;
+            this.Exit.Text = "Sair";
+            this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // MainMenu
             // 
@@ -243,6 +255,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartActives;
         private System.Windows.Forms.Button BestCustomers;
         private System.Windows.Forms.ListBox ListBestCustomers;
+        private System.Windows.Forms.Button Exit;
     }
 }
 

@@ -39,6 +39,7 @@ namespace Desktop
             this.label3 = new System.Windows.Forms.Label();
             this.Register = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.Exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -120,6 +121,7 @@ namespace Desktop
             this.Register.TabIndex = 7;
             this.Register.Text = "Registrar";
             this.Register.UseVisualStyleBackColor = false;
+            this.Register.Click += new System.EventHandler(this.Register_Click);
             // 
             // pictureBox2
             // 
@@ -132,6 +134,16 @@ namespace Desktop
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
+            // Exit
+            // 
+            this.Exit.Location = new System.Drawing.Point(268, 315);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(75, 23);
+            this.Exit.TabIndex = 9;
+            this.Exit.Text = "Sair";
+            this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,6 +151,7 @@ namespace Desktop
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.Exit);
             this.Controls.Add(this.Register);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
@@ -170,5 +183,6 @@ namespace Desktop
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button Register;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button Exit;
     }
 }

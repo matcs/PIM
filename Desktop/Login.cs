@@ -37,7 +37,6 @@ namespace Desktop
             if (sQLServices.login(Email, Password)) { 
                 this.Visible = false;
                 new MainMenu().Visible = true;
-                
             }
 
         }
@@ -51,6 +50,17 @@ namespace Desktop
         {
             
             
+        }
+
+        private void Register_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            new Register().Visible = true;
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
