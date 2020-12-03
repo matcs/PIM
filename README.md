@@ -4,8 +4,9 @@ Esta repositório faz parte do projeto integrado multidisciplinar (abreviando: P
 Ele se divide em quatro aplicações:
 
 ## API
-A API é a parte principal do projeto. Lá estão todos os models do projeto, as migrations, conexão com o banco de dados utilizando o [EntityFrameworkCore](https://docs.microsoft.com/en-us/ef/core/) que também permitira que haja métodos de para criar, ler, atualizar e deletar os dados. Por fim a API também possui um sistema básico de segurança feito por JWT para proteger acessos indevidos. 
-
+A API é a parte principal do projeto. Lá estão todos os models do projeto, as migrations, conexão com o banco de dados utilizando o [EntityFrameworkCore](https://docs.microsoft.com/en-us/ef/core/) que também permitira que haja métodos de para criar, ler, atualizar e deletar os dados. Por fim a API também possui um sistema básico de segurança feito por JWT para proteger acessos indevidos. Para iniciar o banco de dados basta abrir o Package-Manager no Visual Studio 2019 e digitar o comando:
+  `EntityFrameworkCore\Update-Database`
+  
 ## MVC
 A aplicação MVC se o responsável por fazer o client-side. Todas as APIs consumidas viram da aplicação API. O cliente poderá realizar tudo que estiver ao seu alcance, como atualizar dados pessoais, endereços e afins.
 
